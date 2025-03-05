@@ -1,6 +1,9 @@
 # Vaultic
 A light-weight, secure password manager built with a Tkinter-Based GUI.
 
+# Trello Board
+Link: https://trello.com/b/lMPEAwc6/vaultic
+
 # What Does It Do?
 [x] Generates strong, random passwords
 [x] Encrypts and stores passwords safely
@@ -18,7 +21,7 @@ Designed to be simple, secure and fast - no bloated features, just essentials.
 - List all saved accounts
 
 # Tech Stack
-- Language: Python
+- Language: Python, SQL
 - Storage: SQLite (or potentially an encrypted file)
 - Security: Symmetric encryption using the cryptography library
 
