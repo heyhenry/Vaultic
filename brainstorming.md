@@ -25,4 +25,14 @@
 - Maxiumum password length of 64 characterse (NIST 2023 guidelines)
 - Passwords should include special characters, and avoid banned characters (i.e. emojis and spaces) (NIST 2023 guidelines)
 - No password complexity recommended, just use ASCII characters (NIST 2023 guidelines)
-- 
+
+# Password Security Design
+- Using Argon2 for Master Password Hashing 
+    - Because its slow, so it will make brute force attacks even slower amongst other attacks
+    - Because it has won the password hashing competition, making it a known and publicly reputable hashing algorithm
+    - Because it provides better resistance than its previous hashing algorithm comrades, like Bcrypt
+- Using Fernot's Symmetric Encryption
+    - Because it is a widely used, accepted and reputable encryption technique
+    - Because it is a standard encryption option used globally
+    - Because it is easy to understand and implement (especially for a first timer)
+    - Because it is enough for this kind of project, other options such as Asymmetric, Block and Stream Ciphers can be seen as being potentially overkill 

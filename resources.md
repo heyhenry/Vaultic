@@ -2,3 +2,11 @@
 - 10 Features MSPs Should Look For in a Password Management Tool (accessed: 6th March 2025): https://www.passwordboss.com/10-features-msps-should-look-for-in-a-password-management-tool/
 - A Beginner's Guide to Encryption and Decryption in Python (accessed: 6th March 2025): https://medium.com/@info_82002/a-beginners-guide-to-encryption-and-decryption-in-python-12d81f6a9eac
 - NIST Password Guidelines (accessed: 7th March 2025): https://blog.netwrix.com/nist-password-guidelines 
+- Encryption vs. hashing vs. Salting - What's the Difference? (accessed: 9th March 2025): https://www.pingidentity.com/en/resources/blog/post/encryption-vs-hashing-vs-salting.html
+- What is Argon2? (accessed: 9th March 2025): https://argon2-cffi.readthedocs.io/en/stable/argon2.html
+- Salt and hash a password in Python (accessed: 9th March 2025): https://stackoverflow.com/questions/9594125/salt-and-hash-a-password-in-python
+- What's the difference between PBKDF and SHA and why use them together? (accessed: 9th March 2025): https://crypto.stackexchange.com/questions/35275/whats-the-difference-between-pbkdf-and-sha-and-why-use-them-together
+- Salted Password Hashing - Doing it Right (accessed: 9th March 2025): https://crackstation.net/hashing-security.htm
+- Rainbow Table Attack (accessed: 9th March 2025): https://www.beyondidentity.com/glossary/rainbow-table-attack
+- Argon2 vs SHA-512, what's better in my case? (accessed: 9th March 2025): https://security.stackexchange.com/questions/261902/argon2-vs-sha-512-whats-better-in-my-case
+- SHA-256 vs SHA-512: Key Encryption Algorithms Differences Explained! (accessed: 9th March 2025): https://cheapsslweb.com/blog/sha-256-vs-sha-512-key-encryption/
