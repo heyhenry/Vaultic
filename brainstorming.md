@@ -36,3 +36,15 @@
     - Because it is a standard encryption option used globally
     - Because it is easy to understand and implement (especially for a first timer)
     - Because it is enough for this kind of project, other options such as Asymmetric, Block and Stream Ciphers can be seen as being potentially overkill 
+
+# Security process
+1. Ask user for initial input for master password
+    - Implement validation to ensure password is within certain range of characters and uses select characters
+    - Implement validation to ensure password is valid (non-empty string or space only string)
+2. Hash the given master password
+    - Store the password hash in a sqlite.db file
+3. Generate encryption key based on hashed password and salt, once password login was successful
+4. use encryption key to decrypt the sqlite database
+5. when application closes, encrypt the sqlite database again
+
+6. Repeat steps 3-5 for every next interaction with the password manager

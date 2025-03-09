@@ -10,3 +10,11 @@
 - Rainbow Table Attack (accessed: 9th March 2025): https://www.beyondidentity.com/glossary/rainbow-table-attack
 - Argon2 vs SHA-512, what's better in my case? (accessed: 9th March 2025): https://security.stackexchange.com/questions/261902/argon2-vs-sha-512-whats-better-in-my-case
 - SHA-256 vs SHA-512: Key Encryption Algorithms Differences Explained! (accessed: 9th March 2025): https://cheapsslweb.com/blog/sha-256-vs-sha-512-key-encryption/
+- KDF Algorithms: (accessed: 9th March 2025): https://bitwarden.com/help/kdf-algorithms/
+- argon2-cffi installation process (accessed: 9th March 2025): https://argon2-cffi.readthedocs.io/en/stable/installation.html
+- How is Argon2 used for key derivation? (accessed: 9th March 2025): https://crypto.stackexchange.com/questions/95946/how-is-argon2-used-for-key-derivation
+- What are teh advantages of symmetric key encryption? (accessed: 9th March 2025): https://www.quora.com/What-are-the-advantages-of-symmetric-key-encryption
+- argon2-cffi Official API Reference Documentation (accessed: 9th March 2025): https://argon2-cffi.readthedocs.io/en/stable/api.html
+- Key derivation functions (accessed: 9th March 2025): https://cryptography.io/en/latest/hazmat/primitives/key-derivation-functions/
+- Python | os.urandom() method (accessed: 9th March 2025): https://www.geeksforgeeks.org/python-os-urandom-method/
+- Creating a salt in python (accessed: 9th March 2025): https://stackoverflow.com/questions/5293959/creating-a-salt-in-python
