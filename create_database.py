@@ -1,7 +1,7 @@
 import sqlite3
 
 # establish a connection to an existing database, or create database
-connection = sqlite3.connect(r"pw_manager.db")
+connection = sqlite3.connect("db/pw_manager.db")
 # create a pointer reference to invoke methods (i.e. queries, statements incl. fetching data)
 cursor = connection.cursor()
 
