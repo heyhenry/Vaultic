@@ -48,3 +48,11 @@
 5. when application closes, encrypt the sqlite database again
 
 6. Repeat steps 3-5 for every next interaction with the password manager
+
+
+
+# App initial launch process
+1. User opens app and a script containing database creation will automatically run and create the auth.db and pw_manager.db
+2. Based on the auth.db content, the program will check if there is any information in the auth.db (i.e. master_password), if not it will automatically ask for a master password upon program launch
+2.1. Alternatively, if a masterpassword/hash is found, the program will automatically ask for the master password in lieu of asking user to create a master password
+3. Once a password has been given it will create a hash and also generate an encryption key and encrypt the pw_manager.db file
