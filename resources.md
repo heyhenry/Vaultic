@@ -13,8 +13,14 @@
 - KDF Algorithms: (accessed: 9th March 2025): https://bitwarden.com/help/kdf-algorithms/
 - argon2-cffi installation process (accessed: 9th March 2025): https://argon2-cffi.readthedocs.io/en/stable/installation.html
 - How is Argon2 used for key derivation? (accessed: 9th March 2025): https://crypto.stackexchange.com/questions/95946/how-is-argon2-used-for-key-derivation
-- What are teh advantages of symmetric key encryption? (accessed: 9th March 2025): https://www.quora.com/What-are-the-advantages-of-symmetric-key-encryption
+- What are the advantages of symmetric key encryption? (accessed: 9th March 2025): https://www.quora.com/What-are-the-advantages-of-symmetric-key-encryption
+- Hashing Python for Password Security (accessed: 9th March 2025): https://github.com/python-code-camp/Hashing-Python-for-Password-Security/blob/main/main.py
 - argon2-cffi Official API Reference Documentation (accessed: 9th March 2025): https://argon2-cffi.readthedocs.io/en/stable/api.html
 - Key derivation functions (accessed: 9th March 2025): https://cryptography.io/en/latest/hazmat/primitives/key-derivation-functions/
 - Python | os.urandom() method (accessed: 9th March 2025): https://www.geeksforgeeks.org/python-os-urandom-method/
 - Creating a salt in python (accessed: 9th March 2025): https://stackoverflow.com/questions/5293959/creating-a-salt-in-python
+- SQLite with Python Tutorials (accessed: 10th March 2025): https://www.youtube.com/watch?v=jsX99U8UkOo&list=PLJJcOjd3n1ZfwZKYMu_JSs0xSejPsQlav&index=10
+- SQLite Sample Database (accessed: 10th March 2025): https://www.sqlitetutorial.net/sqlite-sample-database/
+- DB Browser for SQLite (accessed: 10th March 2025): https://sqlitebrowser.org/
+- SQLite - Primary Key (accessed: 10th March 2025): https://www.tutorialspoint.com/sqlite/sqlite_primary_key.htm
+- SQLITE PRAGMA synchronous (accessed: 10th March 2025): https://www.sqlite.org/pragma.html#pragma_synchronous
