@@ -1,8 +1,12 @@
 import argon2
 import sqlite3
 
+# currently stored hash is for the string literal pw: Peekaboo (verificaiton is case sensitive!)
+
 connection = sqlite3.connect("db/auth.db")
 cursor = connection.cursor()
+
+ph = argon2.PasswordHasher()
 
 # check database to see if a master password has been set
 get_password_query = "SELECT hash FROM authentication"
@@ -19,17 +23,22 @@ if password_found:
     cursor.execute(get_hashed_master_password)
     result = cursor.fetchone()
     result_master_password = result[0]
-    print(result_master_password)
+    # print(result_master_password)
+
+    try:
+        ph.verify(result_master_password, input_password)
+        print("CONGRATLATIONS!! YOU'VE ENTERED YOUR VAULT SUCCESSFULLY!!!!!")
+    except argon2.exceptions.VerifyMismatchError:
+        print("Your input password does not match the given master password!")
 else:
     # prompt user to enter a new master password
     master_password = input("Enter new master password: ")
     print(f"master password: {master_password}")
 
     # hash the new master password
-    ph = argon2.PasswordHasher()
     hashed_master_password = ph.hash(master_password)
     print(f"hashed master password: {hashed_master_password}")
-
+    
     # insert the new master password into the authentication database
     insert_new_password = "UPDATE authentication SET hash = ? WHERE rowid = 1" # safer than f"" which is susceptible to sql injection attacks
     cursor.execute(insert_new_password, (hashed_master_password,))
