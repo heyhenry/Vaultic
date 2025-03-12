@@ -1,0 +1,3 @@
+# todo next
+- create kdf process to generate encryption key 
+- encrypt/decrypt database based on generated key
