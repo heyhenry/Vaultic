@@ -24,3 +24,4 @@
 - DB Browser for SQLite (accessed: 10th March 2025): https://sqlitebrowser.org/
 - SQLite - Primary Key (accessed: 10th March 2025): https://www.tutorialspoint.com/sqlite/sqlite_primary_key.htm
 - SQLITE PRAGMA synchronous (accessed: 10th March 2025): https://www.sqlite.org/pragma.html#pragma_synchronous
+- How to Use Context Manager to Open and Close Connections (accessed: 12th March 2025): https://www.freecodecamp.org/news/work-with-sqlite-in-python-handbook/#heading-how-to-use-context-manager-to-open-and-close-connections
