@@ -19,12 +19,14 @@ if result[0] != '':
 if password_found:
     input_password = input("Enter your master password: ")
 
+    # retrieve the master password's hash
     get_hashed_master_password = "SELECT hash FROM authentication WHERE rowid = 1"
     cursor.execute(get_hashed_master_password)
     result = cursor.fetchone()
     result_master_password = result[0]
     # print(result_master_password)
 
+    # verify password against stored hash to see if password is correct
     try:
         ph.verify(result_master_password, input_password)
         print("CONGRATLATIONS!! YOU'VE ENTERED YOUR VAULT SUCCESSFULLY!!!!!")
