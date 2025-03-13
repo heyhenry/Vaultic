@@ -52,8 +52,33 @@ class AuthManager:
         try:
             self.ph.verify(hashed_master_password, input_password)
             print("Successfully accessed your vault!")
+            return True
         except argon2.exceptions.VerifyMismatchError:
             print("Unsuccessful accessing your vault.")
+            return False
+
+
+    def kdf(self, password):
+        # get the stored salt value
+        get_salt = "SELECT salt FROM authentication WHERE rowid = 1"
+        self.cursor.execute(get_salt)
+        salt = self.cursor.fetchone()
+        salt = salt[0]
+        # ensure password has been converted to bytes aka binary
+        password = password.encode()
+        
+        # create the kdf
+        kdf = argon2.low_level.hash_secret_raw(
+            secret=password,
+            salt=salt,
+            time_cost=3,
+            memory_cost=65536,
+            parallelism=1,
+            hash_len=32,
+            type=argon2.Type.ID
+        )
+
+        return kdf
 
     # close the database connection
     def close_database(self):
