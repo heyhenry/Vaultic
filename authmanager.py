@@ -1,6 +1,8 @@
 import sqlite3
 import argon2
 import os
+from cryptography.fernet import Fernet
+from base64 import urlsafe_b64encode
 
 class AuthManager:
     def __init__(self):
@@ -12,6 +14,7 @@ class AuthManager:
         self.connection = sqlite3.connect(self.db_path)
         # create cursor object instance for sqlite3.cursor
         self.cursor = self.connection.cursor()
+        self.enc_key = None
         
     def get_stored_hash(self):
         # get the value for the hash from auth.db
@@ -52,8 +55,8 @@ class AuthManager:
         try:
             self.ph.verify(hashed_master_password, input_password)
             print("Successfully accessed your vault!")
-            # generates a kdf data for an encryption key
-            self.kdf(input_password)
+            # generate encryption key with kdf as basis
+            self.generate_encryption_key(self.kdf(input_password))
             
         except argon2.exceptions.VerifyMismatchError:
             print("Unsuccessful accessing your vault.")
@@ -80,6 +83,12 @@ class AuthManager:
         )
 
         return kdf
+    
+    def generate_encryption_key(self, kdf):
+        # encode to url safe base64 as per requirement for fernot keys
+        encoded_kdf = urlsafe_b64encode(kdf)
+        # create the encryption key
+        self.enc_key = Fernet(encoded_kdf)
 
     # close the database connection
     def close_database(self):
