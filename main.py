@@ -2,6 +2,13 @@ import argon2
 import sqlite3
 from authmanager import AuthManager
 from create_password_database import create_passwords_database
+from create_auth_database import create_auth_database
+import os
+
+# create both a 'db' directory and the auth database if auth database doesn't exist
+if not os.path.exists("db/auth.db"):
+    os.mkdir("db")
+    create_auth_database()
 
 # create the auth object instance
 auth = AuthManager()
