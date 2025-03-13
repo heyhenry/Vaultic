@@ -1,5 +1,6 @@
 import sqlite3
 import argon2
+import os
 
 class AuthManager:
     def __init__(self):
@@ -29,6 +30,14 @@ class AuthManager:
         # update the value for hash in the auth.db
         insert_new_master_password = "UPDATE authentication SET hash = ? WHERE rowid = 1"
         self.cursor.execute(insert_new_master_password, (hashed_master_password,))
+        # save changes
+        self.connection.commit()
+
+    def generate_salt(self):
+        # create a new salt
+        generate_salt = "UPDATE authentication SET salt = ? WHERE rowid = 1"
+        # generate randomised string size of 16 bytes
+        self.cursor.execute(generate_salt, (os.urandom(16),))
         # save changes
         self.connection.commit()
 

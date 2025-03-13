@@ -16,6 +16,7 @@ if auth.get_stored_hash():
 else:
     master_password = input("Enter a New Master Password: ")
     auth.set_master_password(master_password)
+    auth.generate_salt()
 
 # close the database after usage
 auth.close_database()
