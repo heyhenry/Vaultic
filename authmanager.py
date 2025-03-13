@@ -52,10 +52,11 @@ class AuthManager:
         try:
             self.ph.verify(hashed_master_password, input_password)
             print("Successfully accessed your vault!")
-            return True
+            # generates a kdf data for an encryption key
+            self.kdf(input_password)
+            
         except argon2.exceptions.VerifyMismatchError:
             print("Unsuccessful accessing your vault.")
-            return False
 
 
     def kdf(self, password):

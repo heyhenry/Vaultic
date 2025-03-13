@@ -13,9 +13,7 @@ if auth.get_stored_hash():
     # prompt user password
     input_password = input("Enter your Master Password: ")
     # verify the entered password
-    if auth.verify_master_password(input_password):
-        # create kdf and encryption key
-        print(auth.kdf(input_password))
+    auth.verify_master_password(input_password)
         
 
 # if a valid hash is not found in the auth.db, proceed to ask user for a new master password and store in auth.db
