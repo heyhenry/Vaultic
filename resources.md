@@ -25,3 +25,7 @@
 - SQLite - Primary Key (accessed: 10th March 2025): https://www.tutorialspoint.com/sqlite/sqlite_primary_key.htm
 - SQLITE PRAGMA synchronous (accessed: 10th March 2025): https://www.sqlite.org/pragma.html#pragma_synchronous
 - How to Use Context Manager to Open and Close Connections (accessed: 12th March 2025): https://www.freecodecamp.org/news/work-with-sqlite-in-python-handbook/#heading-how-to-use-context-manager-to-open-and-close-connections
+- Encrypting Files | Python (accessed: 13th March 2025): https://www.youtube.com/shorts/gikCisBPTgw
+- base64.urlsafe_b64encode(s) in Python (accessed: 13th March 2025): https://www.geeksforgeeks.org/base64-urlsafe_b64encodes-in-python/
+- How to do Python Check if a File Exists: A Complete Guide (accessed: 13th March 2025): https://www.simplilearn.com/tutorials/python-tutorial/python-check-if-file-exists
+- Create a directory in Python (accessed: 13th March 2025): https://www.geeksforgeeks.org/create-a-directory-in-python/
