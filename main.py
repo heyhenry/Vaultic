@@ -30,6 +30,18 @@ else:
     auth.set_master_password(master_password)
     create_passwords_database()
     auth.create_dump()
+    print("Accessing pw database?")
+    print("1. YES")
+    print("2. NO")
+    choice = int(input("Enter choice: ")) 
+    if choice == 1:
+        auth.decrypt_dump()
+        sec_choice = input('1. Exit?')
+        if sec_choice == 1:
+            print('bye!')
+
+# always re-encrypt file before program closes
+auth.encrypt_dump()
 
 # close the database after usage
 auth.close_database()
