@@ -4,6 +4,7 @@ from authmanager import AuthManager
 from create_password_database import create_passwords_database
 from create_auth_database import create_auth_database
 import os
+import pandas as pd
 
 PASSWORD_DATABASE_FILENAME = "db/pw_manager.db"
 DUMP_FILENAME = "db/password_db.sql"
@@ -27,6 +28,19 @@ if auth.get_stored_hash():
     input_password = input("Enter your Master Password: ")
     # verify the entered password
     auth.verify_master_password(input_password)
+    # process to check each level of db manipulation is working accordingly
+    print("[Welcome to Vaultic]")
+    # create connection to the pw_manager.db
+    connection = sqlite3.connect("db/pw_manager.db")
+    cursor = connection.cursor()
+    # decrypt the database
+    if os.path.exists(ENCRYPTED_DUMP_FILENAME):
+        auth.decrypt_dump()
+    # pretty display of database contents
+    print(pd.read_sql_query("SELECT * FROM accounts", connection))
+    input("\nPress 'any' button to exit program.")
+    # must close the connection, so the encrypt function can run properly, as it opens its own connection to the pw_manager.db
+    connection.close()
 
 # if a valid hash is not found in the auth.db, proceed to ask user for a new master password and store in auth.db
 else:
@@ -50,6 +64,7 @@ else:
 
 # always re-encrypt file before program closes if dump file is not encrypted
 if not os.path.exists(ENCRYPTED_DUMP_FILENAME):
+    print("ENCRPY IT")
     auth.encrypt_dump()
 
 # close the database after usage
