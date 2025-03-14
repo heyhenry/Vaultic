@@ -106,6 +106,8 @@ class AuthManager:
         with open(DUMP_FILENAME, 'w') as outfile:
             for line in pw_connection.iterdump():
                 outfile.write(f"{line}\n")
+        pw_connection.close()
+        self.delete_database()
 
     # close the database connection
     def close_database(self):
