@@ -30,18 +30,24 @@ if auth.get_stored_hash():
 
 # if a valid hash is not found in the auth.db, proceed to ask user for a new master password and store in auth.db
 else:
+    # prompt user to create a master password
     master_password = input("Enter a New Master Password: ")
+    # setup and store the master password and salt in auth.db
     auth.set_master_password(master_password)
+    # create the initial pw_manager.db
     create_passwords_database()
+    # create dump file of pw_manager.db and encrypt it
     auth.encrypt_dump()
+    # process to check each level of db manipulation is working accordingly
     print("Accessing pw database?")
-    print("1. YES")
-    print("2. NO")
-    choice = int(input("Enter choice: ")) 
+    print("1. Yes")
+    print("2. No")
+    choice = int(input("Enter choice: "))
+    # decrpy the data and create pw_manager.db if user wants to access the database
     if choice == 1:
         auth.decrypt_dump()
-        sec_choice = input("Press any button to exit program")
-        
+        sec_choice = input("Press 'any' button to exit program")
+
 # always re-encrypt file before program closes if dump file is not encrypted
 if not os.path.exists(ENCRYPTED_DUMP_FILENAME):
     auth.encrypt_dump()
