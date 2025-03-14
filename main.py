@@ -29,7 +29,7 @@ else:
     master_password = input("Enter a New Master Password: ")
     auth.set_master_password(master_password)
     create_passwords_database()
-    auth.create_dump()
+    auth.encrypt_dump()
     print("Accessing pw database?")
     print("1. YES")
     print("2. NO")
