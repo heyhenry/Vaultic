@@ -110,15 +110,14 @@ class AuthManager:
                 outfile.write(f"{line}\n")
         pw_connection.close()
         self.delete_database()
-        self.encrypt_dump()
 
     def encrypt_dump(self):
-        if os.path.exists(DUMP_FILENAME):
-            with open(DUMP_FILENAME, 'rb') as file:
-                data = file.read()
-                encrypted_data = self.enc_key.encrypt(data)
-                with open(ENCRYPTED_DUMP_FILENAME, 'wb') as outfile:
-                    outfile.write(encrypted_data)
+        self.create_dump()
+        with open(DUMP_FILENAME, 'rb') as file:
+            data = file.read()
+            encrypted_data = self.enc_key.encrypt(data)
+            with open(ENCRYPTED_DUMP_FILENAME, 'wb') as outfile:
+                outfile.write(encrypted_data)
         os.remove(DUMP_FILENAME)
 
     def decrypt_dump(self):
@@ -129,6 +128,16 @@ class AuthManager:
                 with open(DUMP_FILENAME, 'wb') as outfile:
                     outfile.write(decrypted_data)
         os.remove(ENCRYPTED_DUMP_FILENAME)
+        self.recreate_database()
+
+    def recreate_database(self):
+        with open(DUMP_FILENAME, 'r') as file:
+            sql_script = file.read()
+        self.delete_dump(DUMP_FILENAME)
+        pw_connection = sqlite3.connect(PASSWORD_DATABASE_FILENAME)
+        pw_connection.executescript(sql_script)
+        pw_connection.commit()
+        pw_connection.close()
 
     # close the database connection
     def close_database(self):
