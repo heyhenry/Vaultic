@@ -121,6 +121,15 @@ class AuthManager:
                     outfile.write(encrypted_data)
         os.remove(DUMP_FILENAME)
 
+    def decrypt_dump(self):
+        if os.path.exists(ENCRYPTED_DUMP_FILENAME):
+            with open (ENCRYPTED_DUMP_FILENAME, 'rb') as file:
+                enc_data = file.read()
+                decrypted_data = self.enc_key.decrypt(enc_data)
+                with open(DUMP_FILENAME, 'wb') as outfile:
+                    outfile.write(decrypted_data)
+        os.remove(ENCRYPTED_DUMP_FILENAME)
+
     # close the database connection
     def close_database(self):
         self.connection.close()
