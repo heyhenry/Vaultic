@@ -7,7 +7,8 @@ import os
 
 # create both a 'db' directory and the auth database if auth database doesn't exist
 if not os.path.exists("db/auth.db"):
-    os.mkdir("db")
+    if not os.path.exists("db"):
+        os.mkdir("db")
     create_auth_database()
 
 # create the auth object instance
@@ -29,6 +30,7 @@ else:
     auth.set_master_password(master_password)
     auth.generate_salt()
     create_passwords_database()
+    auth.create_dump()
 
 # close the database after usage
 auth.close_database()
