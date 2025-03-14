@@ -5,6 +5,10 @@ from create_password_database import create_passwords_database
 from create_auth_database import create_auth_database
 import os
 
+PASSWORD_DATABASE_FILENAME = "db/pw_manager.db"
+DUMP_FILENAME = "db/password_db.sql"
+ENCRYPTED_DUMP_FILENAME = "db/enc_password_db.sql"
+
 # create both a 'db' directory and the auth database if auth database doesn't exist
 if not os.path.exists("db/auth.db"):
     if not os.path.exists("db"):
@@ -36,12 +40,11 @@ else:
     choice = int(input("Enter choice: ")) 
     if choice == 1:
         auth.decrypt_dump()
-        sec_choice = input('1. Exit?')
-        if sec_choice == 1:
-            print('bye!')
-
-# always re-encrypt file before program closes
-auth.encrypt_dump()
+        sec_choice = input("Press any button to exit program")
+        
+# always re-encrypt file before program closes if dump file is not encrypted
+if not os.path.exists(ENCRYPTED_DUMP_FILENAME):
+    auth.encrypt_dump()
 
 # close the database after usage
 auth.close_database()
