@@ -6,6 +6,7 @@ from base64 import urlsafe_b64encode
 
 PASSWORD_DATABASE_FILENAME = "db/pw_manager.db"
 DUMP_FILENAME = "db/password_db.sql"
+ENCRYPTED_DUMP_FILENAME = "db/enc_password_db.sql"
 
 class AuthManager:
     def __init__(self):
@@ -38,6 +39,8 @@ class AuthManager:
         self.cursor.execute(insert_new_master_password, (hashed_master_password,))
         # save changes
         self.connection.commit()
+        self.generate_salt()
+        self.generate_encryption_key(self.kdf(master_password))
 
     def generate_salt(self):
         # create a new salt
@@ -46,6 +49,7 @@ class AuthManager:
         self.cursor.execute(generate_salt, (os.urandom(16),))
         # save changes
         self.connection.commit()
+        print("SALT TRIGGERED")
 
     def verify_master_password(self, input_password):
         # get the hashed string for the master password
@@ -83,7 +87,7 @@ class AuthManager:
             hash_len=32,
             type=argon2.Type.ID
         )
-
+        print("KDF TRIGGER")
         return kdf
     
     def generate_encryption_key(self, kdf):
@@ -91,6 +95,7 @@ class AuthManager:
         encoded_kdf = urlsafe_b64encode(kdf)
         # create and set the encryption key
         self.enc_key = Fernet(encoded_kdf)
+        print("KEY GEN TRIGGER")
 
     def delete_dump(self, filename):
         if os.path.exists(filename):
@@ -108,6 +113,17 @@ class AuthManager:
                 outfile.write(f"{line}\n")
         pw_connection.close()
         self.delete_database()
+        print('asdf')
+        print(self.enc_key)
+        # self.encrypt_dump()
+
+    def encrypt_dump(self):
+        if os.path.exists(DUMP_FILENAME):
+            with open(DUMP_FILENAME, 'rb') as file:
+                data = file.read()
+                encrypted_data = self.enc_key.encrypt(data)
+                with open(ENCRYPTED_DUMP_FILENAME, 'wb') as outfile:
+                    outfile.write(encrypted_data)
 
     # close the database connection
     def close_database(self):

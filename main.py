@@ -28,7 +28,6 @@ if auth.get_stored_hash():
 else:
     master_password = input("Enter a New Master Password: ")
     auth.set_master_password(master_password)
-    auth.generate_salt()
     create_passwords_database()
     auth.create_dump()
 
