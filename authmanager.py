@@ -61,7 +61,6 @@ class AuthManager:
         except argon2.exceptions.VerifyMismatchError:
             print("Unsuccessful accessing your vault.")
 
-
     def kdf(self, password):
         # get the stored salt value
         get_salt = "SELECT salt FROM authentication WHERE rowid = 1"
@@ -87,8 +86,12 @@ class AuthManager:
     def generate_encryption_key(self, kdf):
         # encode to url safe base64 as per requirement for fernot keys
         encoded_kdf = urlsafe_b64encode(kdf)
-        # create the encryption key
+        # create and set the encryption key
         self.enc_key = Fernet(encoded_kdf)
+
+    def delete_dump(self, filename):
+        if os.path.exists(filename):
+            os.remove(filename)
 
     # close the database connection
     def close_database(self):
