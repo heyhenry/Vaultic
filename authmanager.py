@@ -4,7 +4,8 @@ import os
 from cryptography.fernet import Fernet
 from base64 import urlsafe_b64encode
 
-PASSWORD_DATABASE_NAME = "db/pw_manager.db"
+PASSWORD_DATABASE_FILENAME = "db/pw_manager.db"
+DUMP_FILENAME = "db/password_db.sql"
 
 class AuthManager:
     def __init__(self):
@@ -96,8 +97,15 @@ class AuthManager:
             os.remove(filename)
 
     def delete_database(self):
-        if os.path.exists("db/pw_manager.db"):
-            os.remove("db/pw_manager.db")
+        if os.path.exists(PASSWORD_DATABASE_FILENAME):
+            os.remove(PASSWORD_DATABASE_FILENAME)
+
+    def create_dump(self):
+        if os.path.exists(PASSWORD_DATABASE_FILENAME):
+            pw_connection = sqlite3.connect(PASSWORD_DATABASE_FILENAME)
+        with open(DUMP_FILENAME, 'w') as outfile:
+            for line in pw_connection.iterdump():
+                outfile.write(f"{line}\n")
 
     # close the database connection
     def close_database(self):
