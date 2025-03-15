@@ -63,9 +63,11 @@ class AuthManager:
             print("Successfully accessed your vault!")
             # generate encryption key with kdf as basis
             self.generate_encryption_key(self.kdf(input_password))
+            return True
             
         except argon2.exceptions.VerifyMismatchError:
             print("Unsuccessful accessing your vault.")
+            return False
 
     def kdf(self, password):
         # get the stored salt value
