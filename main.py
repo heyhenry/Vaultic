@@ -51,15 +51,23 @@ def main():
 
                 # must close the connection, so the encrypt function can run properly, as it opens its own connection to the pw_manager.db
                 connection.close()
+
+                # to encrypt the db after finish using it
+                # auth.encrypt_dump()
+
         except KeyboardInterrupt:
             connection.close()
             auth.encrypt_dump()
 
     # if a valid hash is not found in the auth.db, proceed to ask user for a new master password and store in auth.db
     else:
-        # prompt user to create a master password
-        master_password = input("Enter a New Master Password: ")
-
+        try:
+            # prompt user to create a master password
+            master_password = input("Enter a New Master Password: ")
+        except KeyboardInterrupt:
+            print("Exiting Vaultic...")
+            print("Bye!")
+            
         # setup and store the master password and salt in auth.db
         auth.set_master_password(master_password)
 
