@@ -30,70 +30,84 @@ def main():
             # prompt user password
             input_password = input("Enter your Master Password: ")
             
-            # verify the entered password
-            if auth.verify_master_password(input_password):
+            try:
+                # verify the entered password
+                if auth.verify_master_password(input_password):
 
-                # process to check each level of db manipulation is working accordingly
-                print("[Welcome to Vaultic]")
+                    # process to check each level of db manipulation is working accordingly
+                    print("[Welcome to Vaultic]")
 
-                # create connection to the pw_manager.db
-                connection = sqlite3.connect("db/pw_manager.db")
+                    # create connection to the pw_manager.db
+                    connection = sqlite3.connect("db/pw_manager.db")
 
-                # decrypt the enc_dump and recreate the database for use
-                if os.path.exists(ENCRYPTED_DUMP_FILENAME):
-                    auth.decrypt_dump()
+                    # decrypt the enc_dump and recreate the database for use
+                    if os.path.exists(ENCRYPTED_DUMP_FILENAME):
+                        auth.decrypt_dump()
 
-                # pretty display of database contents
-                print(pd.read_sql_query("SELECT * FROM accounts", connection))
+                    # pretty display of database contents
+                    print(pd.read_sql_query("SELECT * FROM accounts", connection))
 
-                # press any key to complete program usage
-                input("\nPress 'any' button to exit program.")
+                    # press any key to complete program usage
+                    input("\nPress 'any' button to exit program.")
 
-                # must close the connection, so the encrypt function can run properly, as it opens its own connection to the pw_manager.db
+                    # must close the connection, so the encrypt function can run properly, as it opens its own connection to the pw_manager.db
+                    connection.close()
+
+                    # to encrypt the db after finish using it
+                    auth.encrypt_dump()
+
+            except KeyboardInterrupt:
                 connection.close()
-
-                # to encrypt the db after finish using it
-                # auth.encrypt_dump()
-
+                auth.encrypt_dump()
         except KeyboardInterrupt:
-            connection.close()
-            auth.encrypt_dump()
+            print("Exiting Vaultic...")
+            print("Bye!")
 
     # if a valid hash is not found in the auth.db, proceed to ask user for a new master password and store in auth.db
     else:
         try:
             # prompt user to create a master password
             master_password = input("Enter a New Master Password: ")
+
+            try:
+                # setup and store the master password and salt in auth.db
+                auth.set_master_password(master_password)
+
+                # create the initial pw_manager.db
+                create_passwords_database()
+
+                # create dump file of pw_manager.db and encrypt it
+                auth.encrypt_dump()
+
+                # process to check each level of db manipulation is working accordingly
+                print("Accessing pw database?")
+                print("1. Yes")
+                print("2. No")
+                choice = int(input("Enter choice: "))
+
+                # decrpy the data and create pw_manager.db if user wants to access the database
+                if choice == 1:
+                    auth.decrypt_dump()
+                    input("Press 'any' button to exit program")
+                    # to encrypt db before closing the program
+                    auth.encrypt_dump()
+                else:
+                    pass
+                    
+            except KeyboardInterrupt:
+                if os.path.exists("db/pw_manager.db"):
+                    auth.encrypt_dump()
+
         except KeyboardInterrupt:
             print("Exiting Vaultic...")
             print("Bye!")
-            
-        # setup and store the master password and salt in auth.db
-        auth.set_master_password(master_password)
 
-        # create the initial pw_manager.db
-        create_passwords_database()
-
-        # create dump file of pw_manager.db and encrypt it
-        auth.encrypt_dump()
-
-        # process to check each level of db manipulation is working accordingly
-        print("Accessing pw database?")
-        print("1. Yes")
-        print("2. No")
-        choice = int(input("Enter choice: "))
-
-        # decrpy the data and create pw_manager.db if user wants to access the database
-        if choice == 1:
-            auth.decrypt_dump()
-            input("Press 'any' button to exit program")
-
-    # always re-encrypt file before program closes if dump file is not encrypted
-    if not os.path.exists(ENCRYPTED_DUMP_FILENAME):
-        auth.encrypt_dump()
+    # # always re-encrypt file before program closes if dump file is not encrypted
+    # if not os.path.exists(ENCRYPTED_DUMP_FILENAME):
+    #     auth.encrypt_dump()
 
     # close the database after usage
-    auth.close_database()
+    # auth.close_database()
 
 if __name__ == "__main__":
     main()
