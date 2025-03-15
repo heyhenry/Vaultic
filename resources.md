@@ -29,3 +29,12 @@
 - base64.urlsafe_b64encode(s) in Python (accessed: 13th March 2025): https://www.geeksforgeeks.org/base64-urlsafe_b64encodes-in-python/
 - How to do Python Check if a File Exists: A Complete Guide (accessed: 13th March 2025): https://www.simplilearn.com/tutorials/python-tutorial/python-check-if-file-exists
 - Create a directory in Python (accessed: 13th March 2025): https://www.geeksforgeeks.org/create-a-directory-in-python/
+- Changing git commit message after push (accessed: 13th March 2025): https://stackoverflow.com/questions/8981194/changing-git-commit-message-after-push-given-that-no-one-pulled-from-remote
+- SQLite with encryption/password protection (accessed: 13th March 2025): https://stackoverflow.com/questions/5669905/sqlite-with-encryption-password-protection
+- Encrypted database file in Python (accessed: 13th March 2025): https://stackoverflow.com/questions/986403/encrypted-database-file-in-python
+- How do i dump a single sqlite3 table in Python (accessed: 13th March 2025): https://stackoverflow.com/questions/6677540/how-do-i-dump-a-single-sqlite3-table-in-python
+- Sqlite3 official docs on iterdump (accessed: 13th March 2025): https://docs.python.org/3/library/sqlite3.html#sqlite3.Connection.iterdump
+- Sqlite3 official docs on executescript (accessed: 13th March 2025): https://docs.python.org/3/library/sqlite3.html#sqlite3.Cursor.executescript
+- Check if File exist (accessed: 13th March 2025): https://www.w3schools.com/python/python_file_remove.asp
+- How can I delete a file or folder in Python? (accessed: 13th March 2025): https://stackoverflow.com/questions/6996603/how-can-i-delete-a-file-or-folder-in-python
+- Advanced Tkinter: Working with Classes (accessed: 15th March 2025): https://www.digitalocean.com/community/tutorials/tkinter-working-with-classes
