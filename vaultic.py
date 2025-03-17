@@ -26,12 +26,24 @@ class windows(tk.Tk):
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nswe")
 
-        self.show_frame(LoginPage)
+        self.show_frame(RegisterPage)
 
-    def show_frame(self, cont):
-        frame = self.frames[cont]
+    def show_frame(self, page):
+        frame = self.frames[page]
+
+        # withdraw to avoid flckering of previous page
+        self.withdraw()
+        
+        if page == RegisterPage:
+            self.geometry("480x270")
+
         # raises the current frame to the top
         frame.tkraise()
+        # ensures immediate update
+        self.update_idletasks()
+
+        # deiconify to show only the updated window
+        self.deiconify()
 
 class LoginPage(tk.Frame):
     def __init__(self, parent, controller):
@@ -50,15 +62,25 @@ class LoginPage(tk.Frame):
 class RegisterPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        label = tk.Label(self, text="RegisterPage")
-        label.pack(padx=10, pady=10)
+        self.controller = controller
+        self.create_widgets()
 
-        switch_window_button = tk.Button(
-            self, 
-            text="Go to the Login Page",
-            command=lambda: controller.show_frame(LoginPage)
-        )
-        switch_window_button.pack(side="bottom", fill=tk.X)
+    def create_widgets(self):
+        app_title = tk.Label(self, text="Vaultic")
+        desc_subtitle = tk.Label(self, text="Create Master Your Password")
+        password_subtitle = tk.Label(self, text="Enter Password:")
+        password_entry = tk.Entry(self)
+        confirm_password_subtitle = tk.Label(self, text='Confirm Password:')
+        confirm_password_entry = tk.Entry(self)
+        create_submission = tk.Button(self)
+
+        app_title.pack()
+        desc_subtitle.pack()
+        password_subtitle.pack()
+        password_entry.pack()
+        confirm_password_subtitle.pack()
+        confirm_password_entry.pack()
+        create_submission.pack()
 
 class HomePage(tk.Frame):
     def __init__(self, parent, controller):
