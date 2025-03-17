@@ -26,7 +26,7 @@ class windows(tk.Tk):
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nswe")
 
-        self.show_frame(RegisterPage)
+        self.show_frame(LoginPage)
 
     def show_frame(self, page):
         frame = self.frames[page]
@@ -34,7 +34,7 @@ class windows(tk.Tk):
         # withdraw to avoid flckering of previous page
         self.withdraw()
         
-        if page == RegisterPage:
+        if page == RegisterPage or LoginPage:
             self.geometry("480x340")
 
         # raises the current frame to the top
@@ -48,16 +48,19 @@ class windows(tk.Tk):
 class LoginPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        label = tk.Label(self, text="LoginPage")
-        label.pack(padx=10, pady=10)
+        self.controler = controller
+        self.create_widgets()
 
-        # we use the switch_window_button in order to call the show_frame() method as a lambda function
-        switch_window_button = tk.Button(
-            self, 
-            text="Go to the Home Page",
-            command=lambda: controller.show_frame(HomePage)
-        )
-        switch_window_button.pack(side="bottom", fill=tk.X)
+    def create_widgets(self):
+        app_title = tk.Label(self, text="Vaultic", font=("helvetica", 24))
+        password_subtitle = tk.Label(self, text="Enter Password:", font=("helvetica", 18))
+        password_entry = tk.Entry(self, font=("helvetica", 24), width=18)
+        login_submission = tk.Button(self, text="Login", font=("helvetica", 18))
+
+        app_title.place(x=200, y=30)
+        password_subtitle.place(x=80, y=110)
+        password_entry.place(x=80, y=150)
+        login_submission.place(x=200, y=220)
 
 class RegisterPage(tk.Frame):
     def __init__(self, parent, controller):
