@@ -73,6 +73,7 @@ class RegisterPage(tk.Frame):
         confirm_password_subtitle = tk.Label(self, text='Confirm Password:', font=("helvetica", 14))
         confirm_password_entry = tk.Entry(self, font=("helvetica", 18), width=25)
         create_submission = tk.Button(self, text="Create", font=("helvetica", 18))
+        reminder_message = tk.Label(self, text="Remember This!", font=("helvetica", 12))
 
         app_title.place(x=200, y=10)
         desc_subtitle.place(x=80, y=50)
@@ -81,6 +82,7 @@ class RegisterPage(tk.Frame):
         confirm_password_subtitle.place(x=80, y=160)
         confirm_password_entry.place(x=80, y=190)
         create_submission.place(x=180, y=240)
+        reminder_message.place(x=330, y=300)
 
 class HomePage(tk.Frame):
     def __init__(self, parent, controller):
