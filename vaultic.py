@@ -35,7 +35,7 @@ class windows(tk.Tk):
         self.withdraw()
         
         if page == RegisterPage:
-            self.geometry("480x270")
+            self.geometry("480x340")
 
         # raises the current frame to the top
         frame.tkraise()
@@ -66,21 +66,21 @@ class RegisterPage(tk.Frame):
         self.create_widgets()
 
     def create_widgets(self):
-        app_title = tk.Label(self, text="Vaultic")
-        desc_subtitle = tk.Label(self, text="Create Master Your Password")
-        password_subtitle = tk.Label(self, text="Enter Password:")
-        password_entry = tk.Entry(self)
-        confirm_password_subtitle = tk.Label(self, text='Confirm Password:')
-        confirm_password_entry = tk.Entry(self)
-        create_submission = tk.Button(self)
+        app_title = tk.Label(self, text="Vaultic", font=("helvetica", 24))
+        desc_subtitle = tk.Label(self, text="Create Your Master Password", font=("helvetica", 18))
+        password_subtitle = tk.Label(self, text="Enter Password:", font=("helvetica", 14))
+        password_entry = tk.Entry(self, font=("helvetica", 18), width=25)
+        confirm_password_subtitle = tk.Label(self, text='Confirm Password:', font=("helvetica", 14))
+        confirm_password_entry = tk.Entry(self, font=("helvetica", 18), width=25)
+        create_submission = tk.Button(self, text="Create", font=("helvetica", 18))
 
-        app_title.pack()
-        desc_subtitle.pack()
-        password_subtitle.pack()
-        password_entry.pack()
-        confirm_password_subtitle.pack()
-        confirm_password_entry.pack()
-        create_submission.pack()
+        app_title.place(x=200, y=10)
+        desc_subtitle.place(x=80, y=50)
+        password_subtitle.place(x=80, y=90)
+        password_entry.place(x=80, y=120)
+        confirm_password_subtitle.place(x=80, y=160)
+        confirm_password_entry.place(x=80, y=190)
+        create_submission.place(x=180, y=240)
 
 class HomePage(tk.Frame):
     def __init__(self, parent, controller):
