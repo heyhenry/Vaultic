@@ -39,7 +39,7 @@ class windows(tk.Tk):
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nswe")
 
-        # self.show_frame(LoginPage)
+        # determine initial page display upon program startup
         if self.auth.get_stored_hash():
             self.show_frame(LoginPage)
         else:
@@ -91,6 +91,8 @@ class RegisterPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
+        self.password_var = tk.StringVar()
+        self.confirm_password_var = tk.StringVar()
         self.create_widgets()
 
     def create_widgets(self):
@@ -100,7 +102,7 @@ class RegisterPage(tk.Frame):
         password_entry = tk.Entry(self, font=("helvetica", 18), width=25)
         confirm_password_subtitle = tk.Label(self, text='Confirm Password:', font=("helvetica", 14))
         confirm_password_entry = tk.Entry(self, font=("helvetica", 18), width=25)
-        create_submission = tk.Button(self, text="Create", font=("helvetica", 18))
+        create_submission = tk.Button(self, text="Create", font=("helvetica", 18), command=self.process_password_creation)
         reminder_message = tk.Label(self, text="Remember This!", font=("helvetica", 12))
 
         app_title.place(x=200, y=10)
@@ -111,6 +113,21 @@ class RegisterPage(tk.Frame):
         confirm_password_entry.place(x=80, y=190)
         create_submission.place(x=180, y=240)
         reminder_message.place(x=330, y=300)
+
+    def validate_password_creation(self):
+        if self.password_var.get() == self.confirm_password_var.get():
+            return True
+        return False
+
+    def process_password_creation(self):
+        if self.validate_password_creation():
+            self.controller.auth.set_master_password(self.password_var.get())
+            create_passwords_database()
+            self.controller.auth.encrypt_dump()
+            self.controller.show_frame(HomePage)
+        else:
+            pass
+            # display error message and clear fields for retry
 
 class HomePage(tk.Frame):
     def __init__(self, parent, controller):
