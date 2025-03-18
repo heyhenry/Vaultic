@@ -79,10 +79,14 @@ class Windows(tk.Tk):
 
     # re-encrypts the passwords database whenever app is closed
     def on_close(self):
+        # temp log
         print('closing..')
+        # check if the pw_manager database is exposed
         if os.path.exists('db/pw_manager.db'):
+            # close current connection to the pw_manager database
             if self.pw_connection:
                 self.pw_connection.close()
+            # re-encrypt the pw_manager database
             self.auth.encrypt_dump()
         self.destroy()
 
