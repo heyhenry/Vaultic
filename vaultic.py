@@ -14,6 +14,9 @@ class windows(tk.Tk):
         # check for auth database's existence
         self.check_auth_exists()
 
+        # create auth obj ref
+        self.auth = AuthManager()
+
         # creating a window's title
         self.wm_title = ("Test Applicaiton")
     
@@ -36,7 +39,11 @@ class windows(tk.Tk):
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nswe")
 
-        self.show_frame(LoginPage)
+        # self.show_frame(LoginPage)
+        if self.auth.get_stored_hash():
+            self.show_frame(LoginPage)
+        else:
+            self.show_frame(RegisterPage)
 
     # display selected page
     def show_frame(self, page):
