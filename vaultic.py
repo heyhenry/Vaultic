@@ -1,9 +1,19 @@
 import tkinter as tk
 from tkinter import ttk
+import sqlite3
+from authmanager import AuthManager
+from create_password_database import create_passwords_database
+from create_auth_database import create_auth_database
+import os
+import pandas as pd
 
 class windows(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
+
+        # check for auth database's existence
+        self.check_auth_exists()
+
         # creating a window's title
         self.wm_title = ("Test Applicaiton")
     
@@ -28,6 +38,7 @@ class windows(tk.Tk):
 
         self.show_frame(LoginPage)
 
+    # display selected page
     def show_frame(self, page):
         frame = self.frames[page]
 
@@ -44,6 +55,13 @@ class windows(tk.Tk):
 
         # deiconify to show only the updated window
         self.deiconify()
+
+    # check if an authentication database exists 
+    def check_auth_exists(self):
+        if not os.path.exists("db/auth.db"):
+            if not os.path.exists("db"):
+                os.mkdir("db")
+            create_auth_database()
 
 class LoginPage(tk.Frame):
     def __init__(self, parent, controller):
