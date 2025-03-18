@@ -55,8 +55,10 @@ class windows(tk.Tk):
         # withdraw to avoid flckering of previous page
         self.withdraw()
         
-        if page == RegisterPage or LoginPage:
+        if page == RegisterPage or page == LoginPage:
             self.geometry("480x340")
+        elif page == HomePage:
+            frame.refresh_homepage()
 
         # raises the current frame to the top
         frame.tkraise()
@@ -130,6 +132,7 @@ class RegisterPage(tk.Frame):
             self.controller.auth.decrypt_dump()
             self.controller.pw_connection = sqlite3.connect("db/pw_manager.db")
             self.controller.pw_cursor = self.controller.pw_connection.cursor()
+            
             self.controller.show_frame(HomePage)
         else:
             pass
@@ -138,7 +141,21 @@ class RegisterPage(tk.Frame):
 class HomePage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
- 
+        self.controller = controller
+        self.create_widgets()
+
+    def create_widgets(self):
+        title = tk.Label(self, text="HOME PAGE IS HERE")
+        title.pack()
+        self.display_summary = tk.Label(self)
+        self.display_summary.pack()
+
+    # update the homepage with data from database
+    def refresh_homepage(self):
+        sql_query = "SELECT * FROM accounts"
+        self.controller.pw_cursor.execute(sql_query)
+        result = self.controller.pw_cursor.fetchall()
+        self.display_summary.config(text=result if result else "No records found")
 
 if __name__ == "__main__":
     app = windows()
