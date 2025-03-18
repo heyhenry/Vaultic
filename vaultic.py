@@ -77,9 +77,13 @@ class Windows(tk.Tk):
                 os.mkdir("db")
             create_auth_database()
 
-    # do things when app closes (wip)
+    # re-encrypts the passwords database whenever app is closed
     def on_close(self):
         print('closing..')
+        if os.path.exists('db/pw_manager.db'):
+            if self.pw_connection:
+                self.pw_connection.close()
+            self.auth.encrypt_dump()
         self.destroy()
 
 class LoginPage(tk.Frame):
