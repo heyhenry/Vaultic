@@ -17,6 +17,9 @@ class windows(tk.Tk):
         # create auth obj ref
         self.auth = AuthManager()
 
+        self.pw_connection = None
+        self.pw_cursor = None
+
         # creating a window's title
         self.wm_title = ("Test Applicaiton")
     
@@ -124,6 +127,9 @@ class RegisterPage(tk.Frame):
             self.controller.auth.set_master_password(self.password_var.get())
             create_passwords_database()
             self.controller.auth.encrypt_dump()
+            self.controller.auth.decrypt_dump()
+            self.controller.pw_connection = sqlite3.connect("db/pw_manager.db")
+            self.controller.pw_cursor = self.controller.pw_connection.cursor()
             self.controller.show_frame(HomePage)
         else:
             pass
@@ -132,15 +138,7 @@ class RegisterPage(tk.Frame):
 class HomePage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        label = tk.Label(self, text="HomePage")
-        label.pack(padx=10, pady=10)
-
-        switch_window_button = tk.Button(
-            self, 
-            text="Go to the Register Page",
-            command=lambda: controller.show_frame(RegisterPage)
-        )
-        switch_window_button.pack(side="bottom", fill=tk.X)
+ 
 
 if __name__ == "__main__":
     app = windows()
