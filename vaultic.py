@@ -119,18 +119,20 @@ class RegisterPage(tk.Frame):
         app_title = tk.Label(self, text="Vaultic", font=("helvetica", 24))
         desc_subtitle = tk.Label(self, text="Create Your Master Password", font=("helvetica", 18))
         password_subtitle = tk.Label(self, text="Enter Password:", font=("helvetica", 14))
-        password_entry = tk.Entry(self, font=("helvetica", 18), width=25)
+        self.password_entry = tk.Entry(self, font=("helvetica", 18), width=25, textvariable=self.password_var)
         confirm_password_subtitle = tk.Label(self, text='Confirm Password:', font=("helvetica", 14))
-        confirm_password_entry = tk.Entry(self, font=("helvetica", 18), width=25)
+        self.confirm_password_entry = tk.Entry(self, font=("helvetica", 18), width=25, textvariable=self.confirm_password_var)
+        self.error_message = tk.Label(self, foreground='red', font=("helvetica", 10))
         create_submission = tk.Button(self, text="Create", font=("helvetica", 18), command=self.process_password_creation)
         reminder_message = tk.Label(self, text="Remember This!", font=("helvetica", 12))
 
         app_title.place(x=200, y=10)
         desc_subtitle.place(x=80, y=50)
         password_subtitle.place(x=80, y=90)
-        password_entry.place(x=80, y=120)
+        self.password_entry.place(x=80, y=120)
         confirm_password_subtitle.place(x=80, y=160)
-        confirm_password_entry.place(x=80, y=190)
+        self.confirm_password_entry.place(x=80, y=190)
+        self.error_message.place(x=100, y=220)
         create_submission.place(x=180, y=240)
         reminder_message.place(x=330, y=300)
 
@@ -138,20 +140,31 @@ class RegisterPage(tk.Frame):
         if self.password_var.get() == self.confirm_password_var.get():
             return True
         return False
+    
+    def clear_all(self):
+        self.error_message.config(text="")
+        self.password_entry.delete(0, "end")
+        self.confirm_password_entry.delete(0, "end")
+
+    def show_error_message(self):
+        self.error_message.config(text="Invalid Password! (Mismatched or Empty String)")
+        # timed error message and wipe in use, as this tasks should encourage the user to pay full attention due to its high security risk "WRITE THIS IN THE readme.md under design choice?"
+        self.after(3000, self.clear_all)
 
     def process_password_creation(self):
         if self.validate_password_creation():
+            # update the authentication database's information with new; pw, hashing, salt
             self.controller.auth.set_master_password(self.password_var.get())
+            # create the initial pw_manager database
             create_passwords_database()
             self.controller.auth.encrypt_dump()
             self.controller.auth.decrypt_dump()
+            # create a connection to the pw_manager database
             self.controller.pw_connection = sqlite3.connect("db/pw_manager.db")
             self.controller.pw_cursor = self.controller.pw_connection.cursor()
-            
             self.controller.show_frame(HomePage)
         else:
-            pass
-            # display error message and clear fields for retry
+            self.show_error_message()
 
 class HomePage(tk.Frame):
     def __init__(self, parent, controller):
