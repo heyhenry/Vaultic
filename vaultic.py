@@ -7,7 +7,7 @@ from create_auth_database import create_auth_database
 import os
 import pandas as pd
 
-class windows(tk.Tk):
+class Windows(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
 
@@ -48,6 +48,8 @@ class windows(tk.Tk):
         else:
             self.show_frame(RegisterPage)
 
+        self.protocol("WM_DELETE_WINDOW", self.on_close)
+
     # display selected page
     def show_frame(self, page):
         frame = self.frames[page]
@@ -74,6 +76,11 @@ class windows(tk.Tk):
             if not os.path.exists("db"):
                 os.mkdir("db")
             create_auth_database()
+
+    # do things when app closes (wip)
+    def on_close(self):
+        print('closing..')
+        self.destroy()
 
 class LoginPage(tk.Frame):
     def __init__(self, parent, controller):
@@ -158,5 +165,5 @@ class HomePage(tk.Frame):
         self.display_summary.config(text=result if result else "No records found")
 
 if __name__ == "__main__":
-    app = windows()
+    app = Windows()
     app.mainloop()
