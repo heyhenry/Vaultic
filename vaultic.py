@@ -94,16 +94,16 @@ class Windows(tk.Tk):
 class LoginPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        self.controler = controller
+        self.controller = controller
         self.password_var = tk.StringVar()
         self.create_widgets()
 
     def create_widgets(self):
         app_title = tk.Label(self, text="Vaultic", font=("helvetica", 24))
         password_subtitle = tk.Label(self, text="Enter Password:", font=("helvetica", 18))
-        self.password_entry = tk.Entry(self, font=("helvetica", 24), width=18)
+        self.password_entry = tk.Entry(self, font=("helvetica", 24), width=18, textvariable=self.password_var)
         self.error_message = tk.Label(self, foreground="red", font=("helvetica", 12))
-        login_submission = tk.Button(self, text="Login", font=("helvetica", 18))
+        login_submission = tk.Button(self, text="Login", font=("helvetica", 18), command=self.process_password)
 
         app_title.place(x=200, y=30)
         password_subtitle.place(x=80, y=110)
@@ -118,6 +118,16 @@ class LoginPage(tk.Frame):
     def show_error_message(self):
         self.error_message.config(text="Invalid Password! Try again.")
         self.after(3000, self.clear_all)
+
+    def process_password(self):
+        if self.controller.auth.verify_master_password(self.password_var.get()):
+            print('yessir')
+            self.controller.auth.decrypt_dump()
+            self.controller.pw_connection = sqlite3.connect("db/pw_manager.db")
+            self.controller.pw_cursor = self.controller.pw_connection.cursor()
+            self.controller.show_frame(HomePage)
+        else:
+            self.show_error_message()
 
 class RegisterPage(tk.Frame):
     def __init__(self, parent, controller):
