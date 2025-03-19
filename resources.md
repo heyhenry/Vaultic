@@ -38,3 +38,8 @@
 - Check if File exist (accessed: 13th March 2025): https://www.w3schools.com/python/python_file_remove.asp
 - How can I delete a file or folder in Python? (accessed: 13th March 2025): https://stackoverflow.com/questions/6996603/how-can-i-delete-a-file-or-folder-in-python
 - Advanced Tkinter: Working with Classes (accessed: 15th March 2025): https://www.digitalocean.com/community/tutorials/tkinter-working-with-classes
+- Intercept Tkinter "Exit" command? (accessed: 19th March 2025): https://stackoverflow.com/questions/4643007/intercept-tkinter-exit-command
+- I don't understand how "protocol("WM_DELETE_WINDOW", instance.on_closing())" works. (accessed: 19th March 2025): https://www.reddit.com/r/Tkinter/comments/vrxzuz/i_dont_understand_how_protocolwm_delete_window/
+- Python | after method in Tkinter (accessed: 19th March 2025): https://www.geeksforgeeks.org/python-after-method-in-tkinter/
+- How to clear the Entry widget after a button is pressed in Tkinter? (accessed: 19th March 2025): https://www.tutorialspoint.com/how-to-clear-the-entry-widget-after-a-button-is-pressed-in-tkinter
+- My Own Github Repo (Kandayo) (accessed: 19th March 2025): https://github.com/heyhenry/Kandayo/blob/main/proj/main.py
