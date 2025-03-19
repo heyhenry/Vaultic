@@ -113,6 +113,7 @@ class RegisterPage(tk.Frame):
         self.controller = controller
         self.password_var = tk.StringVar()
         self.confirm_password_var = tk.StringVar()
+        self.error_type = None
         self.create_widgets()
 
     def create_widgets(self):
@@ -132,14 +133,21 @@ class RegisterPage(tk.Frame):
         self.password_entry.place(x=80, y=120)
         confirm_password_subtitle.place(x=80, y=160)
         self.confirm_password_entry.place(x=80, y=190)
-        self.error_message.place(x=100, y=220)
+        self.error_message.place(x=130, y=220)
         create_submission.place(x=180, y=240)
         reminder_message.place(x=330, y=300)
 
     def validate_password_creation(self):
-        if self.password_var.get() == self.confirm_password_var.get():
-            return True
-        return False
+        if self.password_var.get() != self.confirm_password_var.get():
+            self.error_type = "Password Mismatch"
+            return False
+        elif self.password_var.get().isspace():
+            self.error_type = "Whitespaces Only"
+            return False
+        elif len(self.password_var.get()) == 0:
+            self.error_type = "Empty Password"
+            return False
+        return True
     
     def clear_all(self):
         self.error_message.config(text="")
@@ -147,7 +155,7 @@ class RegisterPage(tk.Frame):
         self.confirm_password_entry.delete(0, "end")
 
     def show_error_message(self):
-        self.error_message.config(text="Invalid Password! (Mismatched or Empty String)")
+        self.error_message.config(text=f"Invalid Password! {self.error_type}.")
         # timed error message and wipe in use, as this tasks should encourage the user to pay full attention due to its high security risk "WRITE THIS IN THE readme.md under design choice?"
         self.after(3000, self.clear_all)
 
