@@ -60,6 +60,11 @@ class Windows(tk.Tk):
         
         if page == RegisterPage or page == LoginPage:
             self.geometry("480x340")
+            if page == RegisterPage:
+                pass
+            else:
+                # timer added due to tkinter event processing isn't instantaenous(spelling?)
+                self.after(100, lambda: frame.password_entry.focus())
         elif page == HomePage:
             frame.refresh_homepage()
 
