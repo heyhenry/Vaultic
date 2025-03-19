@@ -17,6 +17,7 @@ class Windows(tk.Tk):
         # create auth obj ref
         self.auth = AuthManager()
 
+        # db connection vars
         self.pw_connection = None
         self.pw_cursor = None
 
@@ -94,18 +95,29 @@ class LoginPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controler = controller
+        self.password_var = tk.StringVar()
         self.create_widgets()
 
     def create_widgets(self):
         app_title = tk.Label(self, text="Vaultic", font=("helvetica", 24))
         password_subtitle = tk.Label(self, text="Enter Password:", font=("helvetica", 18))
-        password_entry = tk.Entry(self, font=("helvetica", 24), width=18)
+        self.password_entry = tk.Entry(self, font=("helvetica", 24), width=18)
+        self.error_message = tk.Label(self, foreground="red", font=("helvetica", 12))
         login_submission = tk.Button(self, text="Login", font=("helvetica", 18))
 
         app_title.place(x=200, y=30)
         password_subtitle.place(x=80, y=110)
-        password_entry.place(x=80, y=150)
+        self.password_entry.place(x=80, y=150)
+        self.error_message.place(x=150, y=190)
         login_submission.place(x=200, y=220)
+
+    def clear_all(self):
+        self.password_entry.delete(0, "end")
+        self.error_message.config(text="")
+
+    def show_error_message(self):
+        self.error_message.config(text="Invalid Password! Try again.")
+        self.after(3000, self.clear_all)
 
 class RegisterPage(tk.Frame):
     def __init__(self, parent, controller):
