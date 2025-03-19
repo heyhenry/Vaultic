@@ -43,3 +43,6 @@
 - Python | after method in Tkinter (accessed: 19th March 2025): https://www.geeksforgeeks.org/python-after-method-in-tkinter/
 - How to clear the Entry widget after a button is pressed in Tkinter? (accessed: 19th March 2025): https://www.tutorialspoint.com/how-to-clear-the-entry-widget-after-a-button-is-pressed-in-tkinter
 - My Own Github Repo (Kandayo) (accessed: 19th March 2025): https://github.com/heyhenry/Kandayo/blob/main/proj/main.py
+- What is the difference between focus and focus_set methods in Tkinter? (accessed: 19th March 2025): https://www.tutorialspoint.com/what-is-the-difference-between-focus-and-focus-set-methods-in-tkinter
+- Tkinter: Entry problem (accessed: 19th March 2025): https://python-forum.io/thread-30638.html
+- How to set focus on Entry widget in Tkinter? (accessed: 19th March 2025): https://www.tutorialspoint.com/how-to-set-focus-on-entry-widget-in-tkinter
