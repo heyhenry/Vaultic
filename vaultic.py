@@ -36,7 +36,7 @@ class Windows(tk.Tk):
         # we will now create a dictionary of frames
         self.frames = {}
         # we'll create the frames themselves later but let's add the components to the dictionary
-        for F in (LoginPage, RegisterPage, HomePage):
+        for F in (LoginPage, RegisterPage, HomePage, NewEntryPage):
             frame = F(container, self)
 
             # the windows class acts as the root window for the frames
@@ -46,6 +46,7 @@ class Windows(tk.Tk):
         # determine initial page display upon program startup
         if self.auth.get_stored_hash():
             self.show_frame(LoginPage)
+            # self.show_frame(NewEntryPage)
         else:
             self.show_frame(RegisterPage)
 
@@ -57,9 +58,9 @@ class Windows(tk.Tk):
 
         # withdraw to avoid flckering of previous page
         self.withdraw()
-        
+        self.geometry("480x340") # general defaulted window size for all pages (temporary)
         if page == RegisterPage or page == LoginPage:
-            self.geometry("480x340")
+            # self.geometry("480x340")
             if page == RegisterPage:
                 self.after(100, lambda: frame.password_entry.focus())
             else:
@@ -209,9 +210,13 @@ class HomePage(tk.Frame):
 
     def create_widgets(self):
         title = tk.Label(self, text="HOME PAGE IS HERE")
-        title.pack()
+        new_entry = tk.Button(self, text="New Account [+]", command=lambda: self.controller.show_frame(NewEntryPage))
         self.display_summary = tk.Label(self)
-        self.display_summary.pack()
+        
+
+        title.place(x=200, y=10)
+        new_entry.place(x=350, y=10)
+        self.display_summary.place(x=200, y=50)
 
     # update the homepage with data from database
     def refresh_homepage(self):
@@ -219,6 +224,31 @@ class HomePage(tk.Frame):
         self.controller.pw_cursor.execute(sql_query)
         result = self.controller.pw_cursor.fetchall()
         self.display_summary.config(text=result if result else "No records found")
+
+class NewEntryPage(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        self.controller = controller
+        self.account_name_var = tk.StringVar()
+        self.username_var = tk.StringVar()
+        self.password_var = tk.StringVar()
+        self.create_widgets()
+
+    def create_widgets(self):
+        title = tk.Label(self, text="New Account Entry", font=("Helvetica", 32))
+        account_name_subtitle = tk.Label(self, text="Account Name:")
+        self.account_name_entry = tk.Entry(self, textvariable=self.account_name_var)
+        username_subtitle = tk.Label(self, text="Username:")
+        self.username_entry = tk.Entry(self, textvariable=self.username_var)
+        password_subtitle = tk.Label(self, text="Password:")
+        self.password_entry = tk.Entry(self, textvariable=self.password_var)
+        add_entry_button = tk.Button(self, text="Add")
+        cancel_entry_button = tk.Button(self, text="Cancel")
+
+        title.place(x=250, y=30)    
+
+
+
 
 if __name__ == "__main__":
     app = Windows()
