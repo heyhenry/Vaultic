@@ -47,7 +47,7 @@ class Windows(tk.Tk):
         # determine initial page display upon program startup
         if self.auth.get_stored_hash():
             # self.show_frame(LoginPage)
-            self.show_frame(NewEntryPage)
+            self.show_frame(HomePage)
         else:
             self.show_frame(RegisterPage)
 
@@ -218,14 +218,18 @@ class HomePage(tk.Frame):
         self.create_widgets()
 
     def create_widgets(self):
-        title = tk.Label(self, text="HOME PAGE IS HERE")
-        new_entry = tk.Button(self, text="New Account [+]", command=lambda: self.controller.show_frame(NewEntryPage))
-        self.display_summary = tk.Label(self)
+        title = tk.Label(self, text="Home", font=("Helvetica", 24))
+        new_entry = tk.Button(self, text="New Account [+]", font=("Helvetica", 12), command=lambda: self.controller.show_frame(NewEntryPage))
+        accounts_list = tk.Listbox(self, width=30, height=25)
+        accounts_scrollbar = tk.Scrollbar(self, width=30)
+        accounts_list.config(yscrollcommand=accounts_scrollbar.set)
+        accounts_scrollbar.config(command=accounts_list.yview)
         
 
-        title.place(x=200, y=10)
-        new_entry.place(x=350, y=10)
-        self.display_summary.place(x=200, y=50)
+        title.place(x=350, y=10)
+        new_entry.place(x=600, y=10)
+        accounts_list.place(x=80, y=100)
+        accounts_scrollbar.place(x=263, y=100, height=405)
 
     # update the homepage with data from database
     def refresh_homepage(self):
