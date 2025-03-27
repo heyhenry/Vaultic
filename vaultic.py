@@ -117,6 +117,9 @@ class LoginPage(tk.Frame):
         self.error_message.place(x=150, y=190)
         login_submission.place(x=200, y=220)
 
+        # detect 'Enter' keybind press
+        self.password_entry.bind("<Return>", lambda event: self.process_password())
+
     def clear_all(self):
         self.password_entry.delete(0, "end")
         self.error_message.config(text="")
@@ -164,6 +167,10 @@ class RegisterPage(tk.Frame):
         self.error_message.place(x=130, y=220)
         create_submission.place(x=180, y=240)
         reminder_message.place(x=330, y=300)
+
+        # detect 'enter' keybind regardless of which entry field has focus
+        self.password_entry.bind("<Return>", lambda event: self.process_password_creation())
+        self.confirm_password_entry.bind("<Return>", lambda event: self.process_password_creation())
 
     def validate_password_creation(self):
         if self.password_var.get() != self.confirm_password_var.get():
@@ -292,6 +299,7 @@ class NewEntryPage(tk.Frame):
         else:
             print("Trouble: 'pw_cursor' is None")
 
+    # cancels the process of creating a new account entry
     def cancel_entry(self):
         # ensure all data fields are cleaned
         self.clear_all()
