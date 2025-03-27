@@ -244,7 +244,7 @@ class NewEntryPage(tk.Frame):
         self.password_entry = tk.Entry(self, textvariable=self.password_var, font=("Helvetica", 12), width=20)
         self.error_message = tk.Label(self, foreground="red", font=("Helvetica", 10))
         add_entry_button = tk.Button(self, text="Add", font=("Helvetica", 14), width=10, command=self.validate_new_entry)
-        cancel_entry_button = tk.Button(self, text="Cancel", font=("Helvetica", 14), width=10)
+        cancel_entry_button = tk.Button(self, text="Cancel", font=("Helvetica", 14), width=10, command=self.cancel_entry)
 
         title.place(x=150, y=30)    
         account_name_subtitle.place(x=80, y=100)
@@ -288,8 +288,15 @@ class NewEntryPage(tk.Frame):
             # return user to the homepage after entry is added
             self.controller.show_frame(HomePage)
         # hidden issue logger for dev
+        # technically, should never be procced, as a database connection commences the moment the user is logged into the account.
         else:
             print("Trouble: 'pw_cursor' is None")
+
+    def cancel_entry(self):
+        # ensure all data fields are cleaned
+        self.clear_all()
+        # redirec to the homepage
+        self.controller.show_frame(HomePage)
 
 if __name__ == "__main__":
     app = Windows()
