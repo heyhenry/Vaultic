@@ -46,8 +46,8 @@ class Windows(tk.Tk):
 
         # determine initial page display upon program startup
         if self.auth.get_stored_hash():
-            # self.show_frame(LoginPage)
-            self.show_frame(HomePage)
+            self.show_frame(LoginPage)
+            # self.show_frame(HomePage)
         else:
             self.show_frame(RegisterPage)
 
@@ -69,7 +69,8 @@ class Windows(tk.Tk):
                 self.after(100, lambda: frame.password_entry.focus())
         elif page == HomePage:
             self.geometry("800x600")
-            frame.refresh_homepage()
+            # frame.refresh_homepage()
+            frame.populate_accounts_list()
 
         # raises the current frame to the top
         frame.tkraise()
@@ -220,24 +221,35 @@ class HomePage(tk.Frame):
     def create_widgets(self):
         title = tk.Label(self, text="Home", font=("Helvetica", 24))
         new_entry = tk.Button(self, text="New Account [+]", font=("Helvetica", 12), command=lambda: self.controller.show_frame(NewEntryPage))
-        accounts_list = tk.Listbox(self, width=30, height=25)
+        self.accounts_list = tk.Listbox(self, width=20, height=20, font=("Helvetica", 14), selectmode="single")
         accounts_scrollbar = tk.Scrollbar(self, width=30)
-        accounts_list.config(yscrollcommand=accounts_scrollbar.set)
-        accounts_scrollbar.config(command=accounts_list.yview)
+        self.accounts_list.config(yscrollcommand=accounts_scrollbar.set)
+        accounts_scrollbar.config(command=self.accounts_list.yview)
         
 
         title.place(x=350, y=10)
         new_entry.place(x=600, y=10)
-        accounts_list.place(x=80, y=100)
-        accounts_scrollbar.place(x=263, y=100, height=405)
+        self.accounts_list.place(x=80, y=100)
+        accounts_scrollbar.place(x=303, y=100, height=465)
 
     # update the homepage with data from database
     def refresh_homepage(self):
+        pass
+        # if self.controller.pw_connection:
+        #     sql_query = "SELECT * FROM accounts"
+        #     self.controller.pw_cursor.execute(sql_query)
+        #     result = self.controller.pw_cursor.fetchall()
+            # self.display_summary.config(text=result if result else "No records found")
+
+    def populate_accounts_list(self):
+        self.accounts_list.delete(0, 'end')
         if self.controller.pw_connection:
-            sql_query = "SELECT * FROM accounts"
+            sql_query = "SELECT account_name FROM accounts"
             self.controller.pw_cursor.execute(sql_query)
             result = self.controller.pw_cursor.fetchall()
-            self.display_summary.config(text=result if result else "No records found")
+            if result:
+                for name in result:
+                    self.accounts_list.insert('end', name)
 
 class NewEntryPage(tk.Frame):
     def __init__(self, parent, controller):
