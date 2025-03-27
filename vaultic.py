@@ -45,8 +45,8 @@ class Windows(tk.Tk):
 
         # determine initial page display upon program startup
         if self.auth.get_stored_hash():
-            self.show_frame(LoginPage)
-            # self.show_frame(NewEntryPage)
+            # self.show_frame(LoginPage)
+            self.show_frame(HomePage)
         else:
             self.show_frame(RegisterPage)
 
@@ -67,6 +67,7 @@ class Windows(tk.Tk):
                 # timer added due to tkinter event processing isn't instantaenous(spelling?)
                 self.after(100, lambda: frame.password_entry.focus())
         elif page == HomePage:
+            self.geometry("800x600")
             frame.refresh_homepage()
 
         # raises the current frame to the top
@@ -227,10 +228,11 @@ class HomePage(tk.Frame):
 
     # update the homepage with data from database
     def refresh_homepage(self):
-        sql_query = "SELECT * FROM accounts"
-        self.controller.pw_cursor.execute(sql_query)
-        result = self.controller.pw_cursor.fetchall()
-        self.display_summary.config(text=result if result else "No records found")
+        if self.controller.pw_connection:
+            sql_query = "SELECT * FROM accounts"
+            self.controller.pw_cursor.execute(sql_query)
+            result = self.controller.pw_cursor.fetchall()
+            self.display_summary.config(text=result if result else "No records found")
 
 class NewEntryPage(tk.Frame):
     def __init__(self, parent, controller):
