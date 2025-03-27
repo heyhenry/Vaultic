@@ -6,6 +6,7 @@ from create_password_database import create_passwords_database
 from create_auth_database import create_auth_database
 import os
 import pandas as pd
+from password_generation import generate_password
 
 class Windows(tk.Tk):
     def __init__(self, *args, **kwargs):
@@ -45,8 +46,8 @@ class Windows(tk.Tk):
 
         # determine initial page display upon program startup
         if self.auth.get_stored_hash():
-            self.show_frame(LoginPage)
-            # self.show_frame(HomePage)
+            # self.show_frame(LoginPage)
+            self.show_frame(NewEntryPage)
         else:
             self.show_frame(RegisterPage)
 
@@ -251,6 +252,7 @@ class NewEntryPage(tk.Frame):
         self.username_entry = tk.Entry(self, textvariable=self.username_var, font=("Helvetica", 12), width=20)
         password_subtitle = tk.Label(self, text="Password:", font=("Helvetica", 12))
         self.password_entry = tk.Entry(self, textvariable=self.password_var, font=("Helvetica", 12), width=20)
+        generate_password_button = tk.Button(self, text="Generate", font=("Helvetica", 10), command=self.create_password)
         self.error_message = tk.Label(self, foreground="red", font=("Helvetica", 10))
         add_entry_button = tk.Button(self, text="Add", font=("Helvetica", 14), width=10, command=self.validate_new_entry)
         cancel_entry_button = tk.Button(self, text="Cancel", font=("Helvetica", 14), width=10, command=self.cancel_entry)
@@ -262,10 +264,15 @@ class NewEntryPage(tk.Frame):
         self.username_entry.place(x=200, y=150)
         password_subtitle.place(x=80, y=200)
         self.password_entry.place(x=200, y=200)
+        generate_password_button.place(x=400, y=197)
         self.error_message.place(x=120, y=225)
         add_entry_button.place(x=80, y=250)
         cancel_entry_button.place(x=250, y=250)
         
+    # generate a randomised password if prompted
+    def create_password(self):
+        self.password_var.set(generate_password())
+    
     # check if user has entered a valid account entry
     def validate_new_entry(self):
         # ensure all fields have data
