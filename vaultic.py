@@ -242,7 +242,8 @@ class NewEntryPage(tk.Frame):
         self.username_entry = tk.Entry(self, textvariable=self.username_var, font=("Helvetica", 12), width=20)
         password_subtitle = tk.Label(self, text="Password:", font=("Helvetica", 12))
         self.password_entry = tk.Entry(self, textvariable=self.password_var, font=("Helvetica", 12), width=20)
-        add_entry_button = tk.Button(self, text="Add", font=("Helvetica", 14), width=10, command=self.create_entry)
+        self.error_message = tk.Label(self, foreground="red", font=("Helvetica", 10))
+        add_entry_button = tk.Button(self, text="Add", font=("Helvetica", 14), width=10, command=self.validate_new_entry)
         cancel_entry_button = tk.Button(self, text="Cancel", font=("Helvetica", 14), width=10)
 
         title.place(x=150, y=30)    
@@ -252,9 +253,29 @@ class NewEntryPage(tk.Frame):
         self.username_entry.place(x=200, y=150)
         password_subtitle.place(x=80, y=200)
         self.password_entry.place(x=200, y=200)
+        self.error_message.place(x=120, y=225)
         add_entry_button.place(x=80, y=250)
         cancel_entry_button.place(x=250, y=250)
         
+    # check if user has entered a valid account entry
+    def validate_new_entry(self):
+        # ensure all fields have data
+        if len(self.account_name_var.get()) > 0 and len(self.username_var.get()) > 0 and len(self.password_var.get()) > 0:
+            self.create_entry()
+        self.show_error_message()
+
+    # display the error message
+    def show_error_message(self):
+        self.error_message.config(text="Error: All fields must be filled.")
+        self.after(3000, self.clear_all)
+
+    # clear all entry fields and the error message
+    def clear_all(self):
+        self.error_message.config(text="")
+        self.account_name_entry.delete(0, "end")
+        self.username_entry.delete(0, "end")
+        self.password_entry.delete(0, "end")
+
     # create a new account entry and store in the pw_manager database
     def create_entry(self):
         # sql query to add a new valid account entry
