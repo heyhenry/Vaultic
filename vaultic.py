@@ -45,8 +45,8 @@ class Windows(tk.Tk):
 
         # determine initial page display upon program startup
         if self.auth.get_stored_hash():
-            # self.show_frame(LoginPage)
-            self.show_frame(NewEntryPage)
+            self.show_frame(LoginPage)
+            # self.show_frame(NewEntryPage)
         else:
             self.show_frame(RegisterPage)
 
@@ -242,7 +242,7 @@ class NewEntryPage(tk.Frame):
         self.username_entry = tk.Entry(self, textvariable=self.username_var, font=("Helvetica", 12), width=20)
         password_subtitle = tk.Label(self, text="Password:", font=("Helvetica", 12))
         self.password_entry = tk.Entry(self, textvariable=self.password_var, font=("Helvetica", 12), width=20)
-        add_entry_button = tk.Button(self, text="Add", font=("Helvetica", 14), width=10)
+        add_entry_button = tk.Button(self, text="Add", font=("Helvetica", 14), width=10, command=self.create_entry)
         cancel_entry_button = tk.Button(self, text="Cancel", font=("Helvetica", 14), width=10)
 
         title.place(x=150, y=30)    
@@ -255,9 +255,20 @@ class NewEntryPage(tk.Frame):
         add_entry_button.place(x=80, y=250)
         cancel_entry_button.place(x=250, y=250)
         
-
-
-
+    # create a new account entry and store in the pw_manager database
+    def create_entry(self):
+        # sql query to add a new valid account entry
+        sql_query = "INSERT INTO accounts (account_name, username, password) VALUES (?, ?, ?)"
+        # checker to ensure that there is an active connection to the pw_manager database
+        if self.controller.pw_cursor:
+            self.controller.pw_cursor.execute(sql_query, (self.account_name_var.get(), self.username_var.get(), self.password_var.get()))
+            # save changes to the pw_manager database
+            self.controller.pw_connection.commit()
+            # return user to the homepage after entry is added
+            self.controller.show_frame(HomePage)
+        # hidden issue logger for dev
+        else:
+            print("Trouble: 'pw_cursor' is None")
 
 if __name__ == "__main__":
     app = Windows()
