@@ -45,8 +45,8 @@ class Windows(tk.Tk):
 
         # determine initial page display upon program startup
         if self.auth.get_stored_hash():
-            self.show_frame(LoginPage)
-            # self.show_frame(NewEntryPage)
+            # self.show_frame(LoginPage)
+            self.show_frame(NewEntryPage)
         else:
             self.show_frame(RegisterPage)
 
@@ -235,17 +235,26 @@ class NewEntryPage(tk.Frame):
         self.create_widgets()
 
     def create_widgets(self):
-        title = tk.Label(self, text="New Account Entry", font=("Helvetica", 32))
-        account_name_subtitle = tk.Label(self, text="Account Name:")
-        self.account_name_entry = tk.Entry(self, textvariable=self.account_name_var)
-        username_subtitle = tk.Label(self, text="Username:")
-        self.username_entry = tk.Entry(self, textvariable=self.username_var)
-        password_subtitle = tk.Label(self, text="Password:")
-        self.password_entry = tk.Entry(self, textvariable=self.password_var)
-        add_entry_button = tk.Button(self, text="Add")
-        cancel_entry_button = tk.Button(self, text="Cancel")
+        title = tk.Label(self, text="New Account Entry", font=("Helvetica", 18))
+        account_name_subtitle = tk.Label(self, text="Account Name:", font=("Helvetica", 12))
+        self.account_name_entry = tk.Entry(self, textvariable=self.account_name_var, font=("Helvetica", 12), width=20)
+        username_subtitle = tk.Label(self, text="Username:", font=("Helvetica", 12))
+        self.username_entry = tk.Entry(self, textvariable=self.username_var, font=("Helvetica", 12), width=20)
+        password_subtitle = tk.Label(self, text="Password:", font=("Helvetica", 12))
+        self.password_entry = tk.Entry(self, textvariable=self.password_var, font=("Helvetica", 12), width=20)
+        add_entry_button = tk.Button(self, text="Add", font=("Helvetica", 14), width=10)
+        cancel_entry_button = tk.Button(self, text="Cancel", font=("Helvetica", 14), width=10)
 
-        title.place(x=250, y=30)    
+        title.place(x=150, y=30)    
+        account_name_subtitle.place(x=80, y=100)
+        self.account_name_entry.place(x=200, y=100)
+        username_subtitle.place(x=80, y=150)
+        self.username_entry.place(x=200, y=150)
+        password_subtitle.place(x=80, y=200)
+        self.password_entry.place(x=200, y=200)
+        add_entry_button.place(x=80, y=250)
+        cancel_entry_button.place(x=250, y=250)
+        
 
 
 
