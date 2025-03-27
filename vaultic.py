@@ -45,8 +45,8 @@ class Windows(tk.Tk):
 
         # determine initial page display upon program startup
         if self.auth.get_stored_hash():
-            # self.show_frame(LoginPage)
-            self.show_frame(HomePage)
+            self.show_frame(LoginPage)
+            # self.show_frame(HomePage)
         else:
             self.show_frame(RegisterPage)
 
@@ -271,7 +271,8 @@ class NewEntryPage(tk.Frame):
         # ensure all fields have data
         if len(self.account_name_var.get()) > 0 and len(self.username_var.get()) > 0 and len(self.password_var.get()) > 0:
             self.create_entry()
-        self.show_error_message()
+        else:
+            self.show_error_message()
 
     # display the error message
     def show_error_message(self):
@@ -294,6 +295,8 @@ class NewEntryPage(tk.Frame):
             self.controller.pw_cursor.execute(sql_query, (self.account_name_var.get(), self.username_var.get(), self.password_var.get()))
             # save changes to the pw_manager database
             self.controller.pw_connection.commit()
+            # clean out data fields prior to page redirect
+            self.clear_all()
             # return user to the homepage after entry is added
             self.controller.show_frame(HomePage)
         # hidden issue logger for dev
