@@ -68,7 +68,7 @@ class Windows(tk.Tk):
                 # timer added due to tkinter event processing isn't instantaenous(spelling?)
                 self.after(100, lambda: frame.password_entry.focus())
         elif page == HomePage:
-            self.geometry("800x600")
+            self.geometry("800x700")
             # frame.refresh_homepage()
             frame.populate_accounts_list()
 
@@ -222,45 +222,42 @@ class HomePage(tk.Frame):
         self.create_widgets()
 
     def create_widgets(self):
-        # top 
         title = tk.Label(self, text="Home", font=("Helvetica", 24))
         new_entry = tk.Button(self, text="New Account [+]", font=("Helvetica", 12), command=lambda: self.controller.show_frame(NewEntryPage))
-        
+
+        self.accounts_list = ttk.Treeview(self, columns=("account_name", "account_username"), show="headings", height=10)
+        self.accounts_list.heading("account_name", text="Account Name")
+        self.accounts_list.heading("account_username", text="Username")
+        self.accounts_list.column("account_name", width=300)
+        self.accounts_list.column("account_username", width=300)
+
         title.place(x=350, y=10)
         new_entry.place(x=600, y=10)
 
-        # left
-
-        self.accounts_list = tk.Listbox(self, width=20, height=20, font=("Helvetica", 14), selectmode="single")
-        accounts_scrollbar = tk.Scrollbar(self, width=30)
-        self.accounts_list.config(yscrollcommand=accounts_scrollbar.set)
-        accounts_scrollbar.config(command=self.accounts_list.yview)
-
-        self.accounts_list.place(x=80, y=100)
-        accounts_scrollbar.place(x=303, y=100, height=465)
+        self.accounts_list.place(x=100, y=80)
         
-        # right
-        details_subtitle = tk.Label(self, text="Account Details:", font=("Helvetica", 24))
-        account_name_subtitle = tk.Label(self, text="Name:", font=("Helvetica", 18))
-        account_username_subtitle = tk.Label(self, text="Username:", font=("Helvetica", 18))
-        account_password_subtitle = tk.Label(self, text="Password:", font=("Helvetica", 18))
-        account_name_entry = tk.Entry(self, textvariable=self.account_name_var, state='readonly', font=("Helvetica", 18))
-        account_username_entry = tk.Entry(self, textvariable=self.account_username_var, state='readonly', font=("Helvetica", 18))
-        account_password_entry = tk.Entry(self, textvariable=self.account_password_var, state='readonly', font=("Helvetica", 18))
-        remove_account_button = tk.Button(self, text="Remove Account", font=("Helvetica", 14))
-        edit_account_details_button = tk.Button(self, text="Edit Account Details", font=("Helvetica", 14))
-        generate_password_button = tk.Button(self, text="Generate New Password", font=("Helvetica", 14))
+        # # right
+        # details_subtitle = tk.Label(self, text="Account Details:", font=("Helvetica", 24))
+        # account_name_subtitle = tk.Label(self, text="Name:", font=("Helvetica", 18))
+        # account_username_subtitle = tk.Label(self, text="Username:", font=("Helvetica", 18))
+        # account_password_subtitle = tk.Label(self, text="Password:", font=("Helvetica", 18))
+        # account_name_entry = tk.Entry(self, textvariable=self.account_name_var, state='readonly', font=("Helvetica", 18))
+        # account_username_entry = tk.Entry(self, textvariable=self.account_username_var, state='readonly', font=("Helvetica", 18))
+        # account_password_entry = tk.Entry(self, textvariable=self.account_password_var, state='readonly', font=("Helvetica", 18))
+        # remove_account_button = tk.Button(self, text="Remove Account", font=("Helvetica", 14))
+        # edit_account_details_button = tk.Button(self, text="Edit Account Details", font=("Helvetica", 14))
+        # generate_password_button = tk.Button(self, text="Generate New Password", font=("Helvetica", 14))
 
-        details_subtitle.place(x=425, y=100)
-        account_name_subtitle.place(x=350, y=200)
-        account_username_subtitle.place(x=350, y=250)
-        account_password_subtitle.place(x=350, y=300)
-        account_name_entry.place(x=500, y=200)
-        account_username_entry.place(x=500, y=250)
-        account_password_entry.place(x=500, y=300)
-        remove_account_button.place(x=350, y=400)
-        edit_account_details_button.place(x=550, y=400)
-        generate_password_button.place(x=425, y=480)
+        # details_subtitle.place(x=425, y=100)
+        # account_name_subtitle.place(x=350, y=200)
+        # account_username_subtitle.place(x=350, y=250)
+        # account_password_subtitle.place(x=350, y=300)
+        # account_name_entry.place(x=500, y=200)
+        # account_username_entry.place(x=500, y=250)
+        # account_password_entry.place(x=500, y=300)
+        # remove_account_button.place(x=350, y=400)
+        # edit_account_details_button.place(x=550, y=400)
+        # generate_password_button.place(x=425, y=480)
         
 
     # update the homepage with data from database
@@ -274,14 +271,10 @@ class HomePage(tk.Frame):
 
     # fill the accounts list with stored account names
     def populate_accounts_list(self):
-        self.accounts_list.delete(0, 'end')
-        if self.controller.pw_connection:
-            sql_query = "SELECT account_name FROM accounts"
-            self.controller.pw_cursor.execute(sql_query)
-            result = self.controller.pw_cursor.fetchall()
-            if result:
-                for name in result:
-                    self.accounts_list.insert('end', name)
+        pass
+
+    def get_account_details(self, event):
+        pass
 
 class NewEntryPage(tk.Frame):
     def __init__(self, parent, controller):
