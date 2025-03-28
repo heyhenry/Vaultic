@@ -46,3 +46,16 @@
 - What is the difference between focus and focus_set methods in Tkinter? (accessed: 19th March 2025): https://www.tutorialspoint.com/what-is-the-difference-between-focus-and-focus-set-methods-in-tkinter
 - Tkinter: Entry problem (accessed: 19th March 2025): https://python-forum.io/thread-30638.html
 - How to set focus on Entry widget in Tkinter? (accessed: 19th March 2025): https://www.tutorialspoint.com/how-to-set-focus-on-entry-widget-in-tkinter
+- SQLite Insert (accessed: 27th March 2025): https://www.sqlitetutorial.net/sqlite-insert/
+- python + sqlite, insert data from variables into table (accessed: 27th March 2025): https://stackoverflow.com/questions/4360593/python-sqlite-insert-data-from-variables-into-table
+- Inserting variables to database table using Python (accessed: 27th March 2025): https://www.geeksforgeeks.org/inserting-variables-to-database-table-using-python/
+- How To Bind The Enter Key To A Tkinter Window? (accessed: 27th March 2025): https://www.geeksforgeeks.org/how-to-bind-the-enter-key-to-a-tkinter-window/
+- Get selected item in listbox and call another function storing the selected for it (accessed: 28th March 2025): https://stackoverflow.com/questions/7616541/get-selected-item-in-listbox-and-call-another-function-storing-the-selected-for
+- Tkinter Listbox make a selection (accessed: 28th March 2025): https://stackoverflow.com/questions/60640638/tkinter-listbox-make-a-selection
+- Tkinter: distinguish between double-click & button release? (accessed: 28th March 2025): https://www.reddit.com/r/learnpython/comments/1ewno6m/tkinter_distinguish_between_doubleclick_button/
+- Treeview in Tk (tkinter) (accessed: 28th March): https://pythonassets.com/posts/treeview-in-tk-tkinter/
+- "Row value misused" error in SQLite database (accessed: 28th March 2025): https://stackoverflow.com/questions/42123011/row-value-misused-error-in-sqlite-database
+- Python Tkinter Listbox Widget (accessed: 28th March 2025): https://www.studytonight.com/tkinter/python-tkinter-listbox-
+- Treeview (accessed: 28th March): https://tkdocs.com/tutorial/tree.html
+- tkinter.ttk - Tk themed widgets (insert) (accessed: 28th March 2025): https://docs.python.org/3/library/tkinter.ttk.html#tkinter.ttk.Treeview.insert
+- How to clear an entire Treeview with Tkinter (accessed: 28th March 2025): https://stackoverflow.com/questions/22812134/how-to-clear-an-entire-treeview-with-tkinter
