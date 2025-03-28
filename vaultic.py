@@ -235,7 +235,7 @@ class HomePage(tk.Frame):
         new_entry.place(x=600, y=10)
 
         self.accounts_list.place(x=100, y=80)
-        
+
         # # right
         # details_subtitle = tk.Label(self, text="Account Details:", font=("Helvetica", 24))
         # account_name_subtitle = tk.Label(self, text="Name:", font=("Helvetica", 18))
@@ -271,7 +271,14 @@ class HomePage(tk.Frame):
 
     # fill the accounts list with stored account names
     def populate_accounts_list(self):
-        pass
+        self.accounts_list.delete(*self.accounts_list.get_children())
+        if self.controller.pw_connection:
+            sql_query = "SELECT account_name, username FROM accounts"
+            self.controller.pw_cursor.execute(sql_query)
+            result = self.controller.pw_cursor.fetchall()
+            if result:
+                for account_info in result:
+                    self.accounts_list.insert("", "end", values=account_info)
 
     def get_account_details(self, event):
         pass
