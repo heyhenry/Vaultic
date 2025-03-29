@@ -37,7 +37,7 @@ class Windows(tk.Tk):
         # we will now create a dictionary of frames
         self.frames = {}
         # we'll create the frames themselves later but let's add the components to the dictionary
-        for F in (LoginPage, RegisterPage, HomePage, NewEntryPage, EditAccountInfoPage):
+        for F in (LoginPage, RegisterPage, HomePage, NewEntryPage, EditAccountPage):
             frame = F(container, self)
 
             # the windows class acts as the root window for the frames
@@ -324,9 +324,10 @@ class HomePage(tk.Frame):
             self.populate_accounts_list()
 
     def edit_account_info(self):
-        self.controller.frames[EditAccountInfoPage].get_account_info()
-        self.controller.show_frame(EditAccountInfoPage)
-
+        # trigger a call for EditAccountPage's values to be update based on the selected account in HomePage
+        self.controller.frames[EditAccountPage].get_account_info()
+        # redirect to the EditAccountPage window
+        self.controller.show_frame(EditAccountPage)
 
 class NewEntryPage(tk.Frame):
     def __init__(self, parent, controller):
@@ -411,7 +412,7 @@ class NewEntryPage(tk.Frame):
         # redirect to the homepage
         self.controller.show_frame(HomePage)
 
-class EditAccountInfoPage(tk.Frame):
+class EditAccountPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
@@ -474,6 +475,7 @@ class EditAccountInfoPage(tk.Frame):
         # self.controller.pw_cursor.execute(update_account_info_query, ())
 
     def get_account_info(self):
+        # pull the values stored for respective variables from the HomePage variable instances
         self.account_name_var.set(self.controller.frames[HomePage].account_name_var.get())
         self.username_var.set(self.controller.frames[HomePage].account_username_var.get())
         self.password_var.set(self.controller.frames[HomePage].account_password_var.get())
