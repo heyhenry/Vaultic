@@ -69,7 +69,6 @@ class Windows(tk.Tk):
                 self.after(100, lambda: frame.password_entry.focus())
         elif page == HomePage:
             self.geometry("800x700")
-            # frame.refresh_homepage()
             frame.populate_accounts_list()
 
         # raises the current frame to the top
@@ -261,18 +260,12 @@ class HomePage(tk.Frame):
         
         self.accounts_list.bind("<<TreeviewSelect>>", self.get_account_details)
 
-    # update the homepage with data from database
-    def refresh_homepage(self):
-        pass
-        # if self.controller.pw_connection:
-        #     sql_query = "SELECT * FROM accounts"
-        #     self.controller.pw_cursor.execute(sql_query)
-        #     result = self.controller.pw_cursor.fetchall()
-            # self.display_summary.config(text=result if result else "No records found")
-
     # fill the accounts list with stored account names
     def populate_accounts_list(self):
+        # delete all items stored in the accounts_list
         self.accounts_list.delete(*self.accounts_list.get_children())
+        # run query to the database to fetch all latest accounts and their information 
+        # and store into the accounts list
         if self.controller.pw_connection:
             sql_query = "SELECT account_name, username FROM accounts"
             self.controller.pw_cursor.execute(sql_query)
@@ -282,15 +275,20 @@ class HomePage(tk.Frame):
                     self.accounts_list.insert("", "end", values=account_info)
 
     def get_account_details(self, event):
+        # select an account from the accounts_list
         selection = self.accounts_list.focus()
+        # store the account's name and username respectively for future referencing
         account_name = self.accounts_list.item(selection)["values"][0]
         account_username = self.accounts_list.item(selection)["values"][1]
+        # run query to fetch account information from the database
         sql_query = "SELECT account_name,username,password FROM accounts WHERE account_name=? AND username=?"
         self.controller.pw_cursor.execute(sql_query, (account_name, account_username))
         result = self.controller.pw_cursor.fetchall()
+        # set the account variables for details display based on selected account
         self.account_name_var.set(result[0][0])
         self.account_username_var.set(result[0][1])
         self.account_password_var.set(result[0][2])
+        # deselect the item after setting variables, to clear selection index
         self.accounts_list.selection_remove(selection)
 
     def clear_details(self):
