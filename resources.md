@@ -59,3 +59,10 @@
 - Treeview (accessed: 28th March): https://tkdocs.com/tutorial/tree.html
 - tkinter.ttk - Tk themed widgets (insert) (accessed: 28th March 2025): https://docs.python.org/3/library/tkinter.ttk.html#tkinter.ttk.Treeview.insert
 - How to clear an entire Treeview with Tkinter (accessed: 28th March 2025): https://stackoverflow.com/questions/22812134/how-to-clear-an-entire-treeview-with-tkinter
+- tkinter Treeview: get selected item values (accessed: 29th March 2025): https://stackoverflow.com/questions/30614279/tkinter-treeview-get-selected-item-values
+- Tkinter - Selecting an item from a Treeview using single click instead of double click (Callback on Treeview item selection) (accessed: 29th March 2025): https://stackoverflow.com/questions/61404261/tkinter-selecting-an-item-from-a-treeview-using-single-click-instead-of-doubles
+- Treeview tkdocs | Customizing the Display (accessed: 29th March 2025): https://tkdocs.com/tutorial/tree.html#display
+- Treeview tkdocs | Item Appearance and Events (accessed: 29th March 2025): https://tkdocs.com/tutorial/tree.html#appearance
+- SQLite Online (for testing queries) (accessed: 29th March 2025): https://sqliteonline.com/
+- How to deselect an item or (items) of a Tkinter ttk.Treeview? (accessed: 29th March 2025): https://stackoverflow.com/questions/48593051/how-to-deselect-an-item-or-items-of-a-tkinter-ttk-treeview
+- Treeview tkdocs | ttk.TreeView methods list (accessed: 29th March 2025): https://tkdocs.com/pyref/ttk_treeview.html
