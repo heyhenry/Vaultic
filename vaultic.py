@@ -419,6 +419,8 @@ class EditAccountPage(tk.Frame):
         self.account_name_var = tk.StringVar()
         self.username_var = tk.StringVar()
         self.password_var = tk.StringVar()
+        self.current_account_name_var = tk.StringVar()
+        self.current_username_var = tk.StringVar()
         self.create_widgets()
 
     def create_widgets(self):
@@ -451,7 +453,7 @@ class EditAccountPage(tk.Frame):
     
     def validate_account_info(self):
         if len(self.account_name_var.get()) > 0 and len(self.username_var.get()) > 0 and len(self.password_var.get()) > 0:
-            pass
+            self.update_entry()
         else:
             self.show_error_message()
     
@@ -470,15 +472,20 @@ class EditAccountPage(tk.Frame):
         self.controller.show_frame(HomePage)     
 
     def update_entry(self):
-        pass
-        # update_account_info_query = "UPDATE accounts SET account_name=?,username=?,password=? WHERE account_name=? AND username=?"
-        # self.controller.pw_cursor.execute(update_account_info_query, ())
+        update_account_info_query = "UPDATE accounts SET account_name=?,username=?,password=? WHERE account_name=? AND username=?"
+        self.controller.pw_cursor.execute(update_account_info_query, (self.account_name_var.get(), self.username_var.get(), self.password_var.get(), self.current_account_name_var.get(), self.current_username_var.get()))
+        self.controller.pw_connection.commit()
+        self.clear_all()
+        self.controller.show_frame(HomePage)
 
     def get_account_info(self):
         # pull the values stored for respective variables from the HomePage variable instances
         self.account_name_var.set(self.controller.frames[HomePage].account_name_var.get())
         self.username_var.set(self.controller.frames[HomePage].account_username_var.get())
         self.password_var.set(self.controller.frames[HomePage].account_password_var.get())
+        self.current_account_name_var.set(self.controller.frames[HomePage].account_name_var.get())
+        self.current_username_var.set(self.controller.frames[HomePage].account_username_var.get())
+        
 
 if __name__ == "__main__":
     app = Windows()
