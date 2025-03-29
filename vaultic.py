@@ -37,7 +37,7 @@ class Windows(tk.Tk):
         # we will now create a dictionary of frames
         self.frames = {}
         # we'll create the frames themselves later but let's add the components to the dictionary
-        for F in (LoginPage, RegisterPage, HomePage, NewEntryPage):
+        for F in (LoginPage, RegisterPage, HomePage, NewEntryPage, EditAccountInfoPage):
             frame = F(container, self)
 
             # the windows class acts as the root window for the frames
@@ -244,7 +244,7 @@ class HomePage(tk.Frame):
         account_username_entry = tk.Entry(self, textvariable=self.account_username_var, state='readonly', font=("Helvetica", 18))
         account_password_entry = tk.Entry(self, textvariable=self.account_password_var, state='readonly', font=("Helvetica", 18))
         remove_account_button = tk.Button(self, text="Remove Account", font=("Helvetica", 14), command=self.remove_account)
-        edit_account_details_button = tk.Button(self, text="Edit Account Details", font=("Helvetica", 14))
+        edit_account_details_button = tk.Button(self, text="Edit Account Details", font=("Helvetica", 14), command=self.edit_account_info)
         generate_password_button = tk.Button(self, text="Generate New Password", font=("Helvetica", 14), command=self.generate_new_password)
 
         details_subtitle.place(x=275, y=325)
@@ -322,6 +322,11 @@ class HomePage(tk.Frame):
             self.account_password_var.set("")
             # update the accounts list
             self.populate_accounts_list()
+
+    def edit_account_info(self):
+        self.controller.frames[EditAccountInfoPage].get_account_info()
+        self.controller.show_frame(EditAccountInfoPage)
+
 
 class NewEntryPage(tk.Frame):
     def __init__(self, parent, controller):
@@ -403,8 +408,74 @@ class NewEntryPage(tk.Frame):
     def cancel_entry(self):
         # ensure all data fields are cleaned
         self.clear_all()
-        # redirec to the homepage
+        # redirect to the homepage
         self.controller.show_frame(HomePage)
+
+class EditAccountInfoPage(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        self.controller = controller
+        self.account_name_var = tk.StringVar()
+        self.username_var = tk.StringVar()
+        self.password_var = tk.StringVar()
+        # self.account_name_var.set(self.controller.frames[HomePage].account_name_var.get())
+        self.create_widgets()
+
+    def create_widgets(self):
+        title = tk.Label(self, text="Edit Account Info", font=("Helvetica", 18))
+        account_name_subtitle = tk.Label(self, text="Account Name:", font=("Helvetica", 12))
+        self.account_name_entry = tk.Entry(self, textvariable=self.account_name_var, font=("Helvetica", 12), width=20)
+        username_subtitle = tk.Label(self, text="Username:", font=("Helvetica", 12))
+        self.username_entry = tk.Entry(self, textvariable=self.username_var, font=("Helvetica", 12), width=20)
+        password_subtitle = tk.Label(self, text="Password:", font=("Helvetica", 12))
+        self.password_entry = tk.Entry(self, textvariable=self.password_var, font=("Helvetica", 12), width=20)
+        generate_password_button = tk.Button(self, text="Generate", font=("Helvetica", 10), command=self.create_password)
+        self.error_message = tk.Label(self, foreground="red", font=("Helvetica", 10))
+        add_entry_button = tk.Button(self, text="Add", font=("Helvetica", 14), width=10, command=self.validate_account_info)
+        cancel_entry_button = tk.Button(self, text="Cancel", font=("Helvetica", 14), width=10, command=self.cancel_entry)
+
+        title.place(x=150, y=30)    
+        account_name_subtitle.place(x=80, y=100)
+        self.account_name_entry.place(x=200, y=100)
+        username_subtitle.place(x=80, y=150)
+        self.username_entry.place(x=200, y=150)
+        password_subtitle.place(x=80, y=200)
+        self.password_entry.place(x=200, y=200)
+        generate_password_button.place(x=400, y=197)
+        self.error_message.place(x=120, y=225)
+        add_entry_button.place(x=80, y=250)
+        cancel_entry_button.place(x=250, y=250)
+
+    def create_password(self):
+        self.password_var.set(generate_password())
+    
+    def validate_account_info(self):
+        if len(self.account_name_var.get()) > 0 and len(self.username_var.get()) > 0 and len(self.password_var.get()) > 0:
+            pass
+        else:
+            self.show_error_message()
+    
+    def show_error_message(self):
+        self.error_message.config(text="Error: All fields must be filled.")
+        self.after(3000, self.clear_all)
+    
+    def clear_all(self):
+        self.error_message.config(text="")
+        self.account_name_entry.delete(0, "end")
+        self.username_entry.delete(0, "end")
+        self.password_entry.delete(0, "end")
+
+    def cancel_entry(self):
+        self.clear_all()
+        self.controller.show_frame(HomePage)     
+
+    def update_entry(self):
+        pass
+        # update_account_info_query = "UPDATE accounts SET account_name=?,username=?,password=? WHERE account_name=? AND username=?"
+        # self.controller.pw_cursor.execute(update_account_info_query, ())
+
+    def get_account_info(self):
+        self.account_name_var.set(self.controller.frames[HomePage].account_name_var.get())
 
 if __name__ == "__main__":
     app = Windows()
