@@ -282,11 +282,8 @@ class HomePage(tk.Frame):
                     self.accounts_list.insert("", "end", values=account_info)
 
     def get_account_details(self, event):
-        selection = [self.accounts_list.item(item)["values"] for item in self.accounts_list.selection()]
-        for item in self.accounts_list.selection():
-            print(self.accounts_list.item(item)["values"])
-        
-        # print("Selected Items: ", selection)
+        selection = self.accounts_list.focus()
+        print(self.accounts_list.item(selection)["values"])
 
 
 class NewEntryPage(tk.Frame):
