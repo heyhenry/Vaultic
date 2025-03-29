@@ -66,3 +66,6 @@
 - SQLite Online (for testing queries) (accessed: 29th March 2025): https://sqliteonline.com/
 - How to deselect an item or (items) of a Tkinter ttk.Treeview? (accessed: 29th March 2025): https://stackoverflow.com/questions/48593051/how-to-deselect-an-item-or-items-of-a-tkinter-ttk-treeview
 - Treeview tkdocs | ttk.TreeView methods list (accessed: 29th March 2025): https://tkdocs.com/pyref/ttk_treeview.html
+- SQLite Update (accessed: 29th March 2025): https://www.sqlitetutorial.net/sqlite-update/
+- SQLite Delete (accessed: 29th March 2025): https://www.sqlitetutorial.net/sqlite-delete/
+- My Repo | HappyXP (accessed: 29th March 2025): https://github.com/heyhenry/HappyXP/blob/main/main.py
