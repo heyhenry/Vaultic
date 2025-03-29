@@ -418,7 +418,6 @@ class EditAccountInfoPage(tk.Frame):
         self.account_name_var = tk.StringVar()
         self.username_var = tk.StringVar()
         self.password_var = tk.StringVar()
-        # self.account_name_var.set(self.controller.frames[HomePage].account_name_var.get())
         self.create_widgets()
 
     def create_widgets(self):
@@ -476,6 +475,8 @@ class EditAccountInfoPage(tk.Frame):
 
     def get_account_info(self):
         self.account_name_var.set(self.controller.frames[HomePage].account_name_var.get())
+        self.username_var.set(self.controller.frames[HomePage].account_username_var.get())
+        self.password_var.set(self.controller.frames[HomePage].account_password_var.get())
 
 if __name__ == "__main__":
     app = Windows()
