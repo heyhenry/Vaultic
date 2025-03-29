@@ -245,7 +245,7 @@ class HomePage(tk.Frame):
         account_password_entry = tk.Entry(self, textvariable=self.account_password_var, state='readonly', font=("Helvetica", 18))
         remove_account_button = tk.Button(self, text="Remove Account", font=("Helvetica", 14))
         edit_account_details_button = tk.Button(self, text="Edit Account Details", font=("Helvetica", 14))
-        generate_password_button = tk.Button(self, text="Generate New Password", font=("Helvetica", 14))
+        generate_password_button = tk.Button(self, text="Generate New Password", font=("Helvetica", 14), command=self.generate_new_password)
 
         details_subtitle.place(x=275, y=325)
         account_name_subtitle.place(x=200, y=400)
@@ -291,10 +291,19 @@ class HomePage(tk.Frame):
         # deselect the item after setting variables, to clear selection index
         self.accounts_list.selection_remove(selection)
 
-    def clear_details(self):
-        self.account_name_var.set()
-        self.account_username_var.set()
-        self.account_password_var.set()
+    def generate_new_password(self):
+        # only generate password if an account was selected
+        if self.account_name_var.get() or self.account_username_var.get() or self.account_password_var.get():
+            # create a new password
+            new_password = generate_password()
+            # run query to update the password value for the given account
+            update_password_query = "UPDATE accounts SET password=? WHERE account_name=? AND username=?"
+            self.controller.pw_cursor.execute(update_password_query, (new_password, self.account_name_var.get(), self.account_username_var.get()))
+            self.controller.pw_connection.commit()
+            # update display's password value in tkinter
+            self.account_password_var.set(new_password)
+            # update the accounts list
+            self.populate_accounts_list()
 
 class NewEntryPage(tk.Frame):
     def __init__(self, parent, controller):
