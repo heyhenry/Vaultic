@@ -291,6 +291,12 @@ class HomePage(tk.Frame):
         self.account_name_var.set(result[0][0])
         self.account_username_var.set(result[0][1])
         self.account_password_var.set(result[0][2])
+        self.accounts_list.selection_remove(selection)
+
+    def clear_details(self):
+        self.account_name_var.set()
+        self.account_username_var.set()
+        self.account_password_var.set()
 
 class NewEntryPage(tk.Frame):
     def __init__(self, parent, controller):
