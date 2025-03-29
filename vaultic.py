@@ -46,8 +46,8 @@ class Windows(tk.Tk):
 
         # determine initial page display upon program startup
         if self.auth.get_stored_hash():
-            # self.show_frame(LoginPage)
-            self.show_frame(HomePage)
+            self.show_frame(LoginPage)
+            # self.show_frame(HomePage)
         else:
             self.show_frame(RegisterPage)
 
@@ -225,7 +225,7 @@ class HomePage(tk.Frame):
         title = tk.Label(self, text="Home", font=("Helvetica", 24))
         new_entry = tk.Button(self, text="New Account [+]", font=("Helvetica", 12), command=lambda: self.controller.show_frame(NewEntryPage))
 
-        self.accounts_list = ttk.Treeview(self, columns=("account_name", "account_username"), show="headings", height=10)
+        self.accounts_list = ttk.Treeview(self, columns=("account_name", "account_username"), show="headings", height=10, selectmode='browse')
         self.accounts_list.heading("account_name", text="Account Name")
         self.accounts_list.heading("account_username", text="Username")
         self.accounts_list.column("account_name", width=300)
@@ -259,6 +259,7 @@ class HomePage(tk.Frame):
         edit_account_details_button.place(x=290, y=575)
         generate_password_button.place(x=500, y=575)
         
+        self.accounts_list.bind("<<TreeviewSelect>>", self.get_account_details)
 
     # update the homepage with data from database
     def refresh_homepage(self):
@@ -281,7 +282,12 @@ class HomePage(tk.Frame):
                     self.accounts_list.insert("", "end", values=account_info)
 
     def get_account_details(self, event):
-        pass
+        selection = [self.accounts_list.item(item)["values"] for item in self.accounts_list.selection()]
+        for item in self.accounts_list.selection():
+            print(self.accounts_list.item(item)["values"])
+        
+        # print("Selected Items: ", selection)
+
 
 class NewEntryPage(tk.Frame):
     def __init__(self, parent, controller):
