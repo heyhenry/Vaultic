@@ -46,8 +46,8 @@ class Windows(tk.Tk):
 
         # determine initial page display upon program startup
         if self.auth.get_stored_hash():
-            self.show_frame(LoginPage)
-            # self.show_frame(HomePage)
+            # self.show_frame(LoginPage)
+            self.show_frame(HomePage)
         else:
             self.show_frame(RegisterPage)
 
@@ -237,27 +237,27 @@ class HomePage(tk.Frame):
         self.accounts_list.place(x=100, y=80)
 
         # # right
-        # details_subtitle = tk.Label(self, text="Account Details:", font=("Helvetica", 24))
-        # account_name_subtitle = tk.Label(self, text="Name:", font=("Helvetica", 18))
-        # account_username_subtitle = tk.Label(self, text="Username:", font=("Helvetica", 18))
-        # account_password_subtitle = tk.Label(self, text="Password:", font=("Helvetica", 18))
-        # account_name_entry = tk.Entry(self, textvariable=self.account_name_var, state='readonly', font=("Helvetica", 18))
-        # account_username_entry = tk.Entry(self, textvariable=self.account_username_var, state='readonly', font=("Helvetica", 18))
-        # account_password_entry = tk.Entry(self, textvariable=self.account_password_var, state='readonly', font=("Helvetica", 18))
-        # remove_account_button = tk.Button(self, text="Remove Account", font=("Helvetica", 14))
-        # edit_account_details_button = tk.Button(self, text="Edit Account Details", font=("Helvetica", 14))
-        # generate_password_button = tk.Button(self, text="Generate New Password", font=("Helvetica", 14))
+        details_subtitle = tk.Label(self, text="Account Details:", font=("Helvetica", 24))
+        account_name_subtitle = tk.Label(self, text="Name:", font=("Helvetica", 18))
+        account_username_subtitle = tk.Label(self, text="Username:", font=("Helvetica", 18))
+        account_password_subtitle = tk.Label(self, text="Password:", font=("Helvetica", 18))
+        account_name_entry = tk.Entry(self, textvariable=self.account_name_var, state='readonly', font=("Helvetica", 18))
+        account_username_entry = tk.Entry(self, textvariable=self.account_username_var, state='readonly', font=("Helvetica", 18))
+        account_password_entry = tk.Entry(self, textvariable=self.account_password_var, state='readonly', font=("Helvetica", 18))
+        remove_account_button = tk.Button(self, text="Remove Account", font=("Helvetica", 14))
+        edit_account_details_button = tk.Button(self, text="Edit Account Details", font=("Helvetica", 14))
+        generate_password_button = tk.Button(self, text="Generate New Password", font=("Helvetica", 14))
 
-        # details_subtitle.place(x=425, y=100)
-        # account_name_subtitle.place(x=350, y=200)
-        # account_username_subtitle.place(x=350, y=250)
-        # account_password_subtitle.place(x=350, y=300)
-        # account_name_entry.place(x=500, y=200)
-        # account_username_entry.place(x=500, y=250)
-        # account_password_entry.place(x=500, y=300)
-        # remove_account_button.place(x=350, y=400)
-        # edit_account_details_button.place(x=550, y=400)
-        # generate_password_button.place(x=425, y=480)
+        details_subtitle.place(x=275, y=325)
+        account_name_subtitle.place(x=200, y=400)
+        account_username_subtitle.place(x=200, y=450)
+        account_password_subtitle.place(x=200, y=500)
+        account_name_entry.place(x=400, y=400)
+        account_username_entry.place(x=400, y=450)
+        account_password_entry.place(x=400, y=500)
+        remove_account_button.place(x=100, y=575)
+        edit_account_details_button.place(x=290, y=575)
+        generate_password_button.place(x=500, y=575)
         
 
     # update the homepage with data from database
