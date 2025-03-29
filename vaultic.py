@@ -243,7 +243,7 @@ class HomePage(tk.Frame):
         account_name_entry = tk.Entry(self, textvariable=self.account_name_var, state='readonly', font=("Helvetica", 18))
         account_username_entry = tk.Entry(self, textvariable=self.account_username_var, state='readonly', font=("Helvetica", 18))
         account_password_entry = tk.Entry(self, textvariable=self.account_password_var, state='readonly', font=("Helvetica", 18))
-        remove_account_button = tk.Button(self, text="Remove Account", font=("Helvetica", 14))
+        remove_account_button = tk.Button(self, text="Remove Account", font=("Helvetica", 14), command=self.remove_account)
         edit_account_details_button = tk.Button(self, text="Edit Account Details", font=("Helvetica", 14))
         generate_password_button = tk.Button(self, text="Generate New Password", font=("Helvetica", 14), command=self.generate_new_password)
 
@@ -302,6 +302,24 @@ class HomePage(tk.Frame):
             self.controller.pw_connection.commit()
             # update display's password value in tkinter
             self.account_password_var.set(new_password)
+            # update the accounts list
+            self.populate_accounts_list()
+
+    def remove_account(self):
+        # only remove account if an account was selected
+        if self.account_name_var.get() or self.account_username_var.get() or self.account_password_var():
+            # get account unique identifiers
+            selection = self.accounts_list.focus()
+            account_name = self.accounts_list.item(selection)["values"][0]
+            account_username = self.accounts_list.item(selection)["values"][1]
+            # run sql query to delete the selected account from the database
+            remove_account_query = "DELETE FROM accounts WHERE account_name=? AND username=?"
+            self.controller.pw_cursor.execute(remove_account_query, (account_name, account_username))
+            self.controller.pw_connection.commit()
+            # reset all details related variables
+            self.account_name_var.set("")
+            self.account_username_var.set("")
+            self.account_password_var.set("")
             # update the accounts list
             self.populate_accounts_list()
 
