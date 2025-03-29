@@ -283,8 +283,14 @@ class HomePage(tk.Frame):
 
     def get_account_details(self, event):
         selection = self.accounts_list.focus()
-        print(self.accounts_list.item(selection)["values"])
-
+        account_name = self.accounts_list.item(selection)["values"][0]
+        account_username = self.accounts_list.item(selection)["values"][1]
+        sql_query = "SELECT account_name,username,password FROM accounts WHERE account_name=? AND username=?"
+        self.controller.pw_cursor.execute(sql_query, (account_name, account_username))
+        result = self.controller.pw_cursor.fetchall()
+        self.account_name_var.set(result[0][0])
+        self.account_username_var.set(result[0][1])
+        self.account_password_var.set(result[0][2])
 
 class NewEntryPage(tk.Frame):
     def __init__(self, parent, controller):
