@@ -123,8 +123,8 @@ class LoginPage(tk.Frame):
         self.password_entry.bind("<Return>", lambda event: self.process_password())
 
     def clear_all(self):
-        self.password_entry.delete(0, "end")
         self.error_message.config(text="")
+        self.password_var.set("")
 
     def show_error_message(self):
         self.error_message.config(text="Invalid Password! Try again.")
@@ -188,8 +188,8 @@ class RegisterPage(tk.Frame):
     
     def clear_all(self):
         self.error_message.config(text="")
-        self.password_entry.delete(0, "end")
-        self.confirm_password_entry.delete(0, "end")
+        self.password_var.set("")
+        self.confirm_password_var.set("")
 
     def show_error_message(self):
         self.error_message.config(text=f"Invalid Password! {self.error_type}.")
@@ -383,9 +383,9 @@ class NewEntryPage(tk.Frame):
     # clear all entry fields and the error message
     def clear_all(self):
         self.error_message.config(text="")
-        self.account_name_entry.delete(0, "end")
-        self.username_entry.delete(0, "end")
-        self.password_entry.delete(0, "end")
+        self.account_name_var.set("")
+        self.username_var.set("")
+        self.password_var.set("")
 
     # create a new account entry and store in the pw_manager database
     def create_entry(self):
@@ -419,6 +419,7 @@ class EditAccountPage(tk.Frame):
         self.account_name_var = tk.StringVar()
         self.username_var = tk.StringVar()
         self.password_var = tk.StringVar()
+        # hold current values prior to change, for database reference
         self.current_account_name_var = tk.StringVar()
         self.current_username_var = tk.StringVar()
         self.create_widgets()
@@ -463,19 +464,22 @@ class EditAccountPage(tk.Frame):
     
     def clear_all(self):
         self.error_message.config(text="")
-        self.account_name_entry.delete(0, "end")
-        self.username_entry.delete(0, "end")
-        self.password_entry.delete(0, "end")
+        self.account_name_var.set("")
+        self.username_var.set("")
+        self.password_var.set("")
 
     def cancel_entry(self):
         self.clear_all()
         self.controller.show_frame(HomePage)     
 
     def update_entry(self):
+        # run query to update values for selected account
         update_account_info_query = "UPDATE accounts SET account_name=?,username=?,password=? WHERE account_name=? AND username=?"
         self.controller.pw_cursor.execute(update_account_info_query, (self.account_name_var.get(), self.username_var.get(), self.password_var.get(), self.current_account_name_var.get(), self.current_username_var.get()))
         self.controller.pw_connection.commit()
+        # clear fields post process
         self.clear_all()
+        # redirect to the HomePage
         self.controller.show_frame(HomePage)
 
     def get_account_info(self):
