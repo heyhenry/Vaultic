@@ -434,7 +434,7 @@ class EditAccountPage(tk.Frame):
         self.password_entry = tk.Entry(self, textvariable=self.password_var, font=("Helvetica", 12), width=20)
         generate_password_button = tk.Button(self, text="Generate", font=("Helvetica", 10), command=self.create_password)
         self.error_message = tk.Label(self, foreground="red", font=("Helvetica", 10))
-        add_entry_button = tk.Button(self, text="Add", font=("Helvetica", 14), width=10, command=self.validate_account_info)
+        update_entry_button = tk.Button(self, text="Update", font=("Helvetica", 14), width=10, command=self.validate_account_info)
         cancel_entry_button = tk.Button(self, text="Cancel", font=("Helvetica", 14), width=10, command=self.cancel_entry)
 
         title.place(x=150, y=30)    
@@ -446,7 +446,7 @@ class EditAccountPage(tk.Frame):
         self.password_entry.place(x=200, y=200)
         generate_password_button.place(x=400, y=197)
         self.error_message.place(x=120, y=225)
-        add_entry_button.place(x=80, y=250)
+        update_entry_button.place(x=80, y=250)
         cancel_entry_button.place(x=250, y=250)
 
     def create_password(self):
