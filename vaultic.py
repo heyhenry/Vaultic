@@ -325,16 +325,23 @@ class HomePage(tk.Frame):
 
     def edit_account_info(self):
         if self.account_name_var.get():
-            selection = self.accounts_list.focus()
             # trigger a call for EditAccountPage's values to be update based on the selected account in HomePage
             self.controller.frames[EditAccountPage].get_account_info()
             # redirect to the EditAccountPage window
             self.controller.show_frame(EditAccountPage)
             # deselect the item when switching to account editing page, to clear selection index
-            self.accounts_list.selection_remove(selection)
-            self.account_name_var.set("")
-            self.account_username_var.set("")
-            self.account_password_var.set("")
+            self.clear_details_section()
+
+    def clear_details_section(self):
+        # deselect the item in accounts list
+        selection = self.accounts_list.focus()
+        self.accounts_list.selection_remove(selection)
+        # reset the account info variables
+        self.account_name_var.set("")
+        self.account_username_var.set("")
+        self.account_password_var.set("")
+
+
 
 class NewEntryPage(tk.Frame):
     def __init__(self, parent, controller):
