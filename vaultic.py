@@ -218,6 +218,7 @@ class HomePage(tk.Frame):
         self.account_name_var = tk.StringVar()
         self.account_username_var = tk.StringVar()
         self.account_password_var = tk.StringVar()
+        self.selection = None
         self.create_widgets()
 
     def create_widgets(self):
@@ -307,19 +308,17 @@ class HomePage(tk.Frame):
 
     def remove_account(self):
         # only remove account if an account was selected
-        if self.account_name_var.get() or self.account_username_var.get() or self.account_password_var():
+        if self.account_name_var.get() or self.account_username_var.get() or self.account_password_var.get():
             # get account unique identifiers
-            selection = self.accounts_list.focus()
-            account_name = self.accounts_list.item(selection)["values"][0]
-            account_username = self.accounts_list.item(selection)["values"][1]
+            self.selection = self.accounts_list.focus()
+            account_name = self.accounts_list.item(self.selection)["values"][0]
+            account_username = self.accounts_list.item(self.selection)["values"][1]
             # run sql query to delete the selected account from the database
             remove_account_query = "DELETE FROM accounts WHERE account_name=? AND username=?"
             self.controller.pw_cursor.execute(remove_account_query, (account_name, account_username))
             self.controller.pw_connection.commit()
             # reset all details related variables
-            self.account_name_var.set("")
-            self.account_username_var.set("")
-            self.account_password_var.set("")
+            self.clear_details_section()
             # update the accounts list
             self.populate_accounts_list()
 
@@ -334,13 +333,13 @@ class HomePage(tk.Frame):
 
     def clear_details_section(self):
         # deselect the item in accounts list
-        selection = self.accounts_list.focus()
-        self.accounts_list.selection_remove(selection)
+        if self.selection is None:
+            self.selection = self.accounts_list.focus()
+        self.accounts_list.selection_remove(self.selection)
         # reset the account info variables
         self.account_name_var.set("")
         self.account_username_var.set("")
         self.account_password_var.set("")
-
 
 
 class NewEntryPage(tk.Frame):
