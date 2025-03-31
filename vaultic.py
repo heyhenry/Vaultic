@@ -324,10 +324,11 @@ class HomePage(tk.Frame):
             self.populate_accounts_list()
 
     def edit_account_info(self):
-        # trigger a call for EditAccountPage's values to be update based on the selected account in HomePage
-        self.controller.frames[EditAccountPage].get_account_info()
-        # redirect to the EditAccountPage window
-        self.controller.show_frame(EditAccountPage)
+        if self.account_name_var.get():
+            # trigger a call for EditAccountPage's values to be update based on the selected account in HomePage
+            self.controller.frames[EditAccountPage].get_account_info()
+            # redirect to the EditAccountPage window
+            self.controller.show_frame(EditAccountPage)
 
 class NewEntryPage(tk.Frame):
     def __init__(self, parent, controller):
