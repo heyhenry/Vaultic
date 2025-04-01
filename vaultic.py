@@ -5,7 +5,6 @@ from authmanager import AuthManager
 from create_password_database import create_passwords_database
 from create_auth_database import create_auth_database
 import os
-import pandas as pd
 from password_generation import generate_password
 
 class Windows(tk.Tk):
@@ -23,7 +22,7 @@ class Windows(tk.Tk):
         self.pw_cursor = None
 
         # creating a window's title
-        self.wm_title = ("Test Applicaiton")
+        self.title("Vaultic")
     
         # creating a  frame and assigning it to container
         container = tk.Frame(self, height=400, width=600)
@@ -34,43 +33,42 @@ class Windows(tk.Tk):
         container.grid_rowconfigure(0, weight=1)
         container.grid_columnconfigure(0, weight=1)
 
-        # we will now create a dictionary of frames
-        self.frames = {}
-        # we'll create the frames themselves later but let's add the components to the dictionary
-        for F in (LoginPage, RegisterPage, HomePage, NewEntryPage, EditAccountPage):
-            frame = F(container, self)
+        # we will now create a dictionary of pages
+        self.pages = {}
+        # we'll create the pages themselves later but let's add the components to the dictionary
+        for P in (LoginPage, RegisterPage, HomePage, NewEntryPage, EditAccountPage):
+            page = P(container, self)
 
-            # the windows class acts as the root window for the frames
-            self.frames[F] = frame
-            frame.grid(row=0, column=0, sticky="nswe")
+            # the windows class acts as the root window for the pages
+            self.pages[P] = page
+            page.grid(row=0, column=0, sticky="nswe")
 
         # determine initial page display upon program startup
         if self.auth.get_stored_hash():
-            self.show_frame(LoginPage)
-            # self.show_frame(HomePage)
+            self.show_page(LoginPage)
         else:
-            self.show_frame(RegisterPage)
+            self.show_page(RegisterPage)
 
         self.protocol("WM_DELETE_WINDOW", self.on_close)
 
     # display selected page
-    def show_frame(self, page):
-        frame = self.frames[page]
+    def show_page(self, current_page):
+        page = self.pages[current_page]
 
         # withdraw to avoid flckering of previous page
         self.withdraw()
         self.geometry("480x340") # general defaulted window size for all pages (temporary)
-        if page == RegisterPage or page == LoginPage:
+        if current_page == RegisterPage or current_page == LoginPage:
             # timer added due to tkinter event processing isn't instantaenous(spelling?)
-            self.after(100, frame.password_entry.focus)
-        elif page == HomePage:
+            self.after(100, page.password_entry.focus)
+        elif current_page == HomePage:
             self.geometry("800x700")
             # updates the accounts list to the latest version
             # also deselects any pre-existing item selection aka handles deselection logic as all deselections are intertwined with redirecting to the homepage
-            frame.populate_accounts_list()
+            page.populate_accounts_list()
 
         # raises the current frame to the top
-        frame.tkraise()
+        page.tkraise()
         # ensures immediate update
         self.update_idletasks()
 
@@ -134,7 +132,7 @@ class LoginPage(tk.Frame):
             self.controller.auth.decrypt_dump()
             self.controller.pw_connection = sqlite3.connect("db/pw_manager.db")
             self.controller.pw_cursor = self.controller.pw_connection.cursor()
-            self.controller.show_frame(HomePage)
+            self.controller.show_page(HomePage)
         else:
             self.show_error_message()
 
@@ -208,7 +206,7 @@ class RegisterPage(tk.Frame):
             # create a connection to the pw_manager database
             self.controller.pw_connection = sqlite3.connect("db/pw_manager.db")
             self.controller.pw_cursor = self.controller.pw_connection.cursor()
-            self.controller.show_frame(HomePage)
+            self.controller.show_page(HomePage)
         else:
             self.show_error_message()
 
@@ -263,7 +261,7 @@ class HomePage(tk.Frame):
 
     def new_entry_redirect(self):
         self.clear_details_section()
-        self.controller.show_frame(NewEntryPage)
+        self.controller.show_page(NewEntryPage)
 
     # fill the accounts list with stored account names
     def populate_accounts_list(self):
@@ -329,9 +327,9 @@ class HomePage(tk.Frame):
     def edit_account_info(self):
         if self.account_name_var.get():
             # trigger a call for EditAccountPage's values to be update based on the selected account in HomePage
-            self.controller.frames[EditAccountPage].get_account_info()
+            self.controller.pages[EditAccountPage].get_account_info()
             # redirect to the EditAccountPage window
-            self.controller.show_frame(EditAccountPage)
+            self.controller.show_page(EditAccountPage)
             # deselect the item when switching to account editing page, to clear selection index
             self.clear_details_section()
 
@@ -422,7 +420,7 @@ class NewEntryPage(tk.Frame):
             # clean out data fields prior to page redirect
             self.clear_all()
             # return user to the homepage after entry is added
-            self.controller.show_frame(HomePage)
+            self.controller.show_page(HomePage)
         # hidden issue logger for dev
         # technically, should never be procced, as a database connection commences the moment the user is logged into the account.
         else:
@@ -433,7 +431,7 @@ class NewEntryPage(tk.Frame):
         # ensure all data fields are cleaned
         self.clear_all()
         # redirect to the homepage
-        self.controller.show_frame(HomePage)
+        self.controller.show_page(HomePage)
 
 class EditAccountPage(tk.Frame):
     def __init__(self, parent, controller):
@@ -493,7 +491,7 @@ class EditAccountPage(tk.Frame):
 
     def cancel_entry(self):
         self.clear_all()
-        self.controller.show_frame(HomePage)     
+        self.controller.show_page(HomePage)     
 
     def update_entry(self):
         # run query to update values for selected account
@@ -503,15 +501,15 @@ class EditAccountPage(tk.Frame):
         # clear fields post process
         self.clear_all()
         # redirect to the HomePage
-        self.controller.show_frame(HomePage)
+        self.controller.show_page(HomePage)
 
     def get_account_info(self):
         # pull the values stored for respective variables from the HomePage variable instances
-        self.account_name_var.set(self.controller.frames[HomePage].account_name_var.get())
-        self.username_var.set(self.controller.frames[HomePage].account_username_var.get())
-        self.password_var.set(self.controller.frames[HomePage].account_password_var.get())
-        self.current_account_name_var.set(self.controller.frames[HomePage].account_name_var.get())
-        self.current_username_var.set(self.controller.frames[HomePage].account_username_var.get())
+        self.account_name_var.set(self.controller.pages[HomePage].account_name_var.get())
+        self.username_var.set(self.controller.pages[HomePage].account_username_var.get())
+        self.password_var.set(self.controller.pages[HomePage].account_password_var.get())
+        self.current_account_name_var.set(self.controller.pages[HomePage].account_name_var.get())
+        self.current_username_var.set(self.controller.pages[HomePage].account_username_var.get())
         
 if __name__ == "__main__":
     app = Windows()
