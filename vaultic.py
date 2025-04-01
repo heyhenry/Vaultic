@@ -259,12 +259,10 @@ class HomePage(tk.Frame):
         generate_password_button.place(x=500, y=575)
         
         self.accounts_list.bind("<<TreeviewSelect>>", self.get_account_details)
-        self.remove_account_button.bind("<Button-1>", self.deselect_accounts_list_item)
-        self.edit_account_details_button.bind("<Button-1>", self.deselect_accounts_list_item)
-        self.new_entry.bind("<Button-1>", self.deselect_accounts_list_item)
 
     def new_entry_redirect(self):
         self.clear_details_section()
+        self.deselect_accounts_list_item()
         self.controller.show_frame(NewEntryPage)
 
     # fill the accounts list with stored account names
@@ -284,19 +282,19 @@ class HomePage(tk.Frame):
     def get_account_details(self, event):
         # select an account from the accounts_list
         selection = self.accounts_list.focus()
-        # store the account's name and username respectively for future referencing
-        account_name = self.accounts_list.item(selection)["values"][0]
-        account_username = self.accounts_list.item(selection)["values"][1]
-        # run query to fetch account information from the database
-        sql_query = "SELECT account_name,username,password FROM accounts WHERE account_name=? AND username=?"
-        self.controller.pw_cursor.execute(sql_query, (account_name, account_username))
-        result = self.controller.pw_cursor.fetchall()
-        # set the account variables for details display based on selected account
-        self.account_name_var.set(result[0][0])
-        self.account_username_var.set(result[0][1])
-        self.account_password_var.set(result[0][2])
-        # deselect the item after setting variables, to clear selection index
-        # self.accounts_list.selection_remove(selection)
+        # get the details if there is an active selection
+        if selection:
+            # store the account's name and username respectively for future referencing
+            account_name = self.accounts_list.item(selection)["values"][0]
+            account_username = self.accounts_list.item(selection)["values"][1]
+            # run query to fetch account information from the database
+            sql_query = "SELECT account_name,username,password FROM accounts WHERE account_name=? AND username=?"
+            self.controller.pw_cursor.execute(sql_query, (account_name, account_username))
+            result = self.controller.pw_cursor.fetchall()
+            # set the account variables for details display based on selected account
+            self.account_name_var.set(result[0][0])
+            self.account_username_var.set(result[0][1])
+            self.account_password_var.set(result[0][2])
 
     def generate_new_password(self):
         # only generate password if an account was selected
@@ -315,6 +313,8 @@ class HomePage(tk.Frame):
     def remove_account(self):
         # only remove account if an account was selected
         if self.account_name_var.get() or self.account_username_var.get() or self.account_password_var.get():
+            self.deselect_accounts_list_item()
+            self.clear_details_section()
             # get account unique identifiers
             selection = self.accounts_list.focus()
             account_name = self.accounts_list.item(selection)["values"][0]
@@ -345,7 +345,7 @@ class HomePage(tk.Frame):
         self.account_username_var.set("")
         self.account_password_var.set("")
 
-    def deselect_accounts_list_item(self, event):
+    def deselect_accounts_list_item(self):
         selection = self.accounts_list.focus()
         self.accounts_list.selection_remove(selection)
 
