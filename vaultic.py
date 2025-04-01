@@ -224,7 +224,7 @@ class HomePage(tk.Frame):
 
     def create_widgets(self):
         title = tk.Label(self, text="Home", font=("Helvetica", 24))
-        self.new_entry = tk.Button(self, text="New Account [+]", font=("Helvetica", 12), command=self.new_entry_redirect)
+        new_entry = tk.Button(self, text="New Account [+]", font=("Helvetica", 12), command=self.new_entry_redirect)
 
         self.accounts_list = ttk.Treeview(self, columns=("account_name", "account_username"), show="headings", height=10, selectmode='browse')
         self.accounts_list.heading("account_name", text="Account Name")
@@ -232,12 +232,6 @@ class HomePage(tk.Frame):
         self.accounts_list.column("account_name", width=300)
         self.accounts_list.column("account_username", width=300)
 
-        title.place(x=350, y=10)
-        self.new_entry.place(x=600, y=10)
-
-        self.accounts_list.place(x=100, y=80)
-
-        # # right
         details_subtitle = tk.Label(self, text="Account Details:", font=("Helvetica", 24))
         account_name_subtitle = tk.Label(self, text="Name:", font=("Helvetica", 18))
         account_username_subtitle = tk.Label(self, text="Username:", font=("Helvetica", 18))
@@ -248,6 +242,11 @@ class HomePage(tk.Frame):
         self.remove_account_button = tk.Button(self, text="Remove Account", font=("Helvetica", 14), command=self.remove_account)
         self.edit_account_details_button = tk.Button(self, text="Edit Account Details", font=("Helvetica", 14), command=self.edit_account_info)
         generate_password_button = tk.Button(self, text="Generate New Password", font=("Helvetica", 14), command=self.generate_new_password)
+
+        title.place(x=350, y=10)
+        new_entry.place(x=600, y=10)
+
+        self.accounts_list.place(x=100, y=80)
 
         details_subtitle.place(x=275, y=325)
         account_name_subtitle.place(x=200, y=400)
@@ -261,6 +260,7 @@ class HomePage(tk.Frame):
         generate_password_button.place(x=500, y=575)
         
         self.accounts_list.bind("<<TreeviewSelect>>", self.get_account_details)
+        self.bind("<Button-1>", self.deselect_account)
 
     def new_entry_redirect(self):
         self.clear_details_section()
@@ -341,6 +341,17 @@ class HomePage(tk.Frame):
         self.account_name_var.set("")
         self.account_username_var.set("")
         self.account_password_var.set("")
+
+    def deselect_account(self, event):
+        # find the selected item
+        selection = self.accounts_list.focus()
+        # unhighlight it
+        self.accounts_list.selection_remove(selection)
+        # deselect the item aka change the string value to an empty string value == nothing is selected
+        # None is not viable due to tcl/tk only reading direct strings
+        self.accounts_list.focus("")
+        # clear existing details that are displayed in the details section
+        self.clear_details_section()
 
 class NewEntryPage(tk.Frame):
     def __init__(self, parent, controller):
