@@ -61,12 +61,8 @@ class Windows(tk.Tk):
         self.withdraw()
         self.geometry("480x340") # general defaulted window size for all pages (temporary)
         if page == RegisterPage or page == LoginPage:
-            # self.geometry("480x340")
-            if page == RegisterPage:
-                self.after(100, lambda: frame.password_entry.focus())
-            else:
-                # timer added due to tkinter event processing isn't instantaenous(spelling?)
-                self.after(100, lambda: frame.password_entry.focus())
+            # timer added due to tkinter event processing isn't instantaenous(spelling?)
+            self.after(100, frame.password_entry.focus)
         elif page == HomePage:
             self.geometry("800x700")
             # updates the accounts list to the latest version
@@ -173,8 +169,8 @@ class RegisterPage(tk.Frame):
         reminder_message.place(x=330, y=300)
 
         # detect 'enter' keybind regardless of which entry field has focus
-        self.password_entry.bind("<Return>", lambda event: self.process_password_creation())
-        self.confirm_password_entry.bind("<Return>", lambda event: self.process_password_creation())
+        self.password_entry.bind("<Return>", self.process_password_creation)
+        self.confirm_password_entry.bind("<Return>", self.process_password_creation)
 
     def validate_password_creation(self):
         if self.password_var.get() != self.confirm_password_var.get():
@@ -201,7 +197,7 @@ class RegisterPage(tk.Frame):
         # timed error message and wipe in use, as this tasks should encourage the user to pay full attention due to its high security risk "WRITE THIS IN THE readme.md under design choice?"
         self.after(3000, self.clear_all)
 
-    def process_password_creation(self):
+    def process_password_creation(self, event=None):
         if self.validate_password_creation():
             # update the authentication database's information with new; pw, hashing, salt
             self.controller.auth.set_master_password(self.password_var.get())
