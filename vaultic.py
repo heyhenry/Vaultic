@@ -313,8 +313,6 @@ class HomePage(tk.Frame):
     def remove_account(self):
         # only remove account if an account was selected
         if self.account_name_var.get() or self.account_username_var.get() or self.account_password_var.get():
-            self.deselect_accounts_list_item()
-            self.clear_details_section()
             # get account unique identifiers
             selection = self.accounts_list.focus()
             account_name = self.accounts_list.item(selection)["values"][0]
@@ -325,8 +323,6 @@ class HomePage(tk.Frame):
             self.controller.pw_connection.commit()
             # reset all details related variables
             self.clear_details_section()
-            # deslected item in accounts list
-            # self.accounts_list.selection_remove(selection)
             # update the accounts list
             self.populate_accounts_list()
 
