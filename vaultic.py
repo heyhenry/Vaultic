@@ -69,6 +69,8 @@ class Windows(tk.Tk):
                 self.after(100, lambda: frame.password_entry.focus())
         elif page == HomePage:
             self.geometry("800x700")
+            # updates the accounts list to the latest version
+            # also deselects any pre-existing item selection aka handles deselection logic as all deselections are intertwined with redirecting to the homepage
             frame.populate_accounts_list()
 
         # raises the current frame to the top
@@ -262,7 +264,6 @@ class HomePage(tk.Frame):
 
     def new_entry_redirect(self):
         self.clear_details_section()
-        self.deselect_accounts_list_item()
         self.controller.show_frame(NewEntryPage)
 
     # fill the accounts list with stored account names
@@ -312,7 +313,7 @@ class HomePage(tk.Frame):
 
     def remove_account(self):
         # only remove account if an account was selected
-        if self.account_name_var.get() or self.account_username_var.get() or self.account_password_var.get():
+        if self.account_name_var.get():
             # get account unique identifiers
             selection = self.accounts_list.focus()
             account_name = self.accounts_list.item(selection)["values"][0]
@@ -340,10 +341,6 @@ class HomePage(tk.Frame):
         self.account_name_var.set("")
         self.account_username_var.set("")
         self.account_password_var.set("")
-
-    def deselect_accounts_list_item(self):
-        selection = self.accounts_list.focus()
-        self.accounts_list.selection_remove(selection)
 
 class NewEntryPage(tk.Frame):
     def __init__(self, parent, controller):
