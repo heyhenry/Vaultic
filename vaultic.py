@@ -116,7 +116,7 @@ class LoginPage(tk.Frame):
         login_submission.place(x=200, y=220)
 
         # detect 'Enter' keybind press
-        self.password_entry.bind("<Return>", lambda event: self.process_password())
+        self.password_entry.bind("<Return>", self.process_password)
 
     def clear_all(self):
         self.error_message.config(text="")
@@ -126,7 +126,7 @@ class LoginPage(tk.Frame):
         self.error_message.config(text="Invalid Password! Try again.")
         self.after(3000, self.clear_all)
 
-    def process_password(self):
+    def process_password(self, event):
         if self.controller.auth.verify_master_password(self.password_var.get()):
             print('yessir')
             self.controller.auth.decrypt_dump()
