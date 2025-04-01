@@ -186,6 +186,9 @@ class RegisterPage(tk.Frame):
         elif len(self.password_var.get()) == 0:
             self.error_type = "Empty Password"
             return False
+        elif len(self.password_var.get()) < 8:
+            self.error_type = "Minimum Length 8 Characters"
+            return False
         return True
     
     def clear_all(self):
