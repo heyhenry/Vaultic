@@ -69,3 +69,8 @@
 - SQLite Update (accessed: 29th March 2025): https://www.sqlitetutorial.net/sqlite-update/
 - SQLite Delete (accessed: 29th March 2025): https://www.sqlitetutorial.net/sqlite-delete/
 - My Repo | HappyXP (accessed: 29th March 2025): https://github.com/heyhenry/HappyXP/blob/main/main.py
+- What is the use of the event parameter/argument in tkinter? (accessed: 1st April 2025): https://stackoverflow.com/questions/68356340/what-is-the-use-of-the-event-parameter-argument-in-tkinter
+- How to not pass on TKinter bind event to a function (accessed: 1st April 2025): https://stackoverflow.com/questions/40512008/how-to-not-pass-on-tkinter-bind-event-to-a-function
+- What's the importance of lambda functions in tkinter? (accessed: 1st April 2025): https://stackoverflow.com/questions/68957116/whats-the-importance-of-lambda-functions-in-tkinter
+- Python Tkinter treeview - Iterating 'get_children' output (accessed: 1st April 2025): https://stackoverflow.com/questions/28685048/python-tkinter-treeview-iterating-get-children-output
+- tkinter.ttk.treeview.focus (accessed: 1st April 2025): https://docs.python.org/3/library/tkinter.ttk.html#tkinter.ttk.Treeview.focus
