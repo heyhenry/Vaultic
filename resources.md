@@ -74,3 +74,8 @@
 - What's the importance of lambda functions in tkinter? (accessed: 1st April 2025): https://stackoverflow.com/questions/68957116/whats-the-importance-of-lambda-functions-in-tkinter
 - Python Tkinter treeview - Iterating 'get_children' output (accessed: 1st April 2025): https://stackoverflow.com/questions/28685048/python-tkinter-treeview-iterating-get-children-output
 - tkinter.ttk.treeview.focus (accessed: 1st April 2025): https://docs.python.org/3/library/tkinter.ttk.html#tkinter.ttk.Treeview.focus
+- NIST Password Guidelines: 11 Rules to Follow (accessed: 1st April 2025): https://sprinto.com/blog/nist-password-guidelines/
+- NIST guidelines for maximum password length (accessed: 1st April 2025): https://stackoverflow.com/questions/45682979/nist-guidelines-for-maximum-password-length
+- Tkinter event binding help (accessed: 1st April 2025): https://www.reddit.com/r/learnpython/comments/xn38c5/tkinter_event_binding_help/
+- What is the difference between title() and wm_title() (accessed: 1st April 2025): https://stackoverflow.com/questions/35962694/what-is-the-difference-between-the-title-method-and-wm-title-method-in-the-t
+- 
