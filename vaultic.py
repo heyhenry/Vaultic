@@ -62,7 +62,7 @@ class Windows(bttk.Window):
 
         # withdraw to avoid flckering of previous page
         self.withdraw()
-        self.geometry("480x340") # general defaulted window size for all pages (temporary)
+        self.geometry("490x340") # general defaulted window size for all pages (temporary)
         if current_page == RegisterPage or current_page == LoginPage:
             # timer added due to tkinter event processing isn't instantaenous(spelling?)
             self.after(100, page.password_entry.focus)
@@ -381,17 +381,17 @@ class NewEntryPage(bttk.Frame):
         self.create_widgets()
 
     def create_widgets(self):
-        title = bttk.Label(self, text="New Account Entry")
-        account_name_subtitle = bttk.Label(self, text="Account Name:")
-        self.account_name_entry = bttk.Entry(self, textvariable=self.account_name_var, width=20)
-        username_subtitle = bttk.Label(self, text="Username:")
-        self.username_entry = bttk.Entry(self, textvariable=self.username_var, width=20)
-        password_subtitle = bttk.Label(self, text="Password:")
-        self.password_entry = bttk.Entry(self, textvariable=self.password_var, width=20)
-        generate_password_button = bttk.Button(self, text="Generate", command=self.create_password)
-        self.error_message = bttk.Label(self, foreground="red")
-        add_entry_button = bttk.Button(self, text="Add", width=10, command=self.validate_new_entry)
-        cancel_entry_button = bttk.Button(self, text="Cancel", width=10, command=self.cancel_entry)
+        title = bttk.Label(self, text="New Account Entry", style="CustomF18.TLabel")
+        account_name_subtitle = bttk.Label(self, text="Account Name:", style="CustomF12.TLabel")
+        self.account_name_entry = bttk.Entry(self, textvariable=self.account_name_var, width=20, font=(self.controller.selected_font, 12))
+        username_subtitle = bttk.Label(self, text="Username:", style="CustomF12.TLabel")
+        self.username_entry = bttk.Entry(self, textvariable=self.username_var, width=20, font=(self.controller.selected_font, 12))
+        password_subtitle = bttk.Label(self, text="Password:", style="CustomF12.TLabel")
+        self.password_entry = bttk.Entry(self, textvariable=self.password_var, width=20, font=(self.controller.selected_font, 12))
+        generate_password_button = bttk.Button(self, text="Generate", command=self.create_password, style="CustomF10.TButton")
+        self.error_message = bttk.Label(self, foreground="red", style="CustomF10.TLabel")
+        add_entry_button = bttk.Button(self, text="Add", width=10, command=self.validate_new_entry, style="CustomF14.TButton")
+        cancel_entry_button = bttk.Button(self, text="Cancel", width=10, command=self.cancel_entry, style="CustomF14.TButton")
 
         title.place(x=150, y=30)    
         account_name_subtitle.place(x=80, y=100)
@@ -400,7 +400,7 @@ class NewEntryPage(bttk.Frame):
         self.username_entry.place(x=200, y=150)
         password_subtitle.place(x=80, y=200)
         self.password_entry.place(x=200, y=200)
-        generate_password_button.place(x=400, y=197)
+        generate_password_button.place(x=400, y=200)
         self.error_message.place(x=120, y=225)
         add_entry_button.place(x=80, y=250)
         cancel_entry_button.place(x=250, y=250)
