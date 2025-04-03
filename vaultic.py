@@ -152,7 +152,7 @@ class LoginPage(bttk.Frame):
         self.error_message.config(text="Invalid Password! Try again.")
         self.after(3000, self.clear_all)
 
-    def process_password(self, event):
+    def process_password(self, event=None):
         if self.controller.auth.verify_master_password(self.password_var.get()):
             print('yessir')
             self.controller.auth.decrypt_dump()
@@ -172,24 +172,24 @@ class RegisterPage(bttk.Frame):
         self.create_widgets()
 
     def create_widgets(self):
-        app_title = bttk.Label(self, text="Vaultic")
-        desc_subtitle = bttk.Label(self, text="Create Your Master Password")
-        password_subtitle = bttk.Label(self, text="Enter Password:")
-        self.password_entry = bttk.Entry(self, width=25, textvariable=self.password_var)
-        confirm_password_subtitle = bttk.Label(self, text='Confirm Password:')
-        self.confirm_password_entry = bttk.Entry(self, width=25, textvariable=self.confirm_password_var)
-        self.error_message = bttk.Label(self, foreground='red')
-        create_submission = bttk.Button(self, text="Create", command=self.process_password_creation)
-        reminder_message = bttk.Label(self, text="Remember This!")
+        app_title = bttk.Label(self, text="Vaultic", style="CustomF24.TLabel")
+        desc_subtitle = bttk.Label(self, text="Create Your Master Password", style="CustomF18.TLabel")
+        password_subtitle = bttk.Label(self, text="Enter Password:", style="CustomF14.TLabel")
+        self.password_entry = bttk.Entry(self, width=25, textvariable=self.password_var, font=(self.controller.selected_font, 18))
+        confirm_password_subtitle = bttk.Label(self, text='Confirm Password:', style="CustomF14.TLabel")
+        self.confirm_password_entry = bttk.Entry(self, width=25, textvariable=self.confirm_password_var, font=(self.controller.selected_font, 18))
+        self.error_message = bttk.Label(self, foreground='red', style="CustomF10.TLabel")
+        create_submission = bttk.Button(self, text="Create", command=self.process_password_creation, style="CustomF18.TButton")
+        reminder_message = bttk.Label(self, text="Remember This!", style="CustomF12.TLabel")
 
         app_title.place(x=200, y=10)
         desc_subtitle.place(x=80, y=50)
         password_subtitle.place(x=80, y=90)
         self.password_entry.place(x=80, y=120)
-        confirm_password_subtitle.place(x=80, y=160)
-        self.confirm_password_entry.place(x=80, y=190)
-        self.error_message.place(x=130, y=220)
-        create_submission.place(x=180, y=240)
+        confirm_password_subtitle.place(x=80, y=170)
+        self.confirm_password_entry.place(x=80, y=200)
+        self.error_message.place(x=130, y=245)
+        create_submission.place(x=180, y=270)
         reminder_message.place(x=330, y=300)
 
         # detect 'enter' keybind regardless of which entry field has focus
