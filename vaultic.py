@@ -401,9 +401,9 @@ class NewEntryPage(bttk.Frame):
         password_subtitle.place(x=80, y=200)
         self.password_entry.place(x=200, y=200)
         generate_password_button.place(x=400, y=200)
-        self.error_message.place(x=120, y=225)
-        add_entry_button.place(x=80, y=250)
-        cancel_entry_button.place(x=250, y=250)
+        self.error_message.place(x=160, y=235)
+        add_entry_button.place(x=80, y=265)
+        cancel_entry_button.place(x=250, y=265)
         
     # generate a randomised password if prompted
     def create_password(self):
