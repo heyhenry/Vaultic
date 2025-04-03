@@ -116,6 +116,9 @@ class Windows(bttk.Window):
         style.configure("CustomF12.TButton", font=(self.selected_font, 12))
         style.configure("CustomF10.TButton", font=(self.selected_font, 10))
 
+        # altered global setting of button's takefocus option
+        self.option_add("*TButton*takeFocus", False)
+        
 class LoginPage(bttk.Frame):
     def __init__(self, parent, controller):
         bttk.Frame.__init__(self, parent)
@@ -487,7 +490,7 @@ class EditAccountPage(bttk.Frame):
         password_subtitle.place(x=80, y=200)
         self.password_entry.place(x=200, y=200)
         generate_password_button.place(x=400, y=200)
-        self.error_message.place(x=120, y=235)
+        self.error_message.place(x=160, y=235)
         update_entry_button.place(x=80, y=265)
         cancel_entry_button.place(x=250, y=265)
 
