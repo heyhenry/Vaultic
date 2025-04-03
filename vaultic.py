@@ -8,12 +8,13 @@ import os
 from password_generation import generate_password
 import ttkbootstrap as bttk
 from ttkbootstrap.constants import *
-from ttkbootstrap.dialogs.dialogs import FontDialog
 
 class Windows(bttk.Window):
     def __init__(self, *args, **kwargs):
         bttk.Window.__init__(self, *args, **kwargs)
+        self.selected_font = "Helvetica"
         self.setup_styles()
+        print(bttk.Style().theme_use())
 
         # check for auth database's existence
         self.check_auth_exists()
@@ -100,11 +101,25 @@ class Windows(bttk.Window):
         self.destroy()
 
     def setup_styles(self):
-        style = bttk.Style()
-        style.configure("TLabel", font=("Comic Sans MS", 18))
-        style.configure("TButton", font=("Comic Sans MS", 18))
-        # style.configure("")
+        style = bttk.Style(theme="superhero")
 
+        # label
+        style.configure("CustomF24.TLabel", font=(self.selected_font, 24))
+        style.configure("CustomF18.TLabel", font=(self.selected_font, 18))
+        style.configure("CustomF14.TLabel", font=(self.selected_font, 14))
+        style.configure("CustomF12.TLabel", font=(self.selected_font, 12))
+        style.configure("CustomF10.TLabel", font=(self.selected_font, 10))
+
+        # entry - does not work with ttk due to og engine supposedly
+        # style.configure("CustomF24.TEntry", font=(self.selected_font, 24))
+        # style.configure("CustomF18.TEntry", font=(self.selected_font, 18))
+        # style.configure("CustomF12.TEntry", font=(self.selected_font, 12))
+
+        # button
+        style.configure("CustomF18.TButton", font=(self.selected_font, 18))
+        style.configure("CustomF14.TButton", font=(self.selected_font, 14))
+        style.configure("CustomF12.TButton", font=(self.selected_font, 12))
+        style.configure("CustomF10.TButton", font=(self.selected_font, 10))
 
 class LoginPage(bttk.Frame):
     def __init__(self, parent, controller):
@@ -114,17 +129,17 @@ class LoginPage(bttk.Frame):
         self.create_widgets()
 
     def create_widgets(self):
-        app_title = bttk.Label(self, text="Vaultic")
-        password_subtitle = bttk.Label(self, text="Enter Password:")
-        self.password_entry = bttk.Entry(self, width=18, textvariable=self.password_var)
-        self.error_message = bttk.Label(self, foreground="red")
-        login_submission = bttk.Button(self, text="Login", command=self.process_password)
+        app_title = bttk.Label(self, text="Vaultic", style="CustomF24.TLabel")
+        password_subtitle = bttk.Label(self, text="Enter Password:", style="CustomF18.TLabel")
+        self.password_entry = bttk.Entry(self, width=18, textvariable=self.password_var, font=(self.controller.selected_font, 24))
+        self.error_message = bttk.Label(self, foreground="red", style="CustomF12.TLabel")
+        login_submission = bttk.Button(self, text="Login", command=self.process_password, style="CustomF18.TButton")
 
         app_title.place(x=200, y=30)
         password_subtitle.place(x=80, y=110)
         self.password_entry.place(x=80, y=150)
-        self.error_message.place(x=150, y=190)
-        login_submission.place(x=200, y=220)
+        self.error_message.place(x=150, y=210)
+        login_submission.place(x=200, y=240)
 
         # detect 'Enter' keybind press
         self.password_entry.bind("<Return>", self.process_password)
