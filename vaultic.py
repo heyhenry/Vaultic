@@ -1,15 +1,19 @@
-import tkinter as tk
-from tkinter import ttk
+# import tkinter as tk
+# from tkinter import ttk
 import sqlite3
 from authmanager import AuthManager
 from create_password_database import create_passwords_database
 from create_auth_database import create_auth_database
 import os
 from password_generation import generate_password
+import ttkbootstrap as bttk
+from ttkbootstrap.constants import *
+from ttkbootstrap.dialogs.dialogs import FontDialog
 
-class Windows(tk.Tk):
+class Windows(bttk.Window):
     def __init__(self, *args, **kwargs):
-        tk.Tk.__init__(self, *args, **kwargs)
+        bttk.Window.__init__(self, *args, **kwargs)
+        self.setup_styles()
 
         # check for auth database's existence
         self.check_auth_exists()
@@ -25,7 +29,7 @@ class Windows(tk.Tk):
         self.title("Vaultic")
     
         # creating a  frame and assigning it to container
-        container = tk.Frame(self, height=400, width=600)
+        container = bttk.Frame(self, height=400, width=600)
         # specifying the region where the frame is packed in root
         container.pack(side="top", fill="both", expand=True)
 
@@ -95,19 +99,26 @@ class Windows(tk.Tk):
             self.auth.encrypt_dump()
         self.destroy()
 
-class LoginPage(tk.Frame):
+    def setup_styles(self):
+        style = bttk.Style()
+        style.configure("TLabel", font=("Comic Sans MS", 18))
+        style.configure("TButton", font=("Comic Sans MS", 18))
+        # style.configure("")
+
+
+class LoginPage(bttk.Frame):
     def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
+        bttk.Frame.__init__(self, parent)
         self.controller = controller
-        self.password_var = tk.StringVar()
+        self.password_var = bttk.StringVar()
         self.create_widgets()
 
     def create_widgets(self):
-        app_title = tk.Label(self, text="Vaultic", font=("helvetica", 24))
-        password_subtitle = tk.Label(self, text="Enter Password:", font=("helvetica", 18))
-        self.password_entry = tk.Entry(self, font=("helvetica", 24), width=18, textvariable=self.password_var)
-        self.error_message = tk.Label(self, foreground="red", font=("helvetica", 12))
-        login_submission = tk.Button(self, text="Login", font=("helvetica", 18), command=self.process_password)
+        app_title = bttk.Label(self, text="Vaultic")
+        password_subtitle = bttk.Label(self, text="Enter Password:")
+        self.password_entry = bttk.Entry(self, width=18, textvariable=self.password_var)
+        self.error_message = bttk.Label(self, foreground="red")
+        login_submission = bttk.Button(self, text="Login", command=self.process_password)
 
         app_title.place(x=200, y=30)
         password_subtitle.place(x=80, y=110)
@@ -136,25 +147,25 @@ class LoginPage(tk.Frame):
         else:
             self.show_error_message()
 
-class RegisterPage(tk.Frame):
+class RegisterPage(bttk.Frame):
     def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
+        bttk.Frame.__init__(self, parent)
         self.controller = controller
-        self.password_var = tk.StringVar()
-        self.confirm_password_var = tk.StringVar()
+        self.password_var = bttk.StringVar()
+        self.confirm_password_var = bttk.StringVar()
         self.error_type = None
         self.create_widgets()
 
     def create_widgets(self):
-        app_title = tk.Label(self, text="Vaultic", font=("helvetica", 24))
-        desc_subtitle = tk.Label(self, text="Create Your Master Password", font=("helvetica", 18))
-        password_subtitle = tk.Label(self, text="Enter Password:", font=("helvetica", 14))
-        self.password_entry = tk.Entry(self, font=("helvetica", 18), width=25, textvariable=self.password_var)
-        confirm_password_subtitle = tk.Label(self, text='Confirm Password:', font=("helvetica", 14))
-        self.confirm_password_entry = tk.Entry(self, font=("helvetica", 18), width=25, textvariable=self.confirm_password_var)
-        self.error_message = tk.Label(self, foreground='red', font=("helvetica", 10))
-        create_submission = tk.Button(self, text="Create", font=("helvetica", 18), command=self.process_password_creation)
-        reminder_message = tk.Label(self, text="Remember This!", font=("helvetica", 12))
+        app_title = bttk.Label(self, text="Vaultic")
+        desc_subtitle = bttk.Label(self, text="Create Your Master Password")
+        password_subtitle = bttk.Label(self, text="Enter Password:")
+        self.password_entry = bttk.Entry(self, width=25, textvariable=self.password_var)
+        confirm_password_subtitle = bttk.Label(self, text='Confirm Password:')
+        self.confirm_password_entry = bttk.Entry(self, width=25, textvariable=self.confirm_password_var)
+        self.error_message = bttk.Label(self, foreground='red')
+        create_submission = bttk.Button(self, text="Create", command=self.process_password_creation)
+        reminder_message = bttk.Label(self, text="Remember This!")
 
         app_title.place(x=200, y=10)
         desc_subtitle.place(x=80, y=50)
@@ -210,35 +221,35 @@ class RegisterPage(tk.Frame):
         else:
             self.show_error_message()
 
-class HomePage(tk.Frame):
+class HomePage(bttk.Frame):
     def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
+        bttk.Frame.__init__(self, parent)
         self.controller = controller
-        self.account_name_var = tk.StringVar()
-        self.account_username_var = tk.StringVar()
-        self.account_password_var = tk.StringVar()
+        self.account_name_var = bttk.StringVar()
+        self.account_username_var = bttk.StringVar()
+        self.account_password_var = bttk.StringVar()
         self.create_widgets()
 
     def create_widgets(self):
-        title = tk.Label(self, text="Home", font=("Helvetica", 24))
-        new_entry = tk.Button(self, text="New Account [+]", font=("Helvetica", 12), command=self.new_entry_redirect)
+        title = bttk.Label(self, text="Home")
+        new_entry = bttk.Button(self, text="New Account [+]", command=self.new_entry_redirect)
 
-        self.accounts_list = ttk.Treeview(self, columns=("account_name", "account_username"), show="headings", height=10, selectmode='browse')
+        self.accounts_list = bttk.Treeview(self, columns=("account_name", "account_username"), show="headings", height=10, selectmode='browse')
         self.accounts_list.heading("account_name", text="Account Name")
         self.accounts_list.heading("account_username", text="Username")
         self.accounts_list.column("account_name", width=300)
         self.accounts_list.column("account_username", width=300)
 
-        details_subtitle = tk.Label(self, text="Account Details:", font=("Helvetica", 24))
-        account_name_subtitle = tk.Label(self, text="Name:", font=("Helvetica", 18))
-        account_username_subtitle = tk.Label(self, text="Username:", font=("Helvetica", 18))
-        account_password_subtitle = tk.Label(self, text="Password:", font=("Helvetica", 18))
-        account_name_entry = tk.Entry(self, textvariable=self.account_name_var, state='readonly', font=("Helvetica", 18))
-        account_username_entry = tk.Entry(self, textvariable=self.account_username_var, state='readonly', font=("Helvetica", 18))
-        account_password_entry = tk.Entry(self, textvariable=self.account_password_var, state='readonly', font=("Helvetica", 18))
-        self.remove_account_button = tk.Button(self, text="Remove Account", font=("Helvetica", 14), command=self.remove_account)
-        self.edit_account_details_button = tk.Button(self, text="Edit Account Details", font=("Helvetica", 14), command=self.edit_account_info)
-        generate_password_button = tk.Button(self, text="Generate New Password", font=("Helvetica", 14), command=self.generate_new_password)
+        details_subtitle = bttk.Label(self, text="Account Details:")
+        account_name_subtitle = bttk.Label(self, text="Name:")
+        account_username_subtitle = bttk.Label(self, text="Username:")
+        account_password_subtitle = bttk.Label(self, text="Password:")
+        account_name_entry = bttk.Entry(self, textvariable=self.account_name_var, state='readonly')
+        account_username_entry = bttk.Entry(self, textvariable=self.account_username_var, state='readonly')
+        account_password_entry = bttk.Entry(self, textvariable=self.account_password_var, state='readonly')
+        self.remove_account_button = bttk.Button(self, text="Remove Account", command=self.remove_account)
+        self.edit_account_details_button = bttk.Button(self, text="Edit Account Details", command=self.edit_account_info)
+        generate_password_button = bttk.Button(self, text="Generate New Password", command=self.generate_new_password)
 
         title.place(x=350, y=10)
         new_entry.place(x=600, y=10)
@@ -350,27 +361,27 @@ class HomePage(tk.Frame):
         # clear existing details that are displayed in the details section
         self.clear_details_section()
 
-class NewEntryPage(tk.Frame):
+class NewEntryPage(bttk.Frame):
     def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
+        bttk.Frame.__init__(self, parent)
         self.controller = controller
-        self.account_name_var = tk.StringVar()
-        self.username_var = tk.StringVar()
-        self.password_var = tk.StringVar()
+        self.account_name_var = bttk.StringVar()
+        self.username_var = bttk.StringVar()
+        self.password_var = bttk.StringVar()
         self.create_widgets()
 
     def create_widgets(self):
-        title = tk.Label(self, text="New Account Entry", font=("Helvetica", 18))
-        account_name_subtitle = tk.Label(self, text="Account Name:", font=("Helvetica", 12))
-        self.account_name_entry = tk.Entry(self, textvariable=self.account_name_var, font=("Helvetica", 12), width=20)
-        username_subtitle = tk.Label(self, text="Username:", font=("Helvetica", 12))
-        self.username_entry = tk.Entry(self, textvariable=self.username_var, font=("Helvetica", 12), width=20)
-        password_subtitle = tk.Label(self, text="Password:", font=("Helvetica", 12))
-        self.password_entry = tk.Entry(self, textvariable=self.password_var, font=("Helvetica", 12), width=20)
-        generate_password_button = tk.Button(self, text="Generate", font=("Helvetica", 10), command=self.create_password)
-        self.error_message = tk.Label(self, foreground="red", font=("Helvetica", 10))
-        add_entry_button = tk.Button(self, text="Add", font=("Helvetica", 14), width=10, command=self.validate_new_entry)
-        cancel_entry_button = tk.Button(self, text="Cancel", font=("Helvetica", 14), width=10, command=self.cancel_entry)
+        title = bttk.Label(self, text="New Account Entry")
+        account_name_subtitle = bttk.Label(self, text="Account Name:")
+        self.account_name_entry = bttk.Entry(self, textvariable=self.account_name_var, width=20)
+        username_subtitle = bttk.Label(self, text="Username:")
+        self.username_entry = bttk.Entry(self, textvariable=self.username_var, width=20)
+        password_subtitle = bttk.Label(self, text="Password:")
+        self.password_entry = bttk.Entry(self, textvariable=self.password_var, width=20)
+        generate_password_button = bttk.Button(self, text="Generate", command=self.create_password)
+        self.error_message = bttk.Label(self, foreground="red")
+        add_entry_button = bttk.Button(self, text="Add", width=10, command=self.validate_new_entry)
+        cancel_entry_button = bttk.Button(self, text="Cancel", width=10, command=self.cancel_entry)
 
         title.place(x=150, y=30)    
         account_name_subtitle.place(x=80, y=100)
@@ -433,30 +444,30 @@ class NewEntryPage(tk.Frame):
         # redirect to the homepage
         self.controller.show_page(HomePage)
 
-class EditAccountPage(tk.Frame):
+class EditAccountPage(bttk.Frame):
     def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
+        bttk.Frame.__init__(self, parent)
         self.controller = controller
-        self.account_name_var = tk.StringVar()
-        self.username_var = tk.StringVar()
-        self.password_var = tk.StringVar()
+        self.account_name_var = bttk.StringVar()
+        self.username_var = bttk.StringVar()
+        self.password_var = bttk.StringVar()
         # hold current values prior to change, for database reference
-        self.current_account_name_var = tk.StringVar()
-        self.current_username_var = tk.StringVar()
+        self.current_account_name_var = bttk.StringVar()
+        self.current_username_var = bttk.StringVar()
         self.create_widgets()
 
     def create_widgets(self):
-        title = tk.Label(self, text="Edit Account Info", font=("Helvetica", 18))
-        account_name_subtitle = tk.Label(self, text="Account Name:", font=("Helvetica", 12))
-        self.account_name_entry = tk.Entry(self, textvariable=self.account_name_var, font=("Helvetica", 12), width=20)
-        username_subtitle = tk.Label(self, text="Username:", font=("Helvetica", 12))
-        self.username_entry = tk.Entry(self, textvariable=self.username_var, font=("Helvetica", 12), width=20)
-        password_subtitle = tk.Label(self, text="Password:", font=("Helvetica", 12))
-        self.password_entry = tk.Entry(self, textvariable=self.password_var, font=("Helvetica", 12), width=20)
-        generate_password_button = tk.Button(self, text="Generate", font=("Helvetica", 10), command=self.create_password)
-        self.error_message = tk.Label(self, foreground="red", font=("Helvetica", 10))
-        update_entry_button = tk.Button(self, text="Update", font=("Helvetica", 14), width=10, command=self.validate_account_info)
-        cancel_entry_button = tk.Button(self, text="Cancel", font=("Helvetica", 14), width=10, command=self.cancel_entry)
+        title = bttk.Label(self, text="Edit Account Info")
+        account_name_subtitle = bttk.Label(self, text="Account Name:")
+        self.account_name_entry = bttk.Entry(self, textvariable=self.account_name_var, width=20)
+        username_subtitle = bttk.Label(self, text="Username:")
+        self.username_entry = bttk.Entry(self, textvariable=self.username_var, width=20)
+        password_subtitle = bttk.Label(self, text="Password:")
+        self.password_entry = bttk.Entry(self, textvariable=self.password_var, width=20)
+        generate_password_button = bttk.Button(self, text="Generate", command=self.create_password)
+        self.error_message = bttk.Label(self, foreground="red")
+        update_entry_button = bttk.Button(self, text="Update", width=10, command=self.validate_account_info)
+        cancel_entry_button = bttk.Button(self, text="Cancel", width=10, command=self.cancel_entry)
 
         title.place(x=150, y=30)    
         account_name_subtitle.place(x=80, y=100)
