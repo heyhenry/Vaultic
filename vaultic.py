@@ -101,7 +101,7 @@ class Windows(bttk.Window):
         self.destroy()
 
     def setup_styles(self):
-        style = bttk.Style(theme="superhero")
+        style = bttk.Style(theme="minty")
 
         # label
         style.configure("CustomF24.TLabel", font=(self.selected_font, 24))
@@ -109,11 +109,6 @@ class Windows(bttk.Window):
         style.configure("CustomF14.TLabel", font=(self.selected_font, 14))
         style.configure("CustomF12.TLabel", font=(self.selected_font, 12))
         style.configure("CustomF10.TLabel", font=(self.selected_font, 10))
-
-        # entry - does not work with ttk due to og engine supposedly
-        # style.configure("CustomF24.TEntry", font=(self.selected_font, 24))
-        # style.configure("CustomF18.TEntry", font=(self.selected_font, 18))
-        # style.configure("CustomF12.TEntry", font=(self.selected_font, 12))
 
         # button
         style.configure("CustomF18.TButton", font=(self.selected_font, 18))
@@ -246,8 +241,8 @@ class HomePage(bttk.Frame):
         self.create_widgets()
 
     def create_widgets(self):
-        title = bttk.Label(self, text="Home")
-        new_entry = bttk.Button(self, text="New Account [+]", command=self.new_entry_redirect)
+        title = bttk.Label(self, text="Home", style="CustomF24.TLabel")
+        new_entry = bttk.Button(self, text="New Account [+]", command=self.new_entry_redirect, style="CustomF12.TButton")
 
         self.accounts_list = bttk.Treeview(self, columns=("account_name", "account_username"), show="headings", height=10, selectmode='browse')
         self.accounts_list.heading("account_name", text="Account Name")
@@ -255,32 +250,32 @@ class HomePage(bttk.Frame):
         self.accounts_list.column("account_name", width=300)
         self.accounts_list.column("account_username", width=300)
 
-        details_subtitle = bttk.Label(self, text="Account Details:")
-        account_name_subtitle = bttk.Label(self, text="Name:")
-        account_username_subtitle = bttk.Label(self, text="Username:")
-        account_password_subtitle = bttk.Label(self, text="Password:")
-        account_name_entry = bttk.Entry(self, textvariable=self.account_name_var, state='readonly')
-        account_username_entry = bttk.Entry(self, textvariable=self.account_username_var, state='readonly')
-        account_password_entry = bttk.Entry(self, textvariable=self.account_password_var, state='readonly')
-        self.remove_account_button = bttk.Button(self, text="Remove Account", command=self.remove_account)
-        self.edit_account_details_button = bttk.Button(self, text="Edit Account Details", command=self.edit_account_info)
-        generate_password_button = bttk.Button(self, text="Generate New Password", command=self.generate_new_password)
+        details_subtitle = bttk.Label(self, text="Account Details:", style="CustomF24.TLabel")
+        account_name_subtitle = bttk.Label(self, text="Name:", style="CustomF18.TLabel")
+        account_username_subtitle = bttk.Label(self, text="Username:", style="CustomF18.TLabel")
+        account_password_subtitle = bttk.Label(self, text="Password:", style="CustomF18.TLabel")
+        account_name_entry = bttk.Entry(self, textvariable=self.account_name_var, state='readonly', font=(self.controller.selected_font, 18))
+        account_username_entry = bttk.Entry(self, textvariable=self.account_username_var, state='readonly', font=(self.controller.selected_font, 18))
+        account_password_entry = bttk.Entry(self, textvariable=self.account_password_var, state='readonly', font=(self.controller.selected_font, 18))
+        self.remove_account_button = bttk.Button(self, text="Remove Account", command=self.remove_account, style="CustomF14.TButton")
+        self.edit_account_details_button = bttk.Button(self, text="Edit Account Details", command=self.edit_account_info, style="CustomF14.TButton")
+        generate_password_button = bttk.Button(self, text="Generate New Password", command=self.generate_new_password, style="CustomF14.TButton")
 
         title.place(x=350, y=10)
-        new_entry.place(x=600, y=10)
+        new_entry.place(x=600, y=15)
 
         self.accounts_list.place(x=100, y=80)
 
-        details_subtitle.place(x=275, y=325)
-        account_name_subtitle.place(x=200, y=400)
-        account_username_subtitle.place(x=200, y=450)
-        account_password_subtitle.place(x=200, y=500)
-        account_name_entry.place(x=400, y=400)
-        account_username_entry.place(x=400, y=450)
-        account_password_entry.place(x=400, y=500)
-        self.remove_account_button.place(x=100, y=575)
-        self.edit_account_details_button.place(x=290, y=575)
-        generate_password_button.place(x=500, y=575)
+        details_subtitle.place(x=275, y=300)
+        account_name_subtitle.place(x=200, y=390)
+        account_username_subtitle.place(x=200, y=440)
+        account_password_subtitle.place(x=200, y=490)
+        account_name_entry.place(x=400, y=390)
+        account_username_entry.place(x=400, y=440)
+        account_password_entry.place(x=400, y=490)
+        self.remove_account_button.place(x=100, y=585)
+        self.edit_account_details_button.place(x=290, y=585)
+        generate_password_button.place(x=500, y=585)
         
         self.accounts_list.bind("<<TreeviewSelect>>", self.get_account_details)
         self.bind("<Button-1>", self.deselect_account)
