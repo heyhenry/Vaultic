@@ -118,6 +118,11 @@ class Windows(bttk.Window):
 
         # altered global setting of button's takefocus option
         self.option_add("*TButton*takeFocus", False)
+
+        # treeview
+        style.configure("Treeview.Heading", font=(self.selected_font, 18))
+        style.configure("Treeview", font=(self.selected_font, 12), rowheight=25)
+
         
 class LoginPage(bttk.Frame):
     def __init__(self, parent, controller):
@@ -247,11 +252,11 @@ class HomePage(bttk.Frame):
         title = bttk.Label(self, text="Home", style="CustomF24.TLabel")
         new_entry = bttk.Button(self, text="New Account [+]", command=self.new_entry_redirect, style="CustomF12.TButton")
 
-        self.accounts_list = bttk.Treeview(self, columns=("account_name", "account_username"), show="headings", height=10, selectmode='browse')
-        self.accounts_list.heading("account_name", text="Account Name")
-        self.accounts_list.heading("account_username", text="Username")
-        self.accounts_list.column("account_name", width=300)
-        self.accounts_list.column("account_username", width=300)
+        self.accounts_list = bttk.Treeview(self, columns=("account_name", "account_username"), show="headings", height=7, selectmode='browse')
+        self.accounts_list.heading("account_name", text="Account Name", anchor='w')
+        self.accounts_list.heading("account_username", text="Username", anchor='w')
+        self.accounts_list.column("account_name", width=300, minwidth=300, stretch=False)
+        self.accounts_list.column("account_username", width=300, minwidth=300, stretch=False)
 
         details_subtitle = bttk.Label(self, text="Account Details:", style="CustomF24.TLabel")
         account_name_subtitle = bttk.Label(self, text="Name:", style="CustomF18.TLabel")
@@ -269,7 +274,7 @@ class HomePage(bttk.Frame):
 
         self.accounts_list.place(x=100, y=80)
 
-        details_subtitle.place(x=275, y=300)
+        details_subtitle.place(x=275, y=320)
         account_name_subtitle.place(x=200, y=390)
         account_username_subtitle.place(x=200, y=440)
         account_password_subtitle.place(x=200, y=490)
