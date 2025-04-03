@@ -78,4 +78,20 @@
 - NIST guidelines for maximum password length (accessed: 1st April 2025): https://stackoverflow.com/questions/45682979/nist-guidelines-for-maximum-password-length
 - Tkinter event binding help (accessed: 1st April 2025): https://www.reddit.com/r/learnpython/comments/xn38c5/tkinter_event_binding_help/
 - What is the difference between title() and wm_title() (accessed: 1st April 2025): https://stackoverflow.com/questions/35962694/what-is-the-difference-between-the-title-method-and-wm-title-method-in-the-t
-- 
+- Unmasking passwords during sign up, is it a good idea? (accessed: 3rd April 2025): https://security.stackexchange.com/questions/23333/unmasking-passwords-during-sign-up-is-it-a-good-idea
+- How to create a branch on GitHub (accessed: 3rd April 2025): https://stackoverflow.com/questions/40307960/how-to-create-a-branch-in-github
+- How can i switch to another branch in Git? (accessed: 3rd April 2025): https://stackoverflow.com/questions/47630950/how-can-i-switch-to-another-branch-in-git
+- ttkbootstrap | Tutorial (accessed: 3rd April 2025): https://ttkbootstrap.readthedocs.io/en/latest/gettingstarted/tutorial/
+- ttkbootstrap | Style guide (accessed: 3rd April 2025): https://ttkbootstrap.readthedocs.io/en/latest/styleguide/
+- Tktiner 8.5 reference: a GUI for Python (accessed: 3rd April 2025): https://tkdocs.com/shipman/ttk-style-layer.html
+- Changing font for all ttkbootstrap widgets #322 (accessed: 3rd April 2025): https://github.com/israel-dryer/ttkbootstrap/discussions/322
+- ttkbootstrap | Label (accessed: 3rd April 2025): https://ttkbootstrap.readthedocs.io/en/version-0.5/widgets/label.html
+- Configuring 'font' with ttk.Style for 'TEntry' does not change displayed font (accessed: 3rd April 2025): https://bugs.python.org/issue21341
+- ttkbootstrap | Themes (accessed: 3rd April 2025): https://ttkbootstrap.readthedocs.io/en/latest/themes/
+- Change dotted line on button (accessed: 3rd April 2025): https://www.reddit.com/r/Tkinter/comments/10yq0sm/change_dotted_line_on_button/
+- Changing the default behaviour of tkinter widgets (accessed: 3rd April 2025): https://stackoverflow.com/questions/23817985/changing-the-default-behavior-of-tkinter-widgets
+- Tkinter Class API Reference (accessed: 3rd April 2025): https://tkdocs.com/pyref/onepage.html
+- Configuring all buttons in ttk so takefocus =0 (accessed: 3rd April 2025): https://stackoverflow.com/questions/63535343/configuring-all-buttons-in-ttk-so-takefocus-0
+- Tkinter 8.5 reference: a GUI for Python | 26. Universal widget methods | option_add (accessed: 3rd April 2025): https://anzeljg.github.io/rin2/book2/2405/docs/tkinter/universal.html#option_add
+- Tkinter 8.5 reference: a GUI for Python | 27. Standardizing appearance and the option database (accessed: 3rd April 2025): https://anzeljg.github.io/rin2/book2/2405/docs/tkinter/option-database.htmls
+- tkinter.ttk - TK themed widgets (accessed: 3rd April 2025): https://docs.python.org/3/library/tkinter.ttk.html#widget
