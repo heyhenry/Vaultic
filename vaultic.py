@@ -15,11 +15,11 @@ import random
 class Windows(bttk.Window):
     def __init__(self, *args, **kwargs):
         bttk.Window.__init__(self, *args, **kwargs)
-        titlebar_icon = ImageTk.PhotoImage(Image.open("img/vaultic_logo_5.png").resize((32, 32), Image.Resampling.LANCZOS))
-        self.iconphoto(False, titlebar_icon)
+
+        # implementing font/sizes and other custom style decisions
         self.selected_font = "Helvetica"
         self.setup_styles()
-        print(bttk.Style().theme_use())
+
         # only run toast notification after pending ui works finish loading to avoid top-level quirks
         self.after_idle(self.startup_notification)
 
@@ -69,6 +69,10 @@ class Windows(bttk.Window):
 
         # withdraw to avoid flckering of previous page
         self.withdraw()
+
+        # setting the titlebar's icon
+        titlebar_icon = ImageTk.PhotoImage(Image.open("img/vaultic_logo_5.png").resize((32, 32), Image.Resampling.LANCZOS))
+        self.iconphoto(False, titlebar_icon)
         # default window size
         self.center_window(490, 340)
         self.resizable(False, False)
@@ -180,7 +184,6 @@ class LoginPage(bttk.Frame):
    
     def create_widgets(self):
         app_logo = bttk.Label(self, image=self.logo_img)
-        password_subtitle = bttk.Label(self, text="Enter Password:", style="CustomF18.TLabel")
         self.password_entry = bttk.Entry(self, width=18, textvariable=self.password_var, show="*", font=(self.controller.selected_font, 24))
         self.toggle_mask = tk.Button(self, image=self.masked_img, command=self.toggle_masking)
         self.toggle_mask.config(activebackground="#F8F9FA", background="#F8F9FA")
@@ -188,7 +191,6 @@ class LoginPage(bttk.Frame):
         login_submission = bttk.Button(self, text="Login", command=self.process_password, style="CustomF18.TButton")
 
         app_logo.place(x=200, y=0)
-        password_subtitle.place(x=80, y=110)
         self.password_entry.place(x=80, y=150)
         self.toggle_mask.place(x=425, y=150)
         self.error_message.place(x=150, y=210)
