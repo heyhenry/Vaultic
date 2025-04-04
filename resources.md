@@ -95,3 +95,11 @@
 - Tkinter 8.5 reference: a GUI for Python | 26. Universal widget methods | option_add (accessed: 3rd April 2025): https://anzeljg.github.io/rin2/book2/2405/docs/tkinter/universal.html#option_add
 - Tkinter 8.5 reference: a GUI for Python | 27. Standardizing appearance and the option database (accessed: 3rd April 2025): https://anzeljg.github.io/rin2/book2/2405/docs/tkinter/option-database.htmls
 - tkinter.ttk - TK themed widgets (accessed: 3rd April 2025): https://docs.python.org/3/library/tkinter.ttk.html#widget
+- Merging Branches (accessed: 3rd April 2025): https://www.varonis.com/blog/git-branching#merging-branches
+- tkinter treeview change column font size (accessed: 3rd April 2025): https://stackoverflow.com/questions/46932332/tkinter-treeview-change-column-font-size
+- How can i set the row height in Tkinter TreeView? (accessed: 3rd April 2025): https://stackoverflow.com/questions/48432506/how-can-i-set-the-row-height-in-tkinter-treeview
+- What is a Ctrl C? (accessed: 4th April 2025): https://www.lenovo.com/us/en/glossary/control-c/?orgRef=https%253A%252F%252Fwww.google.com%252F
+- Copying from clipbard using tkinter without displaying window (accessed: 4th April 2025): https://stackoverflow.com/questions/24559675/copying-from-clipboard-using-tkinter-without-displaying-window
+- How to change the color of ttk button (accessed: 4th April 2025): https://stackoverflow.com/questions/27347981/how-to-change-the-color-of-ttk-button
+- Python script to copy text to clipboard (accessed: 4th April 2025): https://stackoverflow.com/questions/11063458/python-script-to-copy-text-to-clipboard
+- copy and paste text to the clipboard ith pyperclip in Python (accessed: 4th April 2025): https://note.nkmk.me/en/python-pyperclip-usage/
