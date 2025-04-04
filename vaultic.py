@@ -67,12 +67,15 @@ class Windows(bttk.Window):
 
         # withdraw to avoid flckering of previous page
         self.withdraw()
-        self.geometry("490x340") # general defaulted window size for all pages (temporary)
+        # default window size
+        self.center_window(490, 340)
+        self.resizable(False, False)
+
         if current_page == RegisterPage or current_page == LoginPage:
             # timer added due to tkinter event processing isn't instantaenous(spelling?)
             self.after(100, page.password_entry.focus)
         elif current_page == HomePage:
-            self.geometry("800x700")
+            self.center_window(800,700)
             # updates the accounts list to the latest version
             # also deselects any pre-existing item selection aka handles deselection logic as all deselections are intertwined with redirecting to the homepage
             page.populate_accounts_list()
@@ -84,6 +87,12 @@ class Windows(bttk.Window):
 
         # deiconify to show only the updated window
         self.deiconify()
+
+    # poisiton the window in the middle of the user's screen
+    def center_window(self, win_width, win_height):
+        x = (self.winfo_screenwidth() // 2) - (win_width // 2)
+        y = (self.winfo_screenheight() // 2) - (win_height // 2)
+        return self.geometry(f"{win_width}x{win_height}+{x}+{y}")
 
     # check if an authentication database exists 
     def check_auth_exists(self):
