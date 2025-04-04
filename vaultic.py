@@ -19,6 +19,7 @@ class Windows(bttk.Window):
         self.selected_font = "Helvetica"
         self.setup_styles()
         print(bttk.Style().theme_use())
+        self.startup_notification()
 
         # check for auth database's existence
         self.check_auth_exists()
@@ -126,7 +127,14 @@ class Windows(bttk.Window):
         # treeview
         style.configure("Treeview.Heading", font=(self.selected_font, 18))
         style.configure("Treeview", font=(self.selected_font, 12), rowheight=25)
-        
+       
+    def startup_notification(self):
+        ToastNotification(
+            title="Vaultic is now running",
+            message="Ready for duty sir!",
+            duration=10000
+        ).show_toast()
+
 class LoginPage(bttk.Frame):
     def __init__(self, parent, controller):
         bttk.Frame.__init__(self, parent)
