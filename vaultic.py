@@ -1,5 +1,3 @@
-# import tkinter as tk
-# from tkinter import ttk
 import sqlite3
 from authmanager import AuthManager
 from create_password_database import create_passwords_database
@@ -12,6 +10,7 @@ from PIL import Image, ImageTk
 import tkinter as tk
 import pyperclip
 from ttkbootstrap.toast import ToastNotification
+import random
 
 class Windows(bttk.Window):
     def __init__(self, *args, **kwargs):
@@ -19,7 +18,8 @@ class Windows(bttk.Window):
         self.selected_font = "Helvetica"
         self.setup_styles()
         print(bttk.Style().theme_use())
-        self.startup_notification()
+        # only run toast notification after pending ui works finish loading to avoid top-level quirks
+        self.after_idle(self.startup_notification)
 
         # check for auth database's existence
         self.check_auth_exists()
@@ -129,10 +129,32 @@ class Windows(bttk.Window):
         style.configure("Treeview", font=(self.selected_font, 12), rowheight=25)
        
     def startup_notification(self):
+        cheeky_messages = [
+            "Vaultic reporting for duty... with a smug grin.",
+            "Don’t worry, I remember everything. *smiles*",
+            "No keys? No problem. I *am* the key.",
+            "Your secrets are safe... until you copy-paste them everywhere.",
+            "Vaultic here — acting like I’m not judging your passwords.",
+            "Ah, the daily dance of pretending we’re secure.",
+            "I see you’re back. Hope you remembered *me*, at least.",
+            "Loading secrets… don’t peek 👀",
+            "Vaultic: Because sticky notes are a crime.",
+            "Initializing... 100% sass, 0% breach.",
+            "Your secrets are guarded like a Primarch’s gene-seed.",
+            "Even the Inquisition couldn’t crack this vault.",
+            "By the light of the Astronomican, Vaultic awakens.",
+            "I might be a peasant app, but I guard like a royal knight!",
+            "My power level? It's over 9000... bits of entropy.",
+            "Training complete. Vaultic’s security is Ultra Instinct.",
+            "I'm gonna be... the Vault King!",
+            "Your secrets are more protected than the One Piece.",
+            "You want the top? Then remember your damn password.",
+            "Suzu-freakin-ran? Nah. Vaultic runs this school."
+        ]
         ToastNotification(
             title="Vaultic is now running",
-            message="Ready for duty sir!",
-            duration=10000
+            message=random.choice(cheeky_messages),
+            duration=5000
         ).show_toast()
 
 class LoginPage(bttk.Frame):
