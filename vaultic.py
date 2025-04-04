@@ -15,6 +15,8 @@ import random
 class Windows(bttk.Window):
     def __init__(self, *args, **kwargs):
         bttk.Window.__init__(self, *args, **kwargs)
+        titlebar_icon = ImageTk.PhotoImage(Image.open("img/vaultic_logo_5.png").resize((32, 32), Image.Resampling.LANCZOS))
+        self.iconphoto(False, titlebar_icon)
         self.selected_font = "Helvetica"
         self.setup_styles()
         print(bttk.Style().theme_use())
