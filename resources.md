@@ -106,3 +106,5 @@
 - ttkbootstrap | toast module (accessed: 4th April 2025): https://ttkbootstrap.readthedocs.io/en/latest/api/toast/#ttkbootstrap.toast.ToastNotification
 - Basic Widget Methods (accessed: 4th April 2025): https://dafarry.github.io/tkinterbook/widget.htm
 - Python Random choice() method (accessed: 4th April 2025): https://www.w3schools.com/python/ref_random_choice.asp
+- How to center a window on the screen in Tkinter? (accessed: 4th April 2025): https://stackoverflow.com/questions/3352918/how-to-center-a-window-on-the-screen-in-tkinter
+- How to change Tkinter Window Icon (accessed: 4th April 2025): https://www.tutorialspoint.com/how-to-change-tkinter-window-icon
