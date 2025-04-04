@@ -71,7 +71,7 @@ class Windows(bttk.Window):
         self.withdraw()
 
         # setting the titlebar's icon
-        titlebar_icon = ImageTk.PhotoImage(Image.open("img/vaultic_logo_5.png").resize((32, 32), Image.Resampling.LANCZOS))
+        titlebar_icon = ImageTk.PhotoImage(Image.open("img/main_logo.png").resize((32, 32), Image.Resampling.LANCZOS))
         self.iconphoto(False, titlebar_icon)
         # default window size
         self.center_window(490, 340)
@@ -179,7 +179,7 @@ class LoginPage(bttk.Frame):
         self.password_var = bttk.StringVar()
         self.masked_img = ImageTk.PhotoImage(Image.open("img/pw_masked.png").resize((42, 42), Image.Resampling.LANCZOS))
         self.unmasked_img = ImageTk.PhotoImage(Image.open("img/pw_unmasked.png").resize((42, 42), Image.Resampling.LANCZOS)) 
-        self.logo_img = ImageTk.PhotoImage(Image.open("img/vaultic_logo_5.png").resize((84, 84), Image.Resampling.LANCZOS))
+        self.logo_img = ImageTk.PhotoImage(Image.open("img/main_logo.png").resize((84, 84), Image.Resampling.LANCZOS))
         self.create_widgets()
    
     def create_widgets(self):
@@ -234,6 +234,7 @@ class RegisterPage(bttk.Frame):
         self.password_var = bttk.StringVar()
         self.confirm_password_var = bttk.StringVar()
         self.error_type = None
+        self.thumbsup_img = ImageTk.PhotoImage(Image.open("img/submain_logo_7.png").resize((84, 84), Image.Resampling.LANCZOS))
         self.create_widgets()
 
     def create_widgets(self):
@@ -246,6 +247,7 @@ class RegisterPage(bttk.Frame):
         self.error_message = bttk.Label(self, foreground='red', style="CustomF10.TLabel")
         create_submission = bttk.Button(self, text="Create", command=self.process_password_creation, style="CustomF18.TButton")
         reminder_message = bttk.Label(self, text="Remember This!", style="CustomF12.TLabel")
+        thumbsup_display = bttk.Label(self, image=self.thumbsup_img)
 
         app_title.place(x=200, y=10)
         desc_subtitle.place(x=80, y=50)
@@ -256,6 +258,7 @@ class RegisterPage(bttk.Frame):
         self.error_message.place(x=130, y=245)
         create_submission.place(x=180, y=270)
         reminder_message.place(x=330, y=300)
+        thumbsup_display.place(x=30, y=250)
 
         # detect 'enter' keybind regardless of which entry field has focus
         self.password_entry.bind("<Return>", self.process_password_creation)
@@ -310,10 +313,13 @@ class HomePage(bttk.Frame):
         self.account_password_var = bttk.StringVar()
         self.copy_icon = ImageTk.PhotoImage(Image.open("img/copy.png").resize((32, 32), Image.Resampling.LANCZOS))
         self.logout_icon = ImageTk.PhotoImage(Image.open("img/logout.png").resize((48, 48), Image.Resampling.LANCZOS))
+        self.logo_icon = ImageTk.PhotoImage(Image.open("img/submain_logo_2.png").resize((84, 84), Image.Resampling.LANCZOS))
+        self.attack_img = ImageTk.PhotoImage(Image.open("img/submain_logo_1.png").resize((120, 120), Image.Resampling.LANCZOS))
         self.create_widgets()
 
     def create_widgets(self):
         title = bttk.Label(self, text="Home", style="CustomF24.TLabel")
+        icon_display = bttk.Label(self, image=self.logo_icon)
         new_entry = bttk.Button(self, text="New Account [+]", command=self.new_entry_redirect, style="CustomF12.TButton")
 
         self.accounts_list = bttk.Treeview(self, columns=("account_name", "account_username"), show="headings", height=7, selectmode='browse')
@@ -338,8 +344,10 @@ class HomePage(bttk.Frame):
         generate_password_button = bttk.Button(self, text="Generate New Password", command=self.generate_new_password, style="CustomF14.TButton")
         logout_button = tk.Button(self, image=self.logout_icon, command=self.logout)
         logout_button.config(background="#F8F9FA", activebackground="#F8F9FA")
+        attack_display = bttk.Label(self, image=self.attack_img)
 
         title.place(x=350, y=10)
+        icon_display.place(x=160, y=0)
         new_entry.place(x=550, y=15)
 
         self.accounts_list.place(x=100, y=80)
@@ -357,6 +365,7 @@ class HomePage(bttk.Frame):
         self.edit_account_details_button.place(x=290, y=585)
         generate_password_button.place(x=500, y=585)
         logout_button.place(x=10, y=650)
+        attack_display.place(x=30, y=380)
         
         self.accounts_list.bind("<<TreeviewSelect>>", self.get_account_details)
         self.bind("<Button-1>", self.deselect_account)
@@ -490,9 +499,11 @@ class NewEntryPage(bttk.Frame):
         self.account_name_var = bttk.StringVar()
         self.username_var = bttk.StringVar()
         self.password_var = bttk.StringVar()
+        self.thumbsup_img = ImageTk.PhotoImage(Image.open("img/submain_logo_9.png").resize((96, 96), Image.Resampling.LANCZOS))
         self.create_widgets()
 
     def create_widgets(self):
+        thumbsup_display = bttk.Label(self, image=self.thumbsup_img)
         title = bttk.Label(self, text="New Account Entry", style="CustomF18.TLabel")
         account_name_subtitle = bttk.Label(self, text="Account Name:", style="CustomF12.TLabel")
         self.account_name_entry = bttk.Entry(self, textvariable=self.account_name_var, width=20, font=(self.controller.selected_font, 12))
@@ -505,6 +516,7 @@ class NewEntryPage(bttk.Frame):
         add_entry_button = bttk.Button(self, text="Add", width=10, command=self.validate_new_entry, style="CustomF14.TButton")
         cancel_entry_button = bttk.Button(self, text="Cancel", width=10, command=self.cancel_entry, style="CustomF14.TButton")
 
+        thumbsup_display.place(x=30, y=0)
         title.place(x=150, y=30)    
         account_name_subtitle.place(x=80, y=100)
         self.account_name_entry.place(x=200, y=100)
@@ -576,9 +588,11 @@ class EditAccountPage(bttk.Frame):
         # hold current values prior to change, for database reference
         self.current_account_name_var = bttk.StringVar()
         self.current_username_var = bttk.StringVar()
+        self.lookover_img = ImageTk.PhotoImage(Image.open("img/submain_logo_8.png").resize((64, 64), Image.Resampling.LANCZOS))
         self.create_widgets()
 
     def create_widgets(self):
+        lookover_display = bttk.Label(self, image=self.lookover_img)
         title = bttk.Label(self, text="Edit Account Info", style="CustomF18.TLabel")
         account_name_subtitle = bttk.Label(self, text="Account Name:", style="CustomF12.TLabel")
         self.account_name_entry = bttk.Entry(self, textvariable=self.account_name_var, width=20, font=(self.controller.selected_font, 12))
@@ -591,6 +605,7 @@ class EditAccountPage(bttk.Frame):
         update_entry_button = bttk.Button(self, text="Update", width=10, command=self.validate_account_info, style="CustomF14.TButton")
         cancel_entry_button = bttk.Button(self, text="Cancel", width=10, command=self.cancel_entry, style="CustomF14.TButton")
 
+        lookover_display.place(x=30, y=0)
         title.place(x=150, y=30)    
         account_name_subtitle.place(x=80, y=100)
         self.account_name_entry.place(x=200, y=100)
