@@ -173,10 +173,11 @@ class LoginPage(bttk.Frame):
         self.password_var = bttk.StringVar()
         self.masked_img = ImageTk.PhotoImage(Image.open("img/pw_masked.png").resize((42, 42), Image.Resampling.LANCZOS))
         self.unmasked_img = ImageTk.PhotoImage(Image.open("img/pw_unmasked.png").resize((42, 42), Image.Resampling.LANCZOS)) 
+        self.logo_img = ImageTk.PhotoImage(Image.open("img/vaultic_logo_5.png").resize((108, 108), Image.Resampling.LANCZOS))
         self.create_widgets()
    
     def create_widgets(self):
-        app_title = bttk.Label(self, text="Vaultic", style="CustomF24.TLabel")
+        app_logo = bttk.Label(self, image=self.logo_img)
         password_subtitle = bttk.Label(self, text="Enter Password:", style="CustomF18.TLabel")
         self.password_entry = bttk.Entry(self, width=18, textvariable=self.password_var, show="*", font=(self.controller.selected_font, 24))
         self.toggle_mask = tk.Button(self, image=self.masked_img, command=self.toggle_masking)
@@ -184,7 +185,7 @@ class LoginPage(bttk.Frame):
         self.error_message = bttk.Label(self, foreground="red", style="CustomF12.TLabel")
         login_submission = bttk.Button(self, text="Login", command=self.process_password, style="CustomF18.TButton")
 
-        app_title.place(x=200, y=30)
+        app_logo.place(x=200, y=0)
         password_subtitle.place(x=80, y=110)
         self.password_entry.place(x=80, y=150)
         self.toggle_mask.place(x=425, y=150)
