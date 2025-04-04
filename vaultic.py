@@ -11,6 +11,7 @@ from ttkbootstrap.constants import *
 from PIL import Image, ImageTk
 import tkinter as tk
 import pyperclip
+from ttkbootstrap.toast import ToastNotification
 
 class Windows(bttk.Window):
     def __init__(self, *args, **kwargs):
@@ -403,9 +404,21 @@ class HomePage(bttk.Frame):
 
     def copy_text(self, pressed_button):
         if pressed_button == "copy_username":
+            # create a toast popup to notify user of their action
+            ToastNotification(
+                title="Copied!",
+                message="Username has been copied.",
+                duration=3000
+            ).show_toast()
+            # copy the selected info to the user's device's clipboard
             pyperclip.copy(self.account_username_var.get())
         else:
             pyperclip.copy(self.account_password_var.get())
+            ToastNotification(
+                title="Copied!",
+                message="Password has been copied.",
+                duration=3000
+            ).show_toast()
 
 class NewEntryPage(bttk.Frame):
     def __init__(self, parent, controller):
