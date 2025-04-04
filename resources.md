@@ -103,3 +103,6 @@
 - How to change the color of ttk button (accessed: 4th April 2025): https://stackoverflow.com/questions/27347981/how-to-change-the-color-of-ttk-button
 - Python script to copy text to clipboard (accessed: 4th April 2025): https://stackoverflow.com/questions/11063458/python-script-to-copy-text-to-clipboard
 - copy and paste text to the clipboard ith pyperclip in Python (accessed: 4th April 2025): https://note.nkmk.me/en/python-pyperclip-usage/
+- ttkbootstrap | toast module (accessed: 4th April 2025): https://ttkbootstrap.readthedocs.io/en/latest/api/toast/#ttkbootstrap.toast.ToastNotification
+- Basic Widget Methods (accessed: 4th April 2025): https://dafarry.github.io/tkinterbook/widget.htm
+- Python Random choice() method (accessed: 4th April 2025): https://www.w3schools.com/python/ref_random_choice.asp
