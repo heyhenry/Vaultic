@@ -320,7 +320,7 @@ class HomePage(bttk.Frame):
         self.remove_account_button = bttk.Button(self, text="Remove Account", command=self.remove_account, style="CustomF14.TButton")
         self.edit_account_details_button = bttk.Button(self, text="Edit Account Details", command=self.edit_account_info, style="CustomF14.TButton")
         generate_password_button = bttk.Button(self, text="Generate New Password", command=self.generate_new_password, style="CustomF14.TButton")
-        logout_button = tk.Button(self, image=self.logout_icon)
+        logout_button = tk.Button(self, image=self.logout_icon, command=self.logout)
         logout_button.config(background="#F8F9FA", activebackground="#F8F9FA")
 
         title.place(x=350, y=10)
@@ -453,6 +453,19 @@ class HomePage(bttk.Frame):
                 message="Password has been copied.",
                 duration=3000
             ).show_toast()
+
+    def logout(self):
+        # temp log
+        print('closing..')
+        # check if the pw_manager database is exposed
+        if os.path.exists('db/pw_manager.db'):
+            # close current connection to the pw_manager database
+            if self.controller.pw_connection:
+                self.controller.pw_connection.close()
+            # re-encrypt the pw_manager database
+            self.controller.auth.encrypt_dump()
+        self.controller.pages[LoginPage].password_var.set("")
+        self.controller.show_page(LoginPage)
 
 class NewEntryPage(bttk.Frame):
     def __init__(self, parent, controller):
