@@ -10,6 +10,7 @@ import ttkbootstrap as bttk
 from ttkbootstrap.constants import *
 from PIL import Image, ImageTk
 import tkinter as tk
+import pyperclip
 
 class Windows(bttk.Window):
     def __init__(self, *args, **kwargs):
@@ -124,7 +125,6 @@ class Windows(bttk.Window):
         # treeview
         style.configure("Treeview.Heading", font=(self.selected_font, 18))
         style.configure("Treeview", font=(self.selected_font, 12), rowheight=25)
-
         
 class LoginPage(bttk.Frame):
     def __init__(self, parent, controller):
@@ -261,6 +261,7 @@ class HomePage(bttk.Frame):
         self.account_name_var = bttk.StringVar()
         self.account_username_var = bttk.StringVar()
         self.account_password_var = bttk.StringVar()
+        self.copy_icon = ImageTk.PhotoImage(Image.open("img/copy.png").resize((32, 32), Image.Resampling.LANCZOS))
         self.create_widgets()
 
     def create_widgets(self):
@@ -280,6 +281,10 @@ class HomePage(bttk.Frame):
         account_name_entry = bttk.Entry(self, textvariable=self.account_name_var, state='readonly', font=(self.controller.selected_font, 18))
         account_username_entry = bttk.Entry(self, textvariable=self.account_username_var, state='readonly', font=(self.controller.selected_font, 18))
         account_password_entry = bttk.Entry(self, textvariable=self.account_password_var, state='readonly', font=(self.controller.selected_font, 18))
+        copy_username_button = tk.Button(self, image=self.copy_icon, command=lambda: self.copy_text("copy_username"))
+        copy_username_button.config(background="#F8F9FA", activebackground="#F8F9FA")
+        copy_password_button = tk.Button(self, image=self.copy_icon, command=lambda: self.copy_text("copy_password"))
+        copy_password_button.config(background="#F8F9FA", activebackground="#F8F9FA")
         self.remove_account_button = bttk.Button(self, text="Remove Account", command=self.remove_account, style="CustomF14.TButton")
         self.edit_account_details_button = bttk.Button(self, text="Edit Account Details", command=self.edit_account_info, style="CustomF14.TButton")
         generate_password_button = bttk.Button(self, text="Generate New Password", command=self.generate_new_password, style="CustomF14.TButton")
@@ -296,6 +301,8 @@ class HomePage(bttk.Frame):
         account_name_entry.place(x=400, y=390)
         account_username_entry.place(x=400, y=440)
         account_password_entry.place(x=400, y=490)
+        copy_username_button.place(x=680, y=445)
+        copy_password_button.place(x=680, y=495)
         self.remove_account_button.place(x=100, y=585)
         self.edit_account_details_button.place(x=290, y=585)
         generate_password_button.place(x=500, y=585)
@@ -393,6 +400,12 @@ class HomePage(bttk.Frame):
         self.accounts_list.focus("")
         # clear existing details that are displayed in the details section
         self.clear_details_section()
+
+    def copy_text(self, pressed_button):
+        if pressed_button == "copy_username":
+            pyperclip.copy(self.account_username_var.get())
+        else:
+            pyperclip.copy(self.account_password_var.get())
 
 class NewEntryPage(bttk.Frame):
     def __init__(self, parent, controller):
