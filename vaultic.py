@@ -8,6 +8,8 @@ import os
 from password_generation import generate_password
 import ttkbootstrap as bttk
 from ttkbootstrap.constants import *
+from PIL import Image, ImageTk
+import tkinter as tk
 
 class Windows(bttk.Window):
     def __init__(self, *args, **kwargs):
@@ -129,18 +131,23 @@ class LoginPage(bttk.Frame):
         bttk.Frame.__init__(self, parent)
         self.controller = controller
         self.password_var = bttk.StringVar()
+        self.masked_img = ImageTk.PhotoImage(Image.open("img/pw_masked.png").resize((42, 42), Image.Resampling.LANCZOS))
+        self.unmasked_img = ImageTk.PhotoImage(Image.open("img/pw_unmasked.png").resize((42, 42), Image.Resampling.LANCZOS)) 
         self.create_widgets()
-
+   
     def create_widgets(self):
         app_title = bttk.Label(self, text="Vaultic", style="CustomF24.TLabel")
         password_subtitle = bttk.Label(self, text="Enter Password:", style="CustomF18.TLabel")
-        self.password_entry = bttk.Entry(self, width=18, textvariable=self.password_var, font=(self.controller.selected_font, 24))
+        self.password_entry = bttk.Entry(self, width=18, textvariable=self.password_var, show="*", font=(self.controller.selected_font, 24))
+        self.toggle_mask = tk.Button(self, image=self.masked_img, command=self.toggle_masking)
+        self.toggle_mask.config(activebackground="#F8F9FA", background="#F8F9FA")
         self.error_message = bttk.Label(self, foreground="red", style="CustomF12.TLabel")
         login_submission = bttk.Button(self, text="Login", command=self.process_password, style="CustomF18.TButton")
 
         app_title.place(x=200, y=30)
         password_subtitle.place(x=80, y=110)
         self.password_entry.place(x=80, y=150)
+        self.toggle_mask.place(x=425, y=150)
         self.error_message.place(x=150, y=210)
         login_submission.place(x=200, y=240)
 
@@ -164,6 +171,14 @@ class LoginPage(bttk.Frame):
             self.controller.show_page(HomePage)
         else:
             self.show_error_message()
+
+    def toggle_masking(self):
+        if self.password_entry.cget("show") == "*":
+            self.toggle_mask.config(image=self.unmasked_img)
+            self.password_entry.config(show="")
+        else:
+            self.toggle_mask.config(image=self.masked_img)
+            self.password_entry.config(show="*")
 
 class RegisterPage(bttk.Frame):
     def __init__(self, parent, controller):
