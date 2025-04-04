@@ -293,6 +293,7 @@ class HomePage(bttk.Frame):
         self.account_username_var = bttk.StringVar()
         self.account_password_var = bttk.StringVar()
         self.copy_icon = ImageTk.PhotoImage(Image.open("img/copy.png").resize((32, 32), Image.Resampling.LANCZOS))
+        self.logout_icon = ImageTk.PhotoImage(Image.open("img/logout.png").resize((48, 48), Image.Resampling.LANCZOS))
         self.create_widgets()
 
     def create_widgets(self):
@@ -319,9 +320,11 @@ class HomePage(bttk.Frame):
         self.remove_account_button = bttk.Button(self, text="Remove Account", command=self.remove_account, style="CustomF14.TButton")
         self.edit_account_details_button = bttk.Button(self, text="Edit Account Details", command=self.edit_account_info, style="CustomF14.TButton")
         generate_password_button = bttk.Button(self, text="Generate New Password", command=self.generate_new_password, style="CustomF14.TButton")
+        logout_button = tk.Button(self, image=self.logout_icon)
+        logout_button.config(background="#F8F9FA", activebackground="#F8F9FA")
 
         title.place(x=350, y=10)
-        new_entry.place(x=600, y=15)
+        new_entry.place(x=550, y=15)
 
         self.accounts_list.place(x=100, y=80)
 
@@ -337,6 +340,7 @@ class HomePage(bttk.Frame):
         self.remove_account_button.place(x=100, y=585)
         self.edit_account_details_button.place(x=290, y=585)
         generate_password_button.place(x=500, y=585)
+        logout_button.place(x=10, y=650)
         
         self.accounts_list.bind("<<TreeviewSelect>>", self.get_account_details)
         self.bind("<Button-1>", self.deselect_account)
