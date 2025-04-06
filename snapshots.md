@@ -1,49 +1,81 @@
-## 🔐 Vaultic - Password Manager
+[## 🔐 Vaultic - Password Manager
 
 > A local, encrypted, and minty-fresh password manager built with Python, SQLite, and ttkbootstrap.
 
 ---
 
-### 🌟 Key Screenshots
+### 🌟 Key Snapshots
 
-#### 🖊️ Register page
-
+#### 🖊️ Register 
 [![Register](img/snapshots/register.png)](https://raw.githubusercontent.com/heyhenry/Vaultic/128a47c14d6bc4e7dbb7153af3d2db738f2ace22/img/snapshots/register.png)
 
-#### 🏁 Login Page
+#### 🏁 Login 
 [![Login](img/snapshots/login_masked.png)](https://raw.githubusercontent.com/heyhenry/Vaultic/128a47c14d6bc4e7dbb7153af3d2db738f2ace22/img/snapshots/login_masked.png)
 
-#### 🏠 Home Dashboard
-[![Home](img/snapshots/home.png)]()
+#### 🏠 Home
+[![Home](img/snapshots/home.png)](https://raw.githubusercontent.com/heyhenry/Vaultic/128a47c14d6bc4e7dbb7153af3d2db738f2ace22/img/snapshots/home.png)
 
-#### ➕ Add New Entry
-![New Entry](img/snapshots/new_entry.png)
+#### 📜 Home - Account Details Display
+[![Account Details](img/snapshots/account_details.png)](https://raw.githubusercontent.com/heyhenry/Vaultic/128a47c14d6bc4e7dbb7153af3d2db738f2ace22/img/snapshots/account_details.png)
 
-#### 🔔 Toast Notification
-![Toast](img/snapshots/toast_login.png)
+#### ➕ Add New Account Entry
+[![New Entry](img/snapshots/empty_new_entry.png)](https://raw.githubusercontent.com/heyhenry/Vaultic/128a47c14d6bc4e7dbb7153af3d2db738f2ace22/img/snapshots/empty_new_entry.png)
+
+#### 🔔 Login - Startup Notification
+[![Toast](img/snapshots/toast_login.png)](https://raw.githubusercontent.com/heyhenry/Vaultic/128a47c14d6bc4e7dbb7153af3d2db738f2ace22/img/snapshots/toast_login.png)
 
 ---
 
 <details>
   <summary>📸 Full Screenshot Gallery (Click to expand)</summary>
 
-### 🔐 Login Page - Empty
-![Login Empty](img/snapshots/login_masked.png)
+### 🖊️ Register 
+[![Register](img/snapshots/register.png)](https://raw.githubusercontent.com/heyhenry/Vaultic/128a47c14d6bc4e7dbb7153af3d2db738f2ace22/img/snapshots/register.png)
 
-### 🔐 Login Page - Error State
-![Login Error](img/snapshots/error_login.png)
+### 🖊️ Register - Error State - Mismatch
+[![Register Error Mismatch](img/snapshots/error_register_mismatch.png)](https://raw.githubusercontent.com/heyhenry/Vaultic/128a47c14d6bc4e7dbb7153af3d2db738f2ace22/img/snapshots/error_register_mismatch.png)
 
-### 🏠 Home Page - Populated
-![Home Empty](img/snapshots/home.png)
+### 🖊️ Register - Error State - Whitespaces Only
+[![Register Error Whitespaces Only](img/snapshots/error_register_whitespace.png)](https://raw.githubusercontent.com/heyhenry/Vaultic/128a47c14d6bc4e7dbb7153af3d2db738f2ace22/img/snapshots/error_register_whitespace.png)
 
-### 🏠 Home Page - Account Details Display
-![Home Full](img/snapshots/account_details.png)
+### 🖊️ Register - Error State - Minimum Length
+[![Register Error Minimum Length](img/snapshots/error_register_length.png)](https://raw.githubusercontent.com/heyhenry/Vaultic/128a47c14d6bc4e7dbb7153af3d2db738f2ace22/img/snapshots/error_register_length.png)
 
-### ✏️ Edit Entry Page
-![Edit Entry](img/snapshots/edit_account_info.png)
+### 🖊️ Register - Error State - Empty Input
+[![Register Error Empty Input](img/snapshots/error_register_empty.png)](https://raw.githubusercontent.com/heyhenry/Vaultic/128a47c14d6bc4e7dbb7153af3d2db738f2ace22/img/snapshots/error_register_empty.png)
 
-### ➕ New Entry - Invalid
-![New Entry Invalid](img/snapshots/error_new_entry.png)
+### 🔐 Login - Masked
+[![Login Masked](img/snapshots/login_masked.png)](https://raw.githubusercontent.com/heyhenry/Vaultic/128a47c14d6bc4e7dbb7153af3d2db738f2ace22/img/snapshots/login_masked.png)
+
+### 🔐 Login - Unmasked
+[![Login Unmasked](img/snapshots/login_unmasked.png)](https://raw.githubusercontent.com/heyhenry/Vaultic/128a47c14d6bc4e7dbb7153af3d2db738f2ace22/img/snapshots/login_unmasked.png)
+
+### 🔐 Login - Startup Notification
+[![Login Startup Notification](img/snapshots/toast_login.png)](https://raw.githubusercontent.com/heyhenry/Vaultic/128a47c14d6bc4e7dbb7153af3d2db738f2ace22/img/snapshots/toast_login.png)
+
+### 🔐 Login - Error State
+[![Login Error](img/snapshots/error_login.png)](https://raw.githubusercontent.com/heyhenry/Vaultic/128a47c14d6bc4e7dbb7153af3d2db738f2ace22/img/snapshots/error_login.png)
+
+### 🏠 Home - Populated
+[![Home Populated](img/snapshots/home.png)](https://raw.githubusercontent.com/heyhenry/Vaultic/128a47c14d6bc4e7dbb7153af3d2db738f2ace22/img/snapshots/home.png)
+
+### 🏠 Home - Account Details Display
+![Home Account Details](img/snapshots/account_details.png)(https://raw.githubusercontent.com/heyhenry/Vaultic/128a47c14d6bc4e7dbb7153af3d2db738f2ace22/img/snapshots/account_details.png)
+
+### 🏠 Home - Copied Username 
+[![Home Username](img/snapshots/toast_home.png)](https://raw.githubusercontent.com/heyhenry/Vaultic/128a47c14d6bc4e7dbb7153af3d2db738f2ace22/img/snapshots/toast_home.png)
+
+### ➕ New Account Entry
+[![New Entry](img/snapshots/empty_new_entry.png)](https://raw.githubusercontent.com/heyhenry/Vaultic/128a47c14d6bc4e7dbb7153af3d2db738f2ace22/img/snapshots/empty_new_entry.png)
+
+### ➕ New Account Entry - Error State
+[![New Entry Error](img/snapshots/error_new_entry.png)](https://raw.githubusercontent.com/heyhenry/Vaultic/128a47c14d6bc4e7dbb7153af3d2db738f2ace22/img/snapshots/error_new_entry.png)
+
+### ✏️ Edit Account Info
+[![Edit Account Info](img/snapshots/edit_account_info.png)](https://raw.githubusercontent.com/heyhenry/Vaultic/128a47c14d6bc4e7dbb7153af3d2db738f2ace22/img/snapshots/edit_account_info.png)
+
+### ✏️ Edit Account Info - Error State
+[![Edit Account Info Error](img/snapshots/error_edit_account_info.png)](https://raw.githubusercontent.com/heyhenry/Vaultic/128a47c14d6bc4e7dbb7153af3d2db738f2ace22/img/snapshots/error_edit_account_info.png)
 
 <!-- Add all your bonus states/screens here -->
 
