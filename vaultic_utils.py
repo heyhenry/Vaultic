@@ -1,7 +1,7 @@
 from ttkbootstrap.toast import ToastNotification
 
-def create_toast(title, message, duration):
-    return ToastNotification(
+def show_toast(title, message, duration):
+    ToastNotification(
         title=title,
         message=message,
         duration=duration
