@@ -9,9 +9,9 @@ from ttkbootstrap.constants import *
 from PIL import Image, ImageTk
 import tkinter as tk
 import pyperclip
-from ttkbootstrap.toast import ToastNotification
 import random
 import webbrowser
+from vaultic_utils import show_toast
 
 class Windows(bttk.Window):
     def __init__(self, *args, **kwargs):
@@ -167,11 +167,7 @@ class Windows(bttk.Window):
             "You want the top? Then remember your damn password.",
             "Suzu-freakin-ran? Nah. Vaultic runs this school."
         ]
-        ToastNotification(
-            title="Vaultic is now running",
-            message=random.choice(cheeky_messages),
-            duration=5000
-        ).show_toast()
+        show_toast("Vaultic is now running", random.choice(cheeky_messages), 5000)
 
 class LoginPage(bttk.Frame):
     def __init__(self, parent, controller):
@@ -468,21 +464,12 @@ class HomePage(bttk.Frame):
 
     def copy_text(self, pressed_button):
         if pressed_button == "copy_username":
-            # create a toast popup to notify user of their action
-            ToastNotification(
-                title="Copied!",
-                message="Username has been copied.",
-                duration=3000
-            ).show_toast()
+            show_toast("Copied!", "Username has been copied.", 3000)
             # copy the selected info to the user's device's clipboard
             pyperclip.copy(self.account_username_var.get())
         else:
             pyperclip.copy(self.account_password_var.get())
-            ToastNotification(
-                title="Copied!",
-                message="Password has been copied.",
-                duration=3000
-            ).show_toast()
+            show_toast("Copied!", "Password has been copied.", 3000)
 
     def logout(self):
         # temp log
