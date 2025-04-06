@@ -593,7 +593,7 @@ class EditAccountPage(bttk.Frame):
         # hold current values prior to change, for database reference
         self.current_account_name_var = bttk.StringVar()
         self.current_username_var = bttk.StringVar()
-        self.lookover_img = ImageTk.PhotoImage(Image.open("img/submain_logo_10.png").resize((96, 96), Image.Resampling.LANCZOS))
+        self.lookover_img = ImageTk.PhotoImage(Image.open("img/submain_logo_13.png").resize((96, 96), Image.Resampling.LANCZOS))
         self.create_widgets()
 
     def create_widgets(self):
