@@ -204,7 +204,7 @@ class LoginPage(bttk.Frame):
 
     def show_error_message(self):
         self.error_message.config(text="Invalid Password! Try again.")
-        self.after(500, self.clear_all)
+        self.after(1000, self.clear_all)
 
     def process_password(self, event=None):
         if self.controller.auth.verify_master_password(self.password_var.get()):
@@ -285,7 +285,7 @@ class RegisterPage(bttk.Frame):
     def show_error_message(self):
         self.error_message.config(text=f"Invalid Password! {self.error_type}.")
         # timed error message and wipe in use, as this tasks should encourage the user to pay full attention due to its high security risk "WRITE THIS IN THE readme.md under design choice?"
-        self.after(500, self.clear_all)
+        self.after(1000, self.clear_all)
 
     def process_password_creation(self, event=None):
         if self.validate_password_creation():
@@ -536,7 +536,7 @@ class NewEntryPage(bttk.Frame):
     # display the error message
     def show_error_message(self):
         self.error_message.config(text="Error: All fields must be filled.")
-        self.after(500, self.clear_all)
+        self.after(1000, self.clear_all)
 
     # clear all entry fields and the error message
     def clear_all(self):
@@ -621,7 +621,7 @@ class EditAccountPage(bttk.Frame):
     
     def show_error_message(self):
         self.error_message.config(text="Error: All fields must be filled.")
-        self.after(500, self.clear_all)
+        self.after(1000, self.clear_all)
     
     def clear_all(self):
         self.error_message.config(text="")
