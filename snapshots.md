@@ -21,6 +21,9 @@
 #### ➕ Add New Account Entry
 [![New Entry](img/snapshots/empty_new_entry.png)](https://raw.githubusercontent.com/heyhenry/Vaultic/128a47c14d6bc4e7dbb7153af3d2db738f2ace22/img/snapshots/empty_new_entry.png)
 
+### ✏️ Edit Account Info
+[![Edit Account Info](img/snapshots/edit_account_info.png)](https://raw.githubusercontent.com/heyhenry/Vaultic/128a47c14d6bc4e7dbb7153af3d2db738f2ace22/img/snapshots/edit_account_info.png)
+
 #### 🔔 Login - Startup Notification
 [![Toast](img/snapshots/toast_login.png)](https://raw.githubusercontent.com/heyhenry/Vaultic/128a47c14d6bc4e7dbb7153af3d2db738f2ace22/img/snapshots/toast_login.png)
 
@@ -60,7 +63,7 @@
 [![Home Populated](img/snapshots/home.png)](https://raw.githubusercontent.com/heyhenry/Vaultic/128a47c14d6bc4e7dbb7153af3d2db738f2ace22/img/snapshots/home.png)
 
 ### 🏠 Home - Account Details Display
-![Home Account Details](img/snapshots/account_details.png)(https://raw.githubusercontent.com/heyhenry/Vaultic/128a47c14d6bc4e7dbb7153af3d2db738f2ace22/img/snapshots/account_details.png)
+[![Home Account Details](img/snapshots/account_details.png)](https://raw.githubusercontent.com/heyhenry/Vaultic/128a47c14d6bc4e7dbb7153af3d2db738f2ace22/img/snapshots/account_details.png)
 
 ### 🏠 Home - Copied Username 
 [![Home Username](img/snapshots/toast_home.png)](https://raw.githubusercontent.com/heyhenry/Vaultic/128a47c14d6bc4e7dbb7153af3d2db738f2ace22/img/snapshots/toast_home.png)
