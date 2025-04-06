@@ -7,7 +7,7 @@
 ### 🌟 Key Screenshots
 
 #### 🏁 Login Page
-[![Login](img/snapshots/login.png)](https://raw.githubusercontent.com/heyhenry/Vaultic/refs/heads/main/img/snapshots/login_masked.png)
+![Login](img/snapshots/login.png)(https://raw.githubusercontent.com/heyhenry/Vaultic/refs/heads/main/img/snapshots/login_masked.png)
 
 #### 🏠 Home Dashboard
 ![Home](img/snapshots/home.png)
