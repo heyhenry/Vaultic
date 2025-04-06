@@ -108,3 +108,6 @@
 - Python Random choice() method (accessed: 4th April 2025): https://www.w3schools.com/python/ref_random_choice.asp
 - How to center a window on the screen in Tkinter? (accessed: 4th April 2025): https://stackoverflow.com/questions/3352918/how-to-center-a-window-on-the-screen-in-tkinter
 - How to change Tkinter Window Icon (accessed: 4th April 2025): https://www.tutorialspoint.com/how-to-change-tkinter-window-icon
+- Markdown (accessed: 7th April 2025): https://gerrit.googlesource.com/gitiles/+/HEAD/Documentation/markdown.md#Images
+- Add image with link in Github's README.md? (accessed: 6th April 2025): https://stackoverflow.com/questions/61071158/add-image-with-link-in-githubs-readme-md#answer-73342235
+- Removing a file via git commandline (accessed: 6th April 2025): https://www.git-tower.com/learn/git/commands/git-rm
