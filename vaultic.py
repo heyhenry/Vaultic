@@ -11,6 +11,7 @@ import tkinter as tk
 import pyperclip
 from ttkbootstrap.toast import ToastNotification
 import random
+import webbrowser
 
 class Windows(bttk.Window):
     def __init__(self, *args, **kwargs):
@@ -263,6 +264,7 @@ class RegisterPage(bttk.Frame):
         # detect 'enter' keybind regardless of which entry field has focus
         self.password_entry.bind("<Return>", self.process_password_creation)
         self.confirm_password_entry.bind("<Return>", self.process_password_creation)
+        reminder_message.bind("<Button-1>", self.open_master_password_info)
 
     def validate_password_creation(self):
         if self.password_var.get() != self.confirm_password_var.get():
@@ -303,6 +305,9 @@ class RegisterPage(bttk.Frame):
             self.controller.show_page(HomePage)
         else:
             self.show_error_message()
+
+    def open_master_password_info(self, event):
+        webbrowser.open("https://bitwarden.com/blog/picking-the-right-password-for-your-password-manager/")
 
 class HomePage(bttk.Frame):
     def __init__(self, parent, controller):
@@ -588,7 +593,7 @@ class EditAccountPage(bttk.Frame):
         # hold current values prior to change, for database reference
         self.current_account_name_var = bttk.StringVar()
         self.current_username_var = bttk.StringVar()
-        self.lookover_img = ImageTk.PhotoImage(Image.open("img/submain_logo_8.png").resize((64, 64), Image.Resampling.LANCZOS))
+        self.lookover_img = ImageTk.PhotoImage(Image.open("img/submain_logo_10.png").resize((96, 96), Image.Resampling.LANCZOS))
         self.create_widgets()
 
     def create_widgets(self):
