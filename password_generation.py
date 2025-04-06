@@ -7,7 +7,7 @@ def generate_password():
 # get password content
     a_string = string.ascii_letters
     a_nums = string.digits
-    a_puncs = string.punctuation
+    a_puncs = "!@#$%^&*_-"
     password = ""
 
     # get mixed characters from each content category (string, digits, punctuation)
@@ -23,4 +23,4 @@ def generate_password():
     return password
 
 # display newly generated password
-print(generate_password())
+# print(generate_password())
