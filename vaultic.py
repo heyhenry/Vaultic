@@ -231,7 +231,7 @@ class RegisterPage(bttk.Frame):
         self.password_var = bttk.StringVar()
         self.confirm_password_var = bttk.StringVar()
         self.error_type = None
-        self.thumbsup_img = ImageTk.PhotoImage(Image.open("img/submain_logo_7.png").resize((84, 84), Image.Resampling.LANCZOS))
+        self.thumbsup_img = ImageTk.PhotoImage(Image.open("img/submain_logo_3.png").resize((84, 84), Image.Resampling.LANCZOS))
         self.create_widgets()
 
     def create_widgets(self):
@@ -491,7 +491,7 @@ class NewEntryPage(bttk.Frame):
         self.account_name_var = bttk.StringVar()
         self.username_var = bttk.StringVar()
         self.password_var = bttk.StringVar()
-        self.thumbsup_img = ImageTk.PhotoImage(Image.open("img/submain_logo_9.png").resize((96, 96), Image.Resampling.LANCZOS))
+        self.thumbsup_img = ImageTk.PhotoImage(Image.open("img/submain_logo_4.png").resize((96, 96), Image.Resampling.LANCZOS))
         self.create_widgets()
 
     def create_widgets(self):
@@ -580,7 +580,7 @@ class EditAccountPage(bttk.Frame):
         # hold current values prior to change, for database reference
         self.current_account_name_var = bttk.StringVar()
         self.current_username_var = bttk.StringVar()
-        self.lookover_img = ImageTk.PhotoImage(Image.open("img/submain_logo_13.png").resize((96, 96), Image.Resampling.LANCZOS))
+        self.lookover_img = ImageTk.PhotoImage(Image.open("img/submain_logo_5.png").resize((96, 96), Image.Resampling.LANCZOS))
         self.create_widgets()
 
     def create_widgets(self):
