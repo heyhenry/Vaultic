@@ -30,7 +30,7 @@
 ---
 
 <details>
-  <summary>📸 Full Screenshot Gallery (Click to expand)</summary>
+  <summary>📸 Full Snapshot Gallery (Click to expand)</summary>
 
 ### 🖊️ Register 
 [![Register](img/snapshots/register.png)](https://raw.githubusercontent.com/heyhenry/Vaultic/128a47c14d6bc4e7dbb7153af3d2db738f2ace22/img/snapshots/register.png)
@@ -79,7 +79,5 @@
 
 ### ✏️ Edit Account Info - Error State
 [![Edit Account Info Error](img/snapshots/error_edit_account_info.png)](https://raw.githubusercontent.com/heyhenry/Vaultic/128a47c14d6bc4e7dbb7153af3d2db738f2ace22/img/snapshots/error_edit_account_info.png)
-
-<!-- Add all your bonus states/screens here -->
 
 </details>
