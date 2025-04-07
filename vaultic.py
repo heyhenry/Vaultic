@@ -11,7 +11,7 @@ import tkinter as tk
 import pyperclip
 import random
 import webbrowser
-from vaultic_utils import show_toast
+from vaultic_utils import show_toast, show_tooltip, print_out
 
 class Windows(bttk.Window):
     def __init__(self, *args, **kwargs):
@@ -370,6 +370,9 @@ class HomePage(bttk.Frame):
         
         self.accounts_list.bind("<<TreeviewSelect>>", self.get_account_details)
         self.bind("<Button-1>", self.deselect_account)
+        copy_username_button.bind("<Enter>", lambda event: show_tooltip(copy_username_button, "Copy Username"))
+        copy_password_button.bind("<Enter>", lambda event: show_tooltip(copy_password_button, "Copy Password"))
+        logout_button.bind("<Enter>", lambda event: show_tooltip(logout_button, "Logout"))
 
     def new_entry_redirect(self):
         self.clear_details_section()
