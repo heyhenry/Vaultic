@@ -169,6 +169,11 @@ class Windows(bttk.Window):
         ]
         show_toast("Vaultic is now running", random.choice(cheeky_messages), 5000)
 
+    # display an error message upon issue found
+    def show_error_message(self, widget, message, clear_func):
+        widget.config(text=message)
+        self.after(1000, clear_func)
+
 class LoginPage(bttk.Frame):
     def __init__(self, parent, controller):
         bttk.Frame.__init__(self, parent)
@@ -202,10 +207,6 @@ class LoginPage(bttk.Frame):
         self.error_message.config(text="")
         self.password_var.set("")
 
-    def show_error_message(self):
-        self.error_message.config(text="Invalid Password! Try again.")
-        self.after(1000, self.clear_all)
-
     def process_password(self, event=None):
         if self.controller.auth.verify_master_password(self.password_var.get()):
             print('yessir')
@@ -214,7 +215,7 @@ class LoginPage(bttk.Frame):
             self.controller.pw_cursor = self.controller.pw_connection.cursor()
             self.controller.show_page(HomePage)
         else:
-            self.show_error_message()
+            self.controller.show_error_message(self.error_message, "Invalid Password! Try again.", self.clear_all)
 
     def toggle_masking(self):
         if self.password_entry.cget("show") == "*":
@@ -282,11 +283,6 @@ class RegisterPage(bttk.Frame):
         self.password_var.set("")
         self.confirm_password_var.set("")
 
-    def show_error_message(self):
-        self.error_message.config(text=f"Invalid Password! {self.error_type}.")
-        # timed error message and wipe in use, as this tasks should encourage the user to pay full attention due to its high security risk "WRITE THIS IN THE readme.md under design choice?"
-        self.after(1000, self.clear_all)
-
     def process_password_creation(self, event=None):
         if self.validate_password_creation():
             # update the authentication database's information with new; pw, hashing, salt
@@ -300,7 +296,7 @@ class RegisterPage(bttk.Frame):
             self.controller.pw_cursor = self.controller.pw_connection.cursor()
             self.controller.show_page(HomePage)
         else:
-            self.show_error_message()
+            self.controller.show_error_message(self.error_message, f"Invalid Password! {self.error_type}", self.clear_all)
 
     def open_master_password_info(self, event):
         webbrowser.open("https://bitwarden.com/blog/picking-the-right-password-for-your-password-manager/")
@@ -534,12 +530,7 @@ class NewEntryPage(bttk.Frame):
         if len(self.account_name_var.get()) > 0 and len(self.username_var.get()) > 0 and len(self.password_var.get()) > 0:
             self.create_entry()
         else:
-            self.show_error_message()
-
-    # display the error message
-    def show_error_message(self):
-        self.error_message.config(text="Error: All fields must be filled.")
-        self.after(1000, self.clear_all)
+            self.controller.show_error_message(self.error_message, "Error! All fields must be filled.", self.clear_all)
 
     # clear all entry fields and the error message
     def clear_all(self):
@@ -620,11 +611,7 @@ class EditAccountPage(bttk.Frame):
         if len(self.account_name_var.get()) > 0 and len(self.username_var.get()) > 0 and len(self.password_var.get()) > 0:
             self.update_entry()
         else:
-            self.show_error_message()
-    
-    def show_error_message(self):
-        self.error_message.config(text="Error: All fields must be filled.")
-        self.after(1000, self.clear_all)
+            self.controller.show_error_message(self.error_message, "Error! All fields must be filled.", self.clear_all)
     
     def clear_all(self):
         self.error_message.config(text="")
