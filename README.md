@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="img/main_logo.png" width="150">
+    <img src="img/main_logo.png" width="250">
 </p>
 <h1 align="center"><b>Vaultic</b></h1>
 <h3 align="center">A light-weight, local and secure minty-fresh password manager built with a Tkinter-Based GUI.</h3>
