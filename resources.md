@@ -11,6 +11,7 @@
 - Argon2 vs SHA-512, what's better in my case? (accessed: 9th March 2025): https://security.stackexchange.com/questions/261902/argon2-vs-sha-512-whats-better-in-my-case
 - SHA-256 vs SHA-512: Key Encryption Algorithms Differences Explained! (accessed: 9th March 2025): https://cheapsslweb.com/blog/sha-256-vs-sha-512-key-encryption/
 - KDF Algorithms: (accessed: 9th March 2025): https://bitwarden.com/help/kdf-algorithms/
+- Creating Argon2 KDF (accessed: 9th March 2025): https://argon2-cffi.readthedocs.io/en/stable/api.html#argon2.low_level.Type
 - argon2-cffi installation process (accessed: 9th March 2025): https://argon2-cffi.readthedocs.io/en/stable/installation.html
 - How is Argon2 used for key derivation? (accessed: 9th March 2025): https://crypto.stackexchange.com/questions/95946/how-is-argon2-used-for-key-derivation
 - What are the advantages of symmetric key encryption? (accessed: 9th March 2025): https://www.quora.com/What-are-the-advantages-of-symmetric-key-encryption
@@ -109,5 +110,16 @@
 - How to center a window on the screen in Tkinter? (accessed: 4th April 2025): https://stackoverflow.com/questions/3352918/how-to-center-a-window-on-the-screen-in-tkinter
 - How to change Tkinter Window Icon (accessed: 4th April 2025): https://www.tutorialspoint.com/how-to-change-tkinter-window-icon
 - Markdown (accessed: 7th April 2025): https://gerrit.googlesource.com/gitiles/+/HEAD/Documentation/markdown.md#Images
-- Add image with link in Github's README.md? (accessed: 6th April 2025): https://stackoverflow.com/questions/61071158/add-image-with-link-in-githubs-readme-md#answer-73342235
-- Removing a file via git commandline (accessed: 6th April 2025): https://www.git-tower.com/learn/git/commands/git-rm
+- Add image with link in Github's README.md? (accessed: 7th April 2025): https://stackoverflow.com/questions/61071158/add-image-with-link-in-githubs-readme-md#answer-73342235
+- Organizing information with collapsed sections (accessed: 7th April 2025): https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/organizing-information-with-collapsed-sections
+- Removing a file via git commandline (accessed: 7th April 2025): https://www.git-tower.com/learn/git/commands/git-rm
+- Emojipedia (accessed: 7th April 2025): https://emojipedia.org/scroll
+- ttkboostrap | tooltip module (accessed: 7th April 2025): https://ttkbootstrap.readthedocs.io/en/latest/api/tooltip/#ttkbootstrap.tooltip.ToolTip
+- ttkbootstraps | constants.py (accessed: 7th April 2025): https://github.com/israel-dryer/ttkbootstrap/blob/master/src/ttkbootstrap/constants.py
+- Basic writing and formatting syntax (accessed: 7th April 2025): https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax
+- Shields.io | Static Badge (accessed: 7th April 2025): https://shields.io/badges
+- ttkbootstrap/README.md (accessed: 7th April 2025): https://github.com/israel-dryer/ttkbootstrap/?tab=readme-ov-file
+- NewPipe/README.md (accessed: 7th April 2025): https://github.com/TeamNewPipe/NewPipe/blob/dev/README.md#we-are-planning-to-rewrite-large-chunks-of-the-codebase-to-bring-about-a-new-modern-and-stable-newpipe
+- NewPipe/README.md raw (accessed: 7th April 2025): https://raw.githubusercontent.com/TeamNewPipe/NewPipe/refs/heads/dev/README.md
+- HTML <'a'> Tag (accessed: 9th April 2025): https://www.w3schools.com/tags/tag_a.asp
+- open link in new tab with github markdown using target="_blank" (accessed: 9th April 2025): https://stackoverflow.com/questions/41915571/open-link-in-new-tab-with-github-markdown-using-target-blank

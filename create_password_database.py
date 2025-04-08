@@ -23,6 +23,5 @@ def create_passwords_database():
     sync_changes_statement = "PRAGMA synchronous = FULL;"
     connection.execute(sync_changes_statement)
 
-
     # close database connection
     connection.close()
