@@ -11,7 +11,8 @@ import tkinter as tk
 import pyperclip
 import random
 import webbrowser
-from vaultic_utils import show_toast, show_tooltip, print_out
+from vaultic_utils import show_toast, show_tooltip
+from queries import *
 
 class Windows(bttk.Window):
     def __init__(self, *args, **kwargs):
@@ -68,7 +69,7 @@ class Windows(bttk.Window):
     def show_page(self, current_page):
         page = self.pages[current_page]
 
-        # withdraw to avoid flckering of previous page
+        # withdraw to avoid flickering of previous page
         self.withdraw()
 
         # setting the titlebar's icon
@@ -79,7 +80,7 @@ class Windows(bttk.Window):
         self.resizable(False, False)
 
         if current_page == RegisterPage or current_page == LoginPage:
-            # timer added due to tkinter event processing isn't instantaenous(spelling?)
+            # timer added due to tkinter event processing isn't instantaneous
             self.after(100, page.password_entry.focus)
         elif current_page == HomePage:
             self.center_window(800,700)
@@ -110,8 +111,6 @@ class Windows(bttk.Window):
 
     # re-encrypts the passwords database whenever app is closed
     def on_close(self):
-        # temp log
-        print('closing..')
         # check if the pw_manager database is exposed
         if os.path.exists('db/pw_manager.db'):
             # close current connection to the pw_manager database
@@ -209,7 +208,6 @@ class LoginPage(bttk.Frame):
 
     def process_password(self, event=None):
         if self.controller.auth.verify_master_password(self.password_var.get()):
-            print('yessir')
             self.controller.auth.decrypt_dump()
             self.controller.pw_connection = sqlite3.connect("db/pw_manager.db")
             self.controller.pw_cursor = self.controller.pw_connection.cursor()
@@ -381,8 +379,8 @@ class HomePage(bttk.Frame):
         # run query to the database to fetch all latest accounts and their information 
         # and store into the accounts list
         if self.controller.pw_connection:
-            sql_query = "SELECT account_name, username FROM accounts"
-            self.controller.pw_cursor.execute(sql_query)
+            # sql_query = "SELECT account_name, username FROM accounts"
+            self.controller.pw_cursor.execute(PW_SELECT_ALL_ACCOUNT_NAME_USERNAME)
             result = self.controller.pw_cursor.fetchall()
             if result:
                 for account_info in result:
@@ -397,8 +395,8 @@ class HomePage(bttk.Frame):
             account_name = self.accounts_list.item(selection)["values"][0]
             account_username = self.accounts_list.item(selection)["values"][1]
             # run query to fetch account information from the database
-            sql_query = "SELECT account_name,username,password FROM accounts WHERE account_name=? AND username=?"
-            self.controller.pw_cursor.execute(sql_query, (account_name, account_username))
+            # sql_query = "SELECT * FROM accounts WHERE account_name=? AND username=?"
+            self.controller.pw_cursor.execute(PW_SELECT_ALL_DETAILS, (account_name, account_username))
             result = self.controller.pw_cursor.fetchall()
             # set the account variables for details display based on selected account
             self.account_name_var.set(result[0][0])
@@ -411,8 +409,8 @@ class HomePage(bttk.Frame):
             # create a new password
             new_password = generate_password()
             # run query to update the password value for the given account
-            update_password_query = "UPDATE accounts SET password=? WHERE account_name=? AND username=?"
-            self.controller.pw_cursor.execute(update_password_query, (new_password, self.account_name_var.get(), self.account_username_var.get()))
+            # update_password_query = "UPDATE accounts SET password=? WHERE account_name=? AND username=?"
+            self.controller.pw_cursor.execute(PW_UPDATE_PASSWORD, (new_password, self.account_name_var.get(), self.account_username_var.get()))
             self.controller.pw_connection.commit()
             # update display's password value in tkinter
             self.account_password_var.set(new_password)
@@ -427,8 +425,8 @@ class HomePage(bttk.Frame):
             account_name = self.accounts_list.item(selection)["values"][0]
             account_username = self.accounts_list.item(selection)["values"][1]
             # run sql query to delete the selected account from the database
-            remove_account_query = "DELETE FROM accounts WHERE account_name=? AND username=?"
-            self.controller.pw_cursor.execute(remove_account_query, (account_name, account_username))
+            # remove_account_query = "DELETE FROM accounts WHERE account_name=? AND username=?"
+            self.controller.pw_cursor.execute(PW_REMOVE_ACCOUNT, (account_name, account_username))
             self.controller.pw_connection.commit()
             # reset all details related variables
             self.clear_details_section()
@@ -471,8 +469,6 @@ class HomePage(bttk.Frame):
             show_toast("Copied!", "Password has been copied.", 3000)
 
     def logout(self):
-        # temp log
-        print('closing..')
         # check if the pw_manager database is exposed
         if os.path.exists('db/pw_manager.db'):
             # close current connection to the pw_manager database
@@ -542,10 +538,10 @@ class NewEntryPage(bttk.Frame):
     # create a new account entry and store in the pw_manager database
     def create_entry(self):
         # sql query to add a new valid account entry
-        sql_query = "INSERT INTO accounts (account_name, username, password) VALUES (?, ?, ?)"
+        # sql_query = "INSERT INTO accounts (account_name, username, password) VALUES (?, ?, ?)"
         # checker to ensure that there is an active connection to the pw_manager database
         if self.controller.pw_cursor:
-            self.controller.pw_cursor.execute(sql_query, (self.account_name_var.get(), self.username_var.get(), self.password_var.get()))
+            self.controller.pw_cursor.execute(PW_ADD_ACCOUNT, (self.account_name_var.get(), self.username_var.get(), self.password_var.get()))
             # save changes to the pw_manager database
             self.controller.pw_connection.commit()
             # clean out data fields prior to page redirect
@@ -625,8 +621,8 @@ class EditAccountPage(bttk.Frame):
 
     def update_entry(self):
         # run query to update values for selected account
-        update_account_info_query = "UPDATE accounts SET account_name=?,username=?,password=? WHERE account_name=? AND username=?"
-        self.controller.pw_cursor.execute(update_account_info_query, (self.account_name_var.get(), self.username_var.get(), self.password_var.get(), self.current_account_name_var.get(), self.current_username_var.get()))
+        # update_account_info_query = "UPDATE accounts SET account_name=?,username=?,password=? WHERE account_name=? AND username=?"
+        self.controller.pw_cursor.execute(PW_UPDATE_ACCOUNT_DETAILS, (self.account_name_var.get(), self.username_var.get(), self.password_var.get(), self.current_account_name_var.get(), self.current_username_var.get()))
         self.controller.pw_connection.commit()
         # clear fields post process
         self.clear_all()
