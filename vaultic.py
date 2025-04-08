@@ -444,7 +444,7 @@ class HomePage(bttk.Frame):
         self.account_username_var.set("")
         self.account_password_var.set("")
 
-    def deselect_account(self, event):
+    def deselect_account(self, event=None):
         # find the selected item
         selection = self.accounts_list.focus()
         # unhighlight it
@@ -472,6 +472,7 @@ class HomePage(bttk.Frame):
                 self.controller.pw_connection.close()
             # re-encrypt the pw_manager database
             self.controller.auth.encrypt_dump()
+        self.deselect_account()
         self.controller.pages[LoginPage].password_var.set("")
         self.controller.show_page(LoginPage)
 
