@@ -379,7 +379,6 @@ class HomePage(bttk.Frame):
         # run query to the database to fetch all latest accounts and their information 
         # and store into the accounts list
         if self.controller.pw_connection:
-            # sql_query = "SELECT account_name, username FROM accounts"
             self.controller.pw_cursor.execute(PW_SELECT_ALL_ACCOUNT_NAME_USERNAME)
             result = self.controller.pw_cursor.fetchall()
             if result:
@@ -395,7 +394,6 @@ class HomePage(bttk.Frame):
             account_name = self.accounts_list.item(selection)["values"][0]
             account_username = self.accounts_list.item(selection)["values"][1]
             # run query to fetch account information from the database
-            # sql_query = "SELECT * FROM accounts WHERE account_name=? AND username=?"
             self.controller.pw_cursor.execute(PW_SELECT_ALL_DETAILS, (account_name, account_username))
             result = self.controller.pw_cursor.fetchall()
             # set the account variables for details display based on selected account
@@ -409,7 +407,6 @@ class HomePage(bttk.Frame):
             # create a new password
             new_password = generate_password()
             # run query to update the password value for the given account
-            # update_password_query = "UPDATE accounts SET password=? WHERE account_name=? AND username=?"
             self.controller.pw_cursor.execute(PW_UPDATE_PASSWORD, (new_password, self.account_name_var.get(), self.account_username_var.get()))
             self.controller.pw_connection.commit()
             # update display's password value in tkinter
@@ -425,7 +422,6 @@ class HomePage(bttk.Frame):
             account_name = self.accounts_list.item(selection)["values"][0]
             account_username = self.accounts_list.item(selection)["values"][1]
             # run sql query to delete the selected account from the database
-            # remove_account_query = "DELETE FROM accounts WHERE account_name=? AND username=?"
             self.controller.pw_cursor.execute(PW_REMOVE_ACCOUNT, (account_name, account_username))
             self.controller.pw_connection.commit()
             # reset all details related variables
@@ -538,7 +534,6 @@ class NewEntryPage(bttk.Frame):
     # create a new account entry and store in the pw_manager database
     def create_entry(self):
         # sql query to add a new valid account entry
-        # sql_query = "INSERT INTO accounts (account_name, username, password) VALUES (?, ?, ?)"
         # checker to ensure that there is an active connection to the pw_manager database
         if self.controller.pw_cursor:
             self.controller.pw_cursor.execute(PW_ADD_ACCOUNT, (self.account_name_var.get(), self.username_var.get(), self.password_var.get()))
@@ -621,7 +616,6 @@ class EditAccountPage(bttk.Frame):
 
     def update_entry(self):
         # run query to update values for selected account
-        # update_account_info_query = "UPDATE accounts SET account_name=?,username=?,password=? WHERE account_name=? AND username=?"
         self.controller.pw_cursor.execute(PW_UPDATE_ACCOUNT_DETAILS, (self.account_name_var.get(), self.username_var.get(), self.password_var.get(), self.current_account_name_var.get(), self.current_username_var.get()))
         self.controller.pw_connection.commit()
         # clear fields post process
