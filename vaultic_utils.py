@@ -7,7 +7,8 @@ def show_toast(title, message, duration):
     ToastNotification(
         title=title,
         message=message,
-        duration=duration
+        duration=duration,
+        icon="\U0001F510"
     ).show_toast()
 
 def show_tooltip(widget, text):
