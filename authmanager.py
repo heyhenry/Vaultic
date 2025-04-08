@@ -3,6 +3,7 @@ import argon2
 import os
 from cryptography.fernet import Fernet
 from base64 import urlsafe_b64encode
+from queries import *
 
 PASSWORD_DATABASE_FILENAME = "db/pw_manager.db"
 DUMP_FILENAME = "db/password_db.sql"
@@ -22,8 +23,7 @@ class AuthManager:
         
     def get_stored_hash(self):
         # get the value for the hash from auth.db
-        get_master_password_query = "SELECT hash FROM authentication WHERE rowid = 1"
-        self.cursor.execute(get_master_password_query)
+        self.cursor.execute(AUTH_GET_HASH)
         result = self.cursor.fetchone()
         # return boolean result based on whether a valid hash exists
         if result[0] == '':
@@ -35,8 +35,7 @@ class AuthManager:
         hashed_master_password = self.ph.hash(master_password)
 
         # update the value for hash in the auth.db
-        insert_new_master_password = "UPDATE authentication SET hash = ? WHERE rowid = 1"
-        self.cursor.execute(insert_new_master_password, (hashed_master_password,))
+        self.cursor.execute(AUTH_INSERT_NEW_MASTER_PASSWORD, (hashed_master_password,))
         # save changes
         self.connection.commit()
         self.generate_salt()
@@ -44,16 +43,14 @@ class AuthManager:
 
     def generate_salt(self):
         # create a new salt
-        generate_salt = "UPDATE authentication SET salt = ? WHERE rowid = 1"
         # generate randomised string size of 16 bytes
-        self.cursor.execute(generate_salt, (os.urandom(16),))
+        self.cursor.execute(AUTH_SET_SALT, (os.urandom(16),))
         # save changes
         self.connection.commit()
 
     def verify_master_password(self, input_password):
         # get the hashed string for the master password
-        get_hashed_master_password = "SELECT hash FROM authentication WHERE rowid = 1"
-        self.cursor.execute(get_hashed_master_password)
+        self.cursor.execute(AUTH_GET_HASH)
         result = self.cursor.fetchone()
         hashed_master_password = result[0]
 
@@ -71,8 +68,7 @@ class AuthManager:
 
     def kdf(self, password):
         # get the stored salt value
-        get_salt = "SELECT salt FROM authentication WHERE rowid = 1"
-        self.cursor.execute(get_salt)
+        self.cursor.execute(AUTH_GET_SALT)
         salt = self.cursor.fetchone()
         salt = salt[0]
         # ensure password has been converted to bytes aka binary
@@ -140,7 +136,6 @@ class AuthManager:
         pw_connection.executescript(sql_script)
         pw_connection.commit()
         pw_connection.close()
-
-    # close the database connection
+    
     def close_database(self):
         self.connection.close()
