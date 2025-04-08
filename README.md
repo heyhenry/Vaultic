@@ -6,16 +6,16 @@
 
 <h2 align="center">Technology Stack</h2>
 <p align="center">
-    <a href="">
+    <a href="https://github.com/heyhenry/Vaultic/blob/main/LICENSE">
         <img src="https://img.shields.io/badge/License-MIT-lightgrey.svg">
     </a>
-    <a href="">
+    <a href="https://www.python.org/">
         <img src="https://img.shields.io/badge/Python-3.12.2-blue?logo=python&logoColor=yellow.svg">
     </a>
-    <a href="">
+    <a href="https://github.com/israel-dryer/ttkbootstrap">
         <img src="https://img.shields.io/badge/ttkbootstrap-styled%20Tkinter-%236f42c1?logo=python.svg">
     </a>
-    <a href="">
+    <a href="https://sqlite.org/">
         <img src="https://img.shields.io/badge/SQLite-DB-%2320c997?logo=sqlite&logoColor=blue.svg">
     </a>
 </p>
@@ -111,7 +111,7 @@
 
 </details>
 
-<p>📚 <a href="resourced.md">Resources I used for Vaultic</a> 📚</p>
+<p>📚 <a href="https://github.com/heyhenry/Vaultic/blob/main/resources.md">Resources I used for Vaultic</a> 📚</p>
 
 ### How Do I Use It?
 Coming Soon.
