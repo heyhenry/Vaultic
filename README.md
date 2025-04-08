@@ -116,5 +116,4 @@
 ### How Do I Use It?
 Coming Soon.
 
-## Author
-Built with ❤️ by [NampaDevelops](https://github.com/heyhenry)
+> Built with ❤️ by [Henry Han](https://github.com/heyhenry)
