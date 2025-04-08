@@ -113,6 +113,10 @@
 
 <p>📚 <a href="https://github.com/heyhenry/Vaultic/blob/main/resources.md" target="_blank">Resources I used for Vaultic</a> 📚</p>
 
+### Future Features
+- Dark Theme (Likely Darkly from ttkbootstrap)
+> Suggestions are welcomed via email.
+
 ### How Do I Use It?
 Coming Soon.
 
