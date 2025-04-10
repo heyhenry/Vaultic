@@ -132,5 +132,7 @@
 - Nuitka Package Configuration Kickoff (accessed: 10th April 2025): https://nuitka.net/posts/nuitka-package-config-kickoff.html
 - No way to disable auto-generated source code zip links #6003 (accessed: 10th April 2025): https://github.com/orgs/community/discussions/6003
 - Exploring the MIT Open Source License: A Comprehensive Guide (accessed: 10th April 2025): https://tlo.mit.edu/understand-ip/exploring-mit-open-source-license-comprehensive-guide
-- HTML Styles (accessed: 10th April 2025): https://www.w3schools.com/html/html_styles.asp
-
+- HTML Styles (accessed: 10th April 2025): https://www.w3schools.com/html/html_styles.
+- Github markdown - cannot change any style by inline-css and class (accessed: 10th April 2025): https://stackoverflow.com/questions/60331472/github-markdown-cannot-change-any-style-by-inline-css-and-class
+- GitHub Flavored Markdown doesn't render CSS styles inside a HTML block #22728 (accessed: 10th April 2025): https://github.com/orgs/community/discussions/22728
+- Adobe Express | Free transparent background maker (accessed: 10th April 2025): https://www.adobe.com/express/feature/image/remove-background/transparent
