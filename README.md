@@ -4,12 +4,22 @@
 <h1 align="center"><b>Vaultic</b></h1>
 <h3 align="center">A light-weight, local and secure minty-fresh password manager built with a Tkinter-Based GUI.</h3>
 
+<p align="center" >
+  <a href="#technology-stack">Tech Stack</a> &bull; <a href="#features">Features</a> &bull; <a href="#how-secure-is-my-data">Security</a> &bull; <a href="#-key-snapshots">Snapshots</a> &bull; <a href="#resources">Resources</a> &bull; <a href="#future-features">Future Features</a> &bull; <a href="#how-do-i-use-it">Installation</a> &bull; <a href="#license">License</a> &bull; <a href="#author">Author</a>
+</p>
+
 <h2 align="center">Technology Stack</h2>
 <p align="center">
     <a href="https://github.com/heyhenry/Vaultic/blob/main/LICENSE" alt="License: MIT"><img src="https://img.shields.io/badge/License-MIT-lightgrey"></a>
     <a href="https://www.python.org/" alt="Programming Language: Python"><img src="https://img.shields.io/badge/Python-3.12.2-blue"></a>
     <a href="https://github.com/israel-dryer/ttkbootstrap" alt="Tkinter: ttkbootstrap"><img src="https://img.shields.io/badge/ttkbootstrap-styled%20Tkinter-%236f42c1"></a>
     <a href="https://sqlite.org/" alt="Database: SQLite"><img src="https://img.shields.io/badge/SQLite-DB-%2320c997"></a>
+</p>
+
+<p align="center">
+  <a href=""><img src="img/vaultic_download_logo.png" width="100"></a>
+  <br>
+  <a href=""><img src="img/vaultic_download_text.png" width="200" style="margin-top: -70px;"></a>
 </p>
 
 ## Features
@@ -103,6 +113,7 @@
 
 </details>
 
+### Resources
 <p>📚 <a href="https://github.com/heyhenry/Vaultic/blob/main/resources.md" target="_blank">Resources I used for Vaultic</a> 📚</p>
 
 ### Future Features
@@ -110,6 +121,15 @@
 > Suggestions are welcomed via email.
 
 ### How Do I Use It?
-Coming Soon.
+1. Download the zip folder (Vaultic_v1.0.0.zip) via the download icons at the top of this file or here.
+2. Extract the contents from the zip folder.
+3. Run (double-click) 'Vaultic' that has the app's logo to start using the application.
+4. Enjoy!
+> You can move the 'Vaultic' icon/file to wherever you want on your computer for your ease of access to the application.
+> Note: It is best to not alter or remove the files contained in the 'src' folder as it may affect the function of the application.
 
+### License
+Vaultic is licensed under <a href="https://tlo.mit.edu/understand-ip/exploring-mit-open-source-license-comprehensive-guide">MIT</a>, so feel free to use, modify, share the software however you want. You can even distribute it, aslong as you adhere to the condition of including the original copyright and permission notices in all copies or substantial portions of the Software. See <a href="https://github.com/heyhenry/Vaultic/blob/main/LICENSE">here</a> for the attached official license for Vaultic.
+
+### Author
 > Built with ❤️ by [Henry Han](https://github.com/heyhenry)

@@ -123,3 +123,14 @@
 - NewPipe/README.md raw (accessed: 7th April 2025): https://raw.githubusercontent.com/TeamNewPipe/NewPipe/refs/heads/dev/README.md
 - HTML <'a'> Tag (accessed: 9th April 2025): https://www.w3schools.com/tags/tag_a.asp
 - open link in new tab with github markdown using target="_blank" (accessed: 9th April 2025): https://stackoverflow.com/questions/41915571/open-link-in-new-tab-with-github-markdown-using-target-blank
+- How can i clear all installed python modules/packages from my system? (accessed: 9th April 2025): https://www.reddit.com/r/learnpython/comments/1cejqfg/how_can_i_clear_all_installed_python/
+- a blue line between badges in readme overview?? #79043 (accessed: 9th April 2025): https://github.com/orgs/community/discussions/79043
+- Nuitka User Manual (accessed: 10th April 2025): https://nuitka.net/user-documentation/user-manual.html#python
+- Nuitka User Cases (accessed: 10th April 2025): https://nuitka.net/user-documentation/use-cases.html
+- Nuitka Releases 0.1-0.9 (accessed: 10th April 2025): https://nuitka.net/changelog/Changelog-0.x.html
+- Nuitka:WARNING: Did not follow import to unused 'sqlite3', consider include options. #1595 (accessed: 10th April 2025): https://github.com/Nuitka/Nuitka/issues/1595
+- Nuitka Package Configuration Kickoff (accessed: 10th April 2025): https://nuitka.net/posts/nuitka-package-config-kickoff.html
+- No way to disable auto-generated source code zip links #6003 (accessed: 10th April 2025): https://github.com/orgs/community/discussions/6003
+- Exploring the MIT Open Source License: A Comprehensive Guide (accessed: 10th April 2025): https://tlo.mit.edu/understand-ip/exploring-mit-open-source-license-comprehensive-guide
+- HTML Styles (accessed: 10th April 2025): https://www.w3schools.com/html/html_styles.asp
+
