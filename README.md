@@ -17,7 +17,7 @@
 </p>
 
 <p align="center">
-  <a href=""><img src="img/combo_download_logo.png" width="250"></a>
+  <a href="https://github.com/heyhenry/Vaultic/releases/download/v1.0.0-vaultic/Vaultic_v1.0.0.zip"><img src="img/combo_download_logo.png" width="250"></a>
 </p>
 
 ## Features
@@ -119,7 +119,7 @@
 > Suggestions are welcomed via email.
 
 ## How Do I Use It?
-1. Download the zip folder (Vaultic_v1.0.0.zip) via the download icons at the top of this file or here.
+1. Download the zip folder (Vaultic_v1.0.0.zip) via the download icons at the top of this file or here <a href="https://github.com/heyhenry/Vaultic/releases/download/v1.0.0-vaultic/Vaultic_v1.0.0.zip">📥</a>.
 2. Extract the contents from the zip folder.
 3. Run (double-click) 'Vaultic' that has the app's logo to start using the application.
 4. Enjoy!
