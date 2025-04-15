@@ -17,6 +17,9 @@ from queries import *
 class Windows(bttk.Window):
     def __init__(self, *args, **kwargs):
         bttk.Window.__init__(self, *args, **kwargs)
+        
+        # scale tk components exactly as is
+        self.call('tk', 'scaling', 1.3)
 
         # implementing font/sizes and other custom style decisions
         self.selected_font = "Helvetica"
