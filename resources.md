@@ -135,4 +135,9 @@
 - HTML Styles (accessed: 10th April 2025): https://www.w3schools.com/html/html_styles.
 - Github markdown - cannot change any style by inline-css and class (accessed: 10th April 2025): https://stackoverflow.com/questions/60331472/github-markdown-cannot-change-any-style-by-inline-css-and-class
 - GitHub Flavored Markdown doesn't render CSS styles inside a HTML block #22728 (accessed: 10th April 2025): https://github.com/orgs/community/discussions/22728
-- Adobe Express | Free transparent background maker (accessed: 10th April 2025): https://www.adobe.com/express/feature/image/remove-background/transparent
+- Adobe Express | Free transparent background maker (accessed: 10th April 2025): https://www.adobe.com/express/feature/image/remove-background/
+- Change DPI scaling or display settings to prevent distorted images in Outlook (accessed: 16th April 2025): https://knowledgebase.constantcontact.com/email-digital-marketing/articles/KnowledgeBase/6167-how-dpi-can-affect-images-in-emails?lang=en_US
+- Scaling of Tkinter GUI in 4k (3840*2160) resolution? (accessed: 16th April 2025): https://stackoverflow.com/questions/34132203/scaling-of-tkinter-gui-in-4k-38402160-resolution
+- Tkinter Window - Changing Resolution and Scaling (accessed: 16th April 2025): https://www.youtube.com/watch?v=roz5Yaw8GB4
+- tcl-lang | Scaling command (accessed: 16th April 2025): https://www.tcl-lang.org/man/tcl8.6/TkCmd/tk.htm#M10 
+- wiki.tcl-lang | tk scaling (accessed: 16th April 2025): https://wiki.tcl-lang.org/page/tk+scaling
