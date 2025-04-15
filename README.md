@@ -17,7 +17,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/heyhenry/Vaultic/releases/download/v1.0.0-vaultic/Vaultic_v1.0.0.zip"><img src="img/combo_download_logo.png" width="250"></a>
+  <a href="https://github.com/heyhenry/Vaultic/releases/download/v1.0.1-vaultic/Vaultic_v1.0.1.zip"><img src="img/combo_download_logo.png" width="250"></a>
 </p>
 
 ## Features
