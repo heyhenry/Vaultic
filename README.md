@@ -119,12 +119,12 @@
 > Suggestions are welcomed via email.
 
 ## How Do I Use It?
-1. Download the zip folder (Vaultic_v1.0.0.zip) via the download icons at the top of this file or here <a href="https://github.com/heyhenry/Vaultic/releases/download/v1.0.0-vaultic/Vaultic_v1.0.0.zip">📥</a>.
+1. Download the zip folder (Vaultic_v1.0.1.zip) via the download icons at the top of this file or here <a href="https://github.com/heyhenry/Vaultic/releases/download/v1.0.1-vaultic/Vaultic_v1.0.1.zip">📥</a>.
 2. Extract the contents from the zip folder.
-3. Run (double-click) 'Vaultic' that has the app's logo to start using the application.
+3. Refer to readme.txt for detailed usage instructions and setup guidance.
 4. Enjoy!
-> You can move the 'Vaultic' icon/file to wherever you want on your computer for your ease of access to the application.
-> Note: It is best to not alter or remove the files contained in the 'src' folder as it may affect the function of the application.
+
+> Note: It is best to not alter or remove any files as it may affect the function of the application.
 
 ## License
 Vaultic is licensed under <a href="https://tlo.mit.edu/understand-ip/exploring-mit-open-source-license-comprehensive-guide">MIT</a>, so feel free to use, modify, share the software however you want. You can even distribute it, aslong as you adhere to the condition of including the original copyright and permission notices in all copies or substantial portions of the Software. See <a href="https://github.com/heyhenry/Vaultic/blob/main/LICENSE">here</a> for the attached official license for Vaultic.
