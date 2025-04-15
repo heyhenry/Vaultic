@@ -42,7 +42,7 @@ class Windows(bttk.Window):
         self.title("Vaultic")
     
         # creating a  frame and assigning it to container
-        container = bttk.Frame(self, height=400, width=600)
+        container = bttk.Frame(self)
         # specifying the region where the frame is packed in root
         container.pack(side="top", fill="both", expand=True)
 
