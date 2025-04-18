@@ -534,13 +534,26 @@ class NewEntryPage(bttk.Frame):
     
     # check if user has entered a valid account entry
     def validate_new_entry(self):
-        # ensure all fields have data
-        if len(self.account_name_var.get()) > 0 and len(self.username_var.get()) > 0 and len(self.password_var.get()) > 0:
-            self.create_entry()
-            # notification after successful account entry
-            show_toast("Added!", "New account added successfully.", 3000)
-        else:
-            self.controller.show_error_message(self.error_message, "Error! All fields must be filled.", self.clear_all)
+        if self.controller.pw_cursor:
+            # fetch all account_names in the database
+            self.controller.pw_cursor.execute("SELECT account_name FROM accounts")
+            result = self.controller.pw_cursor.fetchall()
+            # ensure to only process this validation if there are account_names to compare against
+            if result:
+                # create a list of account_names found from the database
+                account_names = [account_name[0].lower() for account_name in result]
+                # check if new entry's account_name already exists in the database
+                if self.account_name_var.get().lower() in account_names:
+                    self.controller.show_error_message(self.error_message, "Error! Account Name Already Exists.", self.clear_all)
+                    # end validation process here
+                    return
+            # ensure all fields have data
+            if len(self.account_name_var.get()) > 0 and len(self.username_var.get()) > 0 and len(self.password_var.get()) > 0:
+                self.create_entry()
+                # notification after successful account entry
+                show_toast("Added!", "New account added successfully.", 3000)
+            else:
+                self.controller.show_error_message(self.error_message, "Error! All fields must be filled.", self.clear_all)
 
     # clear all entry fields and the error message
     def clear_all(self):
