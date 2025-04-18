@@ -390,7 +390,7 @@ class HomePage(bttk.Frame):
         # run query to the database to fetch all latest accounts and their information 
         # and store into the accounts list
         if self.controller.pw_connection:
-            self.controller.pw_cursor.execute(PW_SELECT_ALL_ACCOUNT_NAME_USERNAME)
+            self.controller.pw_cursor.execute(PW_SELECT_ALL_ROWID_ACCOUNT_NAME_USERNAME)
             result = self.controller.pw_cursor.fetchall()
             if result:
                 for account_info in result:
@@ -542,7 +542,7 @@ class NewEntryPage(bttk.Frame):
     def validate_new_entry(self):
         if self.controller.pw_cursor:
             # fetch all account_names in the database
-            self.controller.pw_cursor.execute("SELECT account_name FROM accounts")
+            self.controller.pw_cursor.execute(PW_SELECT_ALL_ACCOUNT_NAMES)
             result = self.controller.pw_cursor.fetchall()
             # ensure to only process this validation if there are account_names to compare against
             if result:
@@ -631,7 +631,7 @@ class EditAccountPage(bttk.Frame):
         self.password_var.set(generate_password())
     
     def validate_account_info(self):
-        self.controller.pw_cursor.execute("SELECT account_name FROM accounts")
+        self.controller.pw_cursor.execute(PW_SELECT_ALL_ACCOUNT_NAMES)
         result = self.controller.pw_cursor.fetchall()
         account_names = [account_name[0].lower() for account_name in result]
         if self.account_name_var.get().lower() in account_names:
