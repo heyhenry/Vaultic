@@ -626,6 +626,12 @@ class EditAccountPage(bttk.Frame):
         self.password_var.set(generate_password())
     
     def validate_account_info(self):
+        self.controller.pw_cursor.execute("SELECT account_name FROM accounts")
+        result = self.controller.pw_cursor.fetchall()
+        account_names = [account_name[0].lower() for account_name in result]
+        if self.account_name_var.get().lower() in account_names:
+            self.controller.show_error_message(self.error_message, "Error! Account name already exists.", self.clear_all)
+            return
         if len(self.account_name_var.get()) > 0 and len(self.username_var.get()) > 0 and len(self.password_var.get()) > 0:
             self.update_entry()
         else:
