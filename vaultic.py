@@ -416,6 +416,8 @@ class HomePage(bttk.Frame):
             self.account_password_var.set(new_password)
             # update the accounts list
             self.populate_accounts_list()
+            # clear the details section 
+            self.clear_details_section()
 
     def remove_account(self):
         # only remove account if an account was selected
