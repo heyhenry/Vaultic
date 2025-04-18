@@ -411,9 +411,8 @@ class HomePage(bttk.Frame):
         if selection:
             # store the account's name and username respectively for future referencing
             account_name = self.accounts_list.item(selection)["values"][0]
-            account_username = self.accounts_list.item(selection)["values"][1]
             # run query to fetch account information from the database
-            self.controller.pw_cursor.execute(PW_SELECT_ALL_DETAILS, (str(account_name), str(account_username)))
+            self.controller.pw_cursor.execute(PW_SELECT_ALL_DETAILS, (str(account_name),))
             result = self.controller.pw_cursor.fetchall()
             # set the account variables for details display based on selected account
             self.account_name_var.set(result[0][0])
@@ -426,7 +425,7 @@ class HomePage(bttk.Frame):
             # create a new password
             new_password = generate_password()
             # run query to update the password value for the given account
-            self.controller.pw_cursor.execute(PW_UPDATE_PASSWORD, (new_password, self.account_name_var.get(), self.account_username_var.get()))
+            self.controller.pw_cursor.execute(PW_UPDATE_PASSWORD, (new_password, self.account_name_var.get(),))
             self.controller.pw_connection.commit()
             # update display's password value in tkinter
             self.account_password_var.set(new_password)
@@ -443,9 +442,8 @@ class HomePage(bttk.Frame):
             # get account unique identifiers
             selection = self.accounts_list.focus()
             account_name = self.accounts_list.item(selection)["values"][0]
-            account_username = self.accounts_list.item(selection)["values"][1]
             # run sql query to delete the selected account from the database
-            self.controller.pw_cursor.execute(PW_REMOVE_ACCOUNT, (str(account_name), str(account_username)))
+            self.controller.pw_cursor.execute(PW_REMOVE_ACCOUNT, (str(account_name),))
             self.controller.pw_connection.commit()
             # reset all details related variables
             self.clear_details_section()
@@ -598,7 +596,6 @@ class EditAccountPage(bttk.Frame):
         self.password_var = bttk.StringVar()
         # hold current values prior to change, for database reference
         self.current_account_name_var = bttk.StringVar()
-        self.current_username_var = bttk.StringVar()
         self.lookover_img = ImageTk.PhotoImage(Image.open("img/submain_logo_5.png").resize((96, 96), Image.Resampling.LANCZOS))
         self.create_widgets()
 
@@ -633,6 +630,7 @@ class EditAccountPage(bttk.Frame):
         self.password_var.set(generate_password())
     
     def validate_account_info(self):
+        # same logic as in NewEntryPage
         self.controller.pw_cursor.execute(PW_SELECT_ALL_ACCOUNT_NAMES)
         result = self.controller.pw_cursor.fetchall()
         account_names = [account_name[0].lower() for account_name in result]
@@ -655,7 +653,7 @@ class EditAccountPage(bttk.Frame):
 
     def update_entry(self):
         # run query to update values for selected account
-        self.controller.pw_cursor.execute(PW_UPDATE_ACCOUNT_DETAILS, (self.account_name_var.get(), self.username_var.get(), self.password_var.get(), self.current_account_name_var.get(), self.current_username_var.get()))
+        self.controller.pw_cursor.execute(PW_UPDATE_ACCOUNT_DETAILS, (self.account_name_var.get(), self.username_var.get(), self.password_var.get(), self.current_account_name_var.get()))
         self.controller.pw_connection.commit()
         # clear fields post process
         self.clear_all()
@@ -670,7 +668,6 @@ class EditAccountPage(bttk.Frame):
         self.username_var.set(self.controller.pages[HomePage].account_username_var.get())
         self.password_var.set(self.controller.pages[HomePage].account_password_var.get())
         self.current_account_name_var.set(self.controller.pages[HomePage].account_name_var.get())
-        self.current_username_var.set(self.controller.pages[HomePage].account_username_var.get())
         
 if __name__ == "__main__":
     app = Windows()

@@ -141,3 +141,6 @@
 - Tkinter Window - Changing Resolution and Scaling (accessed: 16th April 2025): https://www.youtube.com/watch?v=roz5Yaw8GB4
 - tcl-lang | Scaling command (accessed: 16th April 2025): https://www.tcl-lang.org/man/tcl8.6/TkCmd/tk.htm#M10 
 - wiki.tcl-lang | tk scaling (accessed: 16th April 2025): https://wiki.tcl-lang.org/page/tk+scaling
+- ttkbootstrap | Colors (accessed: 19th April 2025): https://ttkbootstrap.readthedocs.io/en/latest/api/style/colors/
+- ttkbootstrap | Definitions (accessed: 19th April 2025): https://ttkbootstrap.readthedocs.io/en/latest/themes/definitions/
+- sqlite3.ProgrammingError: Incorrect number of bindings supplied. The current statement uses 1, and there are 74 supplied (accessed: 19th April 2025): https://stackoverflow.com/questions/16856647/sqlite3-programmingerror-incorrect-number-of-bindings-supplied-the-current-sta
