@@ -418,6 +418,8 @@ class HomePage(bttk.Frame):
             self.populate_accounts_list()
             # clear the details section 
             self.clear_details_section()
+            # notification of password being updated
+            show_toast(f"Updated!", "Account password updated successfully.", 3000)
 
     def remove_account(self):
         # only remove account if an account was selected
@@ -433,6 +435,8 @@ class HomePage(bttk.Frame):
             self.clear_details_section()
             # update the accounts list
             self.populate_accounts_list()
+            # notification after successful account removal
+            show_toast("Removed!", "Account has been removed successfully.", 3000)
 
     def edit_account_info(self):
         if self.account_name_var.get():
@@ -527,6 +531,8 @@ class NewEntryPage(bttk.Frame):
         # ensure all fields have data
         if len(self.account_name_var.get()) > 0 and len(self.username_var.get()) > 0 and len(self.password_var.get()) > 0:
             self.create_entry()
+            # notification after successful account entry
+            show_toast("Added!", "New account added successfully.", 3000)
         else:
             self.controller.show_error_message(self.error_message, "Error! All fields must be filled.", self.clear_all)
 
@@ -549,10 +555,6 @@ class NewEntryPage(bttk.Frame):
             self.clear_all()
             # return user to the homepage after entry is added
             self.controller.show_page(HomePage)
-        # hidden issue logger for dev
-        # technically, should never be procced, as a database connection commences the moment the user is logged into the account.
-        else:
-            print("Trouble: 'pw_cursor' is None")
 
     # cancels the process of creating a new account entry
     def cancel_entry(self):
@@ -628,6 +630,8 @@ class EditAccountPage(bttk.Frame):
         self.clear_all()
         # redirect to the HomePage
         self.controller.show_page(HomePage)
+        # notification of account update occurring
+        show_toast("Updated!", "Account details updated successfully.", 3000)
 
     def get_account_info(self):
         # pull the values stored for respective variables from the HomePage variable instances
