@@ -172,9 +172,17 @@ class Windows(bttk.Window):
         show_toast("Vaultic is now running", random.choice(cheeky_messages), 5000)
 
     # display an error message upon issue found
-    def show_error_message(self, widget, message, clear_func):
+    def show_error_message(self, widget, message, clear_func=None):
+        # widget in question -> error_message
+        # manipulate the error_message widget on various pages to display error and clear after time out
         widget.config(text=message)
-        self.after(1000, clear_func)
+        # for logic that requires all fields to also be cleared (i.e. clear_all() will take effect)
+        if clear_func:
+            self.after(1000, clear_func)
+            self.after(1000, lambda: widget.config(text=""))
+        # for logic that does not require clearing the entry fields when there is an error
+        else:
+            self.after(1000, lambda: widget.config(text=""))
 
 class LoginPage(bttk.Frame):
     def __init__(self, parent, controller):
@@ -206,7 +214,6 @@ class LoginPage(bttk.Frame):
         self.password_entry.bind("<Return>", self.process_password)
 
     def clear_all(self):
-        self.error_message.config(text="")
         self.password_var.set("")
 
     def process_password(self, event=None):
@@ -282,7 +289,6 @@ class RegisterPage(bttk.Frame):
         return True
     
     def clear_all(self):
-        self.error_message.config(text="")
         self.password_var.set("")
         self.confirm_password_var.set("")
 
@@ -544,7 +550,7 @@ class NewEntryPage(bttk.Frame):
                 account_names = [account_name[0].lower() for account_name in result]
                 # check if new entry's account_name already exists in the database
                 if self.account_name_var.get().lower() in account_names:
-                    self.controller.show_error_message(self.error_message, "Error! Account Name Already Exists.", self.clear_all)
+                    self.controller.show_error_message(self.error_message, "Error! Account name already exists.")
                     # end validation process here
                     return
             # ensure all fields have data
@@ -553,11 +559,10 @@ class NewEntryPage(bttk.Frame):
                 # notification after successful account entry
                 show_toast("Added!", "New account added successfully.", 3000)
             else:
-                self.controller.show_error_message(self.error_message, "Error! All fields must be filled.", self.clear_all)
+                self.controller.show_error_message(self.error_message, "Error! All fields must be filled.")
 
     # clear all entry fields and the error message
     def clear_all(self):
-        self.error_message.config(text="")
         self.account_name_var.set("")
         self.username_var.set("")
         self.password_var.set("")
@@ -630,15 +635,14 @@ class EditAccountPage(bttk.Frame):
         result = self.controller.pw_cursor.fetchall()
         account_names = [account_name[0].lower() for account_name in result]
         if self.account_name_var.get().lower() in account_names:
-            self.controller.show_error_message(self.error_message, "Error! Account name already exists.", self.clear_all)
+            self.controller.show_error_message(self.error_message, "Error! Account name already exists.")
             return
         if len(self.account_name_var.get()) > 0 and len(self.username_var.get()) > 0 and len(self.password_var.get()) > 0:
             self.update_entry()
         else:
-            self.controller.show_error_message(self.error_message, "Error! All fields must be filled.", self.clear_all)
+            self.controller.show_error_message(self.error_message, "Error! All fields must be filled.")
     
     def clear_all(self):
-        self.error_message.config(text="")
         self.account_name_var.set("")
         self.username_var.set("")
         self.password_var.set("")
