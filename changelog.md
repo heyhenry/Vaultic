@@ -1,12 +1,10 @@
-# To add to the vaultic app before publishing a new release..
+# To add to the vaultic app before publishing a new release.. 
+### Changes occuring after receiving feedback from beta testers and further personal testing.
 
 ## Changes yet to implement 
 - regarding 'generate new password' on the home page..  (contemplating on implementing or leaving as is, as toast notifications helps clear action statement)
     - potentially, settig up unique iid for each item in the treeview so app can reference and re-highlight the previous selected item (before the repopulation), so the app can also maintain the account-details section info instead of clearing it.
-- Disallowing duplicate account_name naming -> reasons: improve UX, bad logic for bts code functionality.
 - Update all sql queries and validations where both account_name and username were used to verify, now can stick to just account_name as account_names are unique.
-- Don't clear data fields for new_entry and update_entry on error
-    - Potentially provide more detailed errors instead so they know which data field was the issue
 
 ## Changes so far
 - sql lookup variables have been set to str() type because when a treeview repopulates, the sqlite gives the information for data that are digits only as an integer type as it loses the parenthesis when inserted into the database? (lines 400 and 430 amended)
@@ -15,4 +13,6 @@
 - Utilising the usage of the rowid for each item in the sqlite database.
     - Pull that rowid information and attach to the iid of each account item
 - On register page, ensure the 'remember this' text gets a colour change upon cursor hovering over it
+- Don't clear data fields for new_entry and update_entry on error
+    - Potentially reduce/reuse code where possible
 
