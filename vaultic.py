@@ -386,7 +386,11 @@ class HomePage(bttk.Frame):
             result = self.controller.pw_cursor.fetchall()
             if result:
                 for account_info in result:
-                    self.accounts_list.insert("", "end", values=account_info)
+                    # unpack the sql result (tuple)
+                    rowid = account_info[0]
+                    account_name = account_info[1]
+                    username = account_info[2]
+                    self.accounts_list.insert("", "end", iid=rowid, values=(account_name, username))
 
     def get_account_details(self, event):
         # select an account from the accounts_list

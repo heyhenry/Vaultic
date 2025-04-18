@@ -1,5 +1,5 @@
 # queries to the password manager database
-PW_SELECT_ALL_ACCOUNT_NAME_USERNAME = "SELECT account_name, username FROM accounts"
+PW_SELECT_ALL_ACCOUNT_NAME_USERNAME = "SELECT rowid, account_name, username FROM accounts"
 PW_SELECT_ALL_DETAILS = "SELECT * FROM accounts WHERE account_name=? AND username=?"
 PW_UPDATE_PASSWORD = "UPDATE accounts SET password=? WHERE account_name=? AND username=?"
 PW_REMOVE_ACCOUNT = "DELETE FROM accounts WHERE account_name=? AND username=?"
