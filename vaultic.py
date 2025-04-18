@@ -90,6 +90,8 @@ class Windows(bttk.Window):
             # updates the accounts list to the latest version
             # also deselects any pre-existing item selection aka handles deselection logic as all deselections are intertwined with redirecting to the homepage
             page.populate_accounts_list()
+        elif current_page == NewEntryPage or EditAccountPage:
+            self.after(100, page.account_name_entry.focus)
 
         # raises the current frame to the top
         page.tkraise()
