@@ -397,7 +397,7 @@ class HomePage(bttk.Frame):
             account_name = self.accounts_list.item(selection)["values"][0]
             account_username = self.accounts_list.item(selection)["values"][1]
             # run query to fetch account information from the database
-            self.controller.pw_cursor.execute(PW_SELECT_ALL_DETAILS, (account_name, account_username))
+            self.controller.pw_cursor.execute(PW_SELECT_ALL_DETAILS, (str(account_name), str(account_username)))
             result = self.controller.pw_cursor.fetchall()
             # set the account variables for details display based on selected account
             self.account_name_var.set(result[0][0])
