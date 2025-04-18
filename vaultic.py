@@ -263,6 +263,8 @@ class RegisterPage(bttk.Frame):
         self.password_entry.bind("<Return>", self.process_password_creation)
         self.confirm_password_entry.bind("<Return>", self.process_password_creation)
         reminder_message.bind("<Button-1>", self.open_master_password_info)
+        reminder_message.bind("<Enter>", lambda event: reminder_message.config(foreground='#78c2ad'))
+        reminder_message.bind("<Leave>", lambda event: reminder_message.config(foreground='#5a5a5a'))
 
     def validate_password_creation(self):
         if self.password_var.get() != self.confirm_password_var.get():
