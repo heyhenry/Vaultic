@@ -112,6 +112,7 @@ class Windows(bttk.Window):
                 os.mkdir("db")
             create_auth_database()
 
+    # logic specifically for user closing the app completely
     # re-encrypts the passwords database whenever app is closed
     def on_close(self):
         # check if the pw_manager database is exposed
@@ -217,14 +218,18 @@ class LoginPage(bttk.Frame):
         self.password_var.set("")
 
     def process_password(self, event=None):
+        # check to see if the password matches the one given in the auth database
         if self.controller.auth.verify_master_password(self.password_var.get()):
             self.controller.auth.decrypt_dump()
+            # establish connection with the database and update connection variables to be used across app
             self.controller.pw_connection = sqlite3.connect("db/pw_manager.db")
             self.controller.pw_cursor = self.controller.pw_connection.cursor()
+            # redirect to the home page
             self.controller.show_page(HomePage)
         else:
             self.controller.show_error_message(self.error_message, "Invalid Password! Try again.", self.clear_all)
 
+    # toggle masking of the password
     def toggle_masking(self):
         if self.password_entry.cget("show") == "*":
             self.toggle_mask.config(image=self.unmasked_img)
@@ -389,16 +394,15 @@ class HomePage(bttk.Frame):
         self.accounts_list.delete(*self.accounts_list.get_children())
         # run query to the database to fetch all latest accounts and their information 
         # and store into the accounts list
-        if self.controller.pw_connection:
-            self.controller.pw_cursor.execute(PW_SELECT_ALL_ROWID_ACCOUNT_NAME_USERNAME)
-            result = self.controller.pw_cursor.fetchall()
-            if result:
-                for account_info in result:
-                    # unpack the sql result (tuple)
-                    rowid = account_info[0]
-                    account_name = account_info[1]
-                    username = account_info[2]
-                    self.accounts_list.insert("", "end", iid=rowid, values=(account_name, username))
+        self.controller.pw_cursor.execute(PW_SELECT_ALL_ROWID_ACCOUNT_NAME_USERNAME)
+        result = self.controller.pw_cursor.fetchall()
+        if result:
+            for account_info in result:
+                # unpack the sql result (tuple)
+                rowid = account_info[0]
+                account_name = account_info[1]
+                username = account_info[2]
+                self.accounts_list.insert("", "end", iid=rowid, values=(account_name, username))
 
     def get_account_details(self, event):
         # select an account from the accounts_list
@@ -485,6 +489,7 @@ class HomePage(bttk.Frame):
             pyperclip.copy(self.account_password_var.get())
             show_toast("Copied!", "Password has been copied.", 3000)
 
+    # logic specific for user interaction with the logout icon within app
     def logout(self):
         # check if the pw_manager database is exposed
         if os.path.exists('db/pw_manager.db'):
@@ -540,26 +545,25 @@ class NewEntryPage(bttk.Frame):
     
     # check if user has entered a valid account entry
     def validate_new_entry(self):
-        if self.controller.pw_cursor:
-            # fetch all account_names in the database
-            self.controller.pw_cursor.execute(PW_SELECT_ALL_ACCOUNT_NAMES)
-            result = self.controller.pw_cursor.fetchall()
-            # ensure to only process this validation if there are account_names to compare against
-            if result:
-                # create a list of account_names found from the database
-                account_names = [account_name[0].lower() for account_name in result]
-                # check if new entry's account_name already exists in the database
-                if self.account_name_var.get().lower() in account_names:
-                    self.controller.show_error_message(self.error_message, "Error! Account name already exists.")
-                    # end validation process here
-                    return
-            # ensure all fields have data
-            if len(self.account_name_var.get()) > 0 and len(self.username_var.get()) > 0 and len(self.password_var.get()) > 0:
-                self.create_entry()
-                # notification after successful account entry
-                show_toast("Added!", "New account added successfully.", 3000)
-            else:
-                self.controller.show_error_message(self.error_message, "Error! All fields must be filled.")
+        # fetch all account_names in the database
+        self.controller.pw_cursor.execute(PW_SELECT_ALL_ACCOUNT_NAMES)
+        result = self.controller.pw_cursor.fetchall()
+        # ensure to only process this validation if there are account_names to compare against
+        if result:
+            # create a list of account_names found from the database
+            account_names = [account_name[0].lower() for account_name in result]
+            # check if new entry's account_name already exists in the database
+            if self.account_name_var.get().lower() in account_names:
+                self.controller.show_error_message(self.error_message, "Error! Account name already exists.")
+                # end validation process here
+                return
+        # ensure all fields have data
+        if len(self.account_name_var.get()) > 0 and len(self.username_var.get()) > 0 and len(self.password_var.get()) > 0:
+            self.create_entry()
+            # notification after successful account entry
+            show_toast("Added!", "New account added successfully.", 3000)
+        else:
+            self.controller.show_error_message(self.error_message, "Error! All fields must be filled.")
 
     # clear all entry fields and the error message
     def clear_all(self):
@@ -570,15 +574,13 @@ class NewEntryPage(bttk.Frame):
     # create a new account entry and store in the pw_manager database
     def create_entry(self):
         # sql query to add a new valid account entry
-        # checker to ensure that there is an active connection to the pw_manager database
-        if self.controller.pw_cursor:
-            self.controller.pw_cursor.execute(PW_ADD_ACCOUNT, (self.account_name_var.get(), self.username_var.get(), self.password_var.get()))
-            # save changes to the pw_manager database
-            self.controller.pw_connection.commit()
-            # clean out data fields prior to page redirect
-            self.clear_all()
-            # return user to the homepage after entry is added
-            self.controller.show_page(HomePage)
+        self.controller.pw_cursor.execute(PW_ADD_ACCOUNT, (self.account_name_var.get(), self.username_var.get(), self.password_var.get()))
+        # save changes to the pw_manager database
+        self.controller.pw_connection.commit()
+        # clean out data fields prior to page redirect
+        self.clear_all()
+        # return user to the homepage after entry is added
+        self.controller.show_page(HomePage)
 
     # cancels the process of creating a new account entry
     def cancel_entry(self):
