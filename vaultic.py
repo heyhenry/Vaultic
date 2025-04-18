@@ -425,7 +425,7 @@ class HomePage(bttk.Frame):
             account_name = self.accounts_list.item(selection)["values"][0]
             account_username = self.accounts_list.item(selection)["values"][1]
             # run sql query to delete the selected account from the database
-            self.controller.pw_cursor.execute(PW_REMOVE_ACCOUNT, (account_name, account_username))
+            self.controller.pw_cursor.execute(PW_REMOVE_ACCOUNT, (str(account_name), str(account_username)))
             self.controller.pw_connection.commit()
             # reset all details related variables
             self.clear_details_section()
