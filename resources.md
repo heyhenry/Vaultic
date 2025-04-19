@@ -144,3 +144,4 @@
 - ttkbootstrap | Colors (accessed: 19th April 2025): https://ttkbootstrap.readthedocs.io/en/latest/api/style/colors/
 - ttkbootstrap | Definitions (accessed: 19th April 2025): https://ttkbootstrap.readthedocs.io/en/latest/themes/definitions/
 - sqlite3.ProgrammingError: Incorrect number of bindings supplied. The current statement uses 1, and there are 74 supplied (accessed: 19th April 2025): https://stackoverflow.com/questions/16856647/sqlite3-programmingerror-incorrect-number-of-bindings-supplied-the-current-sta
+- python ttk treeview: how to select and set focus on a row? (accessed: 19th April 2025): https://stackoverflow.com/questions/7862362/python-ttk-treeview-how-to-select-and-set-focus-on-a-rows
