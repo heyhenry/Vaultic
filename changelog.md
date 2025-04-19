@@ -4,9 +4,6 @@
 ## Changes yet to implement 
 - regarding 'generate new password' on the home page..  (contemplating on implementing or leaving as is, as toast notifications helps clear action statement)
     - potentially, settig up unique iid for each item in the treeview so app can reference and re-highlight the previous selected item (before the repopulation), so the app can also maintain the account-details section info instead of clearing it.
-- Include comments for code logic, where required
-- Look for section in code where the username.get() may not be required as the account_name.get() is now a unique identifier.
-    - Also just general usage of username and/or password when not required.
 
 ## Changes so far
 - sql lookup variables have been set to str() type because when a treeview repopulates, the sqlite gives the information for data that are digits only as an integer type as it loses the parenthesis when inserted into the database? (lines 400 and 430 amended)
@@ -22,3 +19,6 @@
 - Eliminated redundant checks for an active connection to the pw database and a valid cursor.
 - Update all sql queries and validations where both account_name and username were used to verify, now can stick to just account_name as account_names are unique.
 - Implement initial entry field focus in NewEntryPage and EditAccountInfoPage.
+- Look for section in code where the username.get() may not be required as the account_name.get() is now a unique identifier.
+    - Also just general usage of username and/or password where redundant.
+- Include comments for code logic, where required

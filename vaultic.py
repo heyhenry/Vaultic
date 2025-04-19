@@ -423,7 +423,8 @@ class HomePage(bttk.Frame):
 
     def generate_new_password(self):
         # only generate password if an account was selected
-        if self.account_name_var.get() or self.account_username_var.get() or self.account_password_var.get():
+        # check if there is a value stored in the account_name_var, if so it means an account has been selected
+        if self.account_name_var.get():
             # create a new password
             new_password = generate_password()
             # run query to update the password value for the given account
