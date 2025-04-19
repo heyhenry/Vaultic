@@ -425,6 +425,7 @@ class HomePage(bttk.Frame):
         # only generate password if an account was selected
         # check if there is a value stored in the account_name_var, if so it means an account has been selected
         if self.account_name_var.get():
+            stored_selection = self.accounts_list.focus()
             # create a new password
             new_password = generate_password()
             # run query to update the password value for the given account
@@ -434,8 +435,9 @@ class HomePage(bttk.Frame):
             self.account_password_var.set(new_password)
             # update the accounts list
             self.populate_accounts_list()
-            # clear the details section 
-            self.clear_details_section()
+            # reselect and highlight to maintain selection state post password generation
+            self.accounts_list.focus(stored_selection)
+            self.accounts_list.selection_set(stored_selection)
             # notification of password being updated
             show_toast(f"Updated!", "Account password updated successfully.", 3000)
 
